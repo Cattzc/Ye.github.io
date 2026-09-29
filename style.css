@@ -1599,3 +1599,24 @@ main {
   }
 
 }
+/* MOBILE-FIRST SECTIONS */
+@media (max-width: 760px) {
+  .section {
+    min-height: auto;
+    padding: 90px 20px;
+    display: block;
+  }
+
+  .section-index {
+    margin-bottom: 35px;
+  }
+
+  .section-body {
+    max-width: 100%;
+  }
+
+  .section-copy {
+    max-width: 100%;
+    margin-top: 45px;
+  }
+}
