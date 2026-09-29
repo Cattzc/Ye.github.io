@@ -1620,3 +1620,274 @@ main {
     margin-top: 45px;
   }
 }
+/* MOBILE SPACE CARDS */
+@media (max-width: 760px) {
+  .space-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 50px;
+  }
+
+  .space-card {
+    min-height: auto;
+    padding: 24px;
+  }
+}/* =========================================================
+   JAYE — FINAL MOBILE + DARK BLACK/NAVY SYSTEM
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  /* ---------- BASE ---------- */
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  *,
+  *::before,
+  *::after {
+    min-width: 0;
+  }
+
+
+  /* ---------- DARK BLACK + NAVY ---------- */
+
+  html {
+    background: #02050b;
+  }
+
+  body {
+    background:
+      radial-gradient(
+        circle at 50% 0%,
+        #12365a 0%,
+        #0a2038 28%,
+        #061426 52%,
+        #030914 78%,
+        #02050b 100%
+      );
+  }
+
+  .site-atmosphere {
+    background:
+      radial-gradient(
+        circle at 50% 22%,
+        rgba(25, 82, 135, 0.16),
+        transparent 48%
+      );
+  }
+
+
+  /* ---------- SECTIONS ---------- */
+
+  .section,
+  .fav-section {
+    width: 100%;
+    max-width: none;
+    min-height: auto;
+    margin: 0;
+    padding: 88px 20px;
+    display: block;
+    overflow: hidden;
+  }
+
+  .section-index {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .section-body {
+    width: 100%;
+    max-width: none;
+  }
+
+  .section-heading {
+    width: 100%;
+  }
+
+  .section-heading h2 {
+    margin-top: 18px;
+    font-size: clamp(42px, 13vw, 68px);
+    line-height: .98;
+    letter-spacing: -.055em;
+  }
+
+  .section-copy {
+    width: 100%;
+    max-width: none;
+    margin: 42px 0 0;
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  .section-copy .lead {
+    font-size: 24px;
+    line-height: 1.15;
+  }
+
+
+  /* ---------- SPACE ---------- */
+
+  .space-grid {
+    width: 100%;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .space-card {
+    width: 100%;
+    min-height: 0;
+    padding: 24px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+
+  /* ---------- IMAGES ---------- */
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+
+  /* ---------- SHREE ---------- */
+
+  .fav-inner {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .fav-heading {
+    margin-bottom: 40px;
+  }
+
+  .fav-heading h2 {
+    font-size: clamp(42px, 13vw, 66px);
+    line-height: 1;
+  }
+
+  .fav-heading h2 span {
+    display: block;
+    margin-top: 12px;
+    font-size: 11px;
+  }
+
+  .fav-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+  }
+
+  .fav-image {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 5px;
+    box-shadow: none;
+  }
+
+  .fav-image::before {
+    display: none;
+  }
+
+  .fav-image img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .fav-story {
+    width: 100%;
+    max-width: none;
+    padding: 0 3px;
+    font-size: 13px;
+    line-height: 1.95;
+    letter-spacing: .01em;
+  }
+
+  .fav-story p {
+    margin-bottom: 28px;
+  }
+
+  .fav-emphasis {
+    margin-top: 36px !important;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .fav-ending {
+    margin-top: 42px !important;
+    padding-left: 15px;
+    line-height: 2;
+  }
+
+
+  /* ---------- CLOSING ---------- */
+
+  .closing {
+    width: 100%;
+    min-height: auto;
+    height: auto;
+    padding: 88px 20px;
+  }
+
+  .closing-inner {
+    width: 100%;
+    max-width: none;
+    min-height: auto;
+    height: auto;
+  }
+
+
+  /* ---------- MOBILE PERFORMANCE ---------- */
+
+  .noise {
+    display: none;
+  }
+
+  .nebula {
+    animation: none !important;
+    will-change: auto;
+    filter: blur(55px);
+  }
+
+  .constellation,
+  .ambient-grid {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .hero-orbit {
+    animation: none !important;
+  }
+
+  .status-dot,
+  .scroll-arrow {
+    animation: none !important;
+  }
+
+  * {
+    scroll-behavior: auto;
+  }
+}
