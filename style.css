@@ -1505,3 +1505,22 @@ main {
     padding-left: 16px;
   }
 }
+/* =================================
+   SHREE IMAGE FIX
+================================= */
+
+@media (max-width: 760px) {
+
+  .fav-image {
+    padding: 6px;
+    margin: 0 auto;
+    border-radius: 2px;
+  }
+
+  .fav-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+}
