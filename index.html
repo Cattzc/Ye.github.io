@@ -3,22 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#05070d">
-  <meta name="description" content="A personal space by Jayé, also known as Yarc.">
+  <meta name="theme-color" content="#050609">
+  <meta name="description" content="Jayé / Yarc. A personal archive.">
   <title>Jayé / Yarc</title>
 
   <style>
     :root {
-      --bg: #05070d;
-      --bg-soft: #080b14;
-      --navy: #0a1020;
-      --text: #f5f7ff;
-      --text-soft: #a7b0c3;
-      --muted: #68738a;
-      --heading: #dce7ff;
-      --accent: #6ea8ff;
-      --accent-soft: #8fb4ff;
-      --border: #17233a;
+      --bg: #050609;
+      --bg-soft: #080b12;
+      --text: #f3f4f7;
+      --soft: #a6aab4;
+      --muted: #666b76;
+      --line: rgba(220, 228, 245, 0.11);
+      --blue: #8eaff5;
     }
 
     * {
@@ -26,201 +23,415 @@
     }
 
     html {
+      background: var(--bg);
       scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
+      overflow-x: hidden;
       background:
-        radial-gradient(circle at 50% 0%, #0b1224 0%, var(--bg) 45%),
+        radial-gradient(
+          1000px 500px at 50% -120px,
+          rgba(29, 50, 91, 0.28),
+          transparent 70%
+        ),
         var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.8;
-      overflow-x: hidden;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Small floating stars */
+    ::selection {
+      background: #dbe6ff;
+      color: #050609;
+    }
+
+    /* STAR FIELD */
+
     .sky {
       position: fixed;
       inset: 0;
-      pointer-events: none;
-      overflow: hidden;
       z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
     }
 
     .star {
       position: absolute;
-      width: 2px;
-      height: 2px;
+      width: var(--size);
+      height: var(--size);
       border-radius: 50%;
-      background: rgba(190, 210, 255, 0.7);
-      opacity: 0.2;
+      background: rgba(210, 224, 255, 0.9);
+      opacity: var(--opacity);
+      box-shadow: 0 0 7px rgba(160, 190, 255, 0.3);
       animation:
-        twinkle var(--duration) ease-in-out infinite alternate,
+        twinkle var(--twinkle) ease-in-out infinite alternate,
         drift var(--drift) ease-in-out infinite alternate;
     }
 
     @keyframes twinkle {
       from {
-        opacity: 0.12;
+        opacity: calc(var(--opacity) * 0.35);
         transform: scale(0.7);
       }
 
       to {
-        opacity: 0.7;
-        transform: scale(1.35);
+        opacity: var(--opacity);
+        transform: scale(1.25);
       }
     }
 
     @keyframes drift {
       from {
-        margin-top: 0;
+        translate: 0 0;
       }
 
       to {
-        margin-top: -7px;
+        translate: var(--move-x) var(--move-y);
       }
     }
 
-    main {
-      width: min(100%, 520px);
-      margin: 0 auto;
-      padding: 28px 22px 80px;
-      position: relative;
-      z-index: 1;
+    /* LIGHT GLOW */
+
+    .glow {
+      position: fixed;
+      width: 260px;
+      height: 260px;
+      top: 22%;
+      left: 50%;
+      z-index: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: rgba(38, 69, 125, 0.09);
+      filter: blur(70px);
+      transition: transform 0.25s ease-out;
     }
 
-    section {
-      padding: 72px 0;
+    /* TOP BAR */
+
+    .top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      padding: 18px 20px;
+      pointer-events: none;
+    }
+
+    .top span {
+      color: rgba(210, 215, 226, 0.55);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* PAGE */
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 680px);
+      margin: auto;
+      padding: 0 24px;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px 0 56px;
+    }
+
+    .hero-meta {
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(68px, 19vw, 124px);
+      line-height: 0.78;
+      letter-spacing: -0.085em;
+      font-weight: 720;
+    }
+
+    .hero h1 span {
+      display: block;
+      margin-left: 10%;
+      color: var(--blue);
+    }
+
+    .hero-description {
+      max-width: 430px;
+      margin: 42px 0 0;
+      color: var(--soft);
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .scroll-mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 58px;
+      color: var(--muted);
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .scroll-mark::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: rgba(220, 228, 245, 0.22);
+    }
+
+    /* SECTIONS */
+
+    section:not(.hero) {
+      padding: 110px 0;
+      border-top: 1px solid var(--line);
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(22px);
       transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
+        opacity 0.9s ease,
+        transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
 
     section.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
     }
 
-    .section-number {
-      display: block;
-      margin-bottom: 12px;
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 34px;
+    }
+
+    .number {
+      color: var(--blue);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+    }
+
+    .type {
       color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 0.16em;
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: right;
     }
 
-    h1,
     h2 {
-      margin: 0 0 22px;
-      color: var(--heading);
+      max-width: 620px;
+      margin: 0 0 30px;
+      font-size: clamp(38px, 10vw, 67px);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
       font-weight: 650;
-      letter-spacing: -0.02em;
-    }
-
-    h1 {
-      font-size: 34px;
-      line-height: 1.15;
-    }
-
-    h2 {
-      font-size: 27px;
-      line-height: 1.25;
-    }
-
-    h3 {
-      margin: 0 0 10px;
-      color: var(--heading);
-      font-size: 15px;
-      font-weight: 600;
     }
 
     p {
+      max-width: 570px;
       margin: 0 0 24px;
-      color: var(--text-soft);
-      font-size: 16px;
+      color: var(--soft);
+      font-size: 15px;
+      line-height: 1.9;
     }
 
     p:last-child {
       margin-bottom: 0;
     }
 
-    .intro-name {
-      color: var(--accent-soft);
+    .large-copy {
+      color: #d2d5dc;
+      font-size: 17px;
+      line-height: 1.8;
     }
+
+    /* FAVOURITES */
 
     .favourites {
+      margin-top: 42px;
+      border-top: 1px solid var(--line);
+    }
+
+    .favourite {
       display: grid;
-      gap: 30px;
+      grid-template-columns: 88px 1fr;
+      gap: 18px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
     }
 
-    .favourite-item {
-      padding-bottom: 30px;
-      border-bottom: 1px solid var(--border);
+    .favourite-title {
+      color: #e8eaf0;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
     }
 
-    .favourite-item:last-child {
-      padding-bottom: 0;
-      border-bottom: 0;
+    .favourite p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.8;
     }
 
-    .demi-image {
+    /* STATEMENT */
+
+    .statement {
+      margin: 44px 0 0;
+      padding-left: 18px;
+      border-left: 1px solid var(--blue);
+      color: #d9dce4;
+      font-size: 20px;
+      line-height: 1.55;
+      letter-spacing: -0.025em;
+    }
+
+    /* MEMORY */
+
+    .memory {
+      margin: 42px 0 42px;
+    }
+
+    .memory-frame {
+      overflow: hidden;
+      border: 1px solid rgba(220, 228, 245, 0.15);
+      background: #080a0f;
+    }
+
+    .memory-image {
       display: block;
       width: 100%;
-      margin: 30px 0 38px;
-      border: 1px solid #1d3158;
-      border-radius: 20px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
-      animation: imageFloat 5s ease-in-out infinite;
+      height: auto;
+      filter: saturate(0.84) contrast(1.04);
+      transition:
+        transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+        filter 0.8s ease;
     }
 
-    @keyframes imageFloat {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-3px);
-      }
+    .memory-frame:hover .memory-image {
+      transform: scale(1.015);
+      filter: saturate(0.95) contrast(1.04);
     }
 
-    .last-page {
-      padding-bottom: 20px;
+    .memory-info {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 10px;
+      color: var(--muted);
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
-    .highlight {
-      color: var(--accent-soft);
+    /* FINAL */
+
+    .last {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .final-line {
-      margin-top: 34px;
-      color: var(--text);
-      font-size: 18px;
+    .last h2 {
+      font-size: clamp(46px, 13vw, 86px);
+    }
+
+    .person {
+      margin-bottom: 25px;
+      color: var(--blue);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
     }
 
     .signature {
-      margin-top: 34px;
-      color: var(--accent-soft);
-      font-size: 15px;
+      margin-top: 48px;
+      color: #d8dce5;
+      font-size: 12px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
     }
+
+    /* FOOTER */
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 28px 0 38px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    footer .credit {
+      color: #888d98;
+    }
+
+    /* SMALL PHONES */
+
+    @media (max-width: 400px) {
+      main {
+        padding-left: 19px;
+        padding-right: 19px;
+      }
+
+      .top {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .favourite {
+        grid-template-columns: 72px 1fr;
+      }
+    }
+
+    /* REDUCED MOTION */
 
     @media (prefers-reduced-motion: reduce) {
       html {
         scroll-behavior: auto;
       }
 
-      .star,
-      .demi-image {
+      .star {
         animation: none;
       }
 
-      section {
+      .glow {
+        transition: none;
+      }
+
+      section:not(.hero) {
         opacity: 1;
         transform: none;
+        transition: none;
+      }
+
+      .memory-image {
         transition: none;
       }
     }
@@ -230,301 +441,426 @@
 <body>
 
   <div class="sky" id="sky"></div>
+  <div class="glow" id="glow"></div>
+
+  <div class="top">
+    <span>J / Y</span>
+    <span>Personal Archive</span>
+  </div>
 
   <main>
 
-    <section>
-      <span class="section-number">01</span>
-      <h1>Introduction</h1>
+    <!-- HERO -->
 
-      <p>
-        I’m <span class="intro-name">Jayé</span>. Most people know me as Yarc.
+    <section class="hero">
+      <div class="hero-meta">Jayé / Yarc · 2026</div>
+
+      <h1>
+        JAYÉ
+        <span>/ YARC</span>
+      </h1>
+
+      <p class="hero-description">
+        A place for the things I like, the things I create, the people and
+        memories that matter, and pieces of myself I want to keep somewhere.
+      </p>
+
+      <div class="scroll-mark">
+        Scroll to explore
+      </div>
+    </section>
+
+
+    <!-- 01 -->
+
+    <section>
+      <div class="section-head">
+        <span class="number">01</span>
+        <span class="type">About</span>
+      </div>
+
+      <h2>A little<br>context.</h2>
+
+      <p class="large-copy">
+        I’m Jayé. Most people know me as Yarc.
       </p>
 
       <p>
-        A place for the things I like, the things I create, the people and memories that matter, and pieces of myself I want to keep somewhere.
+        I’m currently a student, figuring things out as I go.
+        I’m not an editor or designer, and I’m not trying to act like I’m
+        the best at everything.
+      </p>
+
+      <p>
+        I just like trying things, learning something new, and seeing
+        what happens.
       </p>
     </section>
 
+
+    <!-- 02 -->
+
     <section>
-      <span class="section-number">02</span>
-      <h2>The Things I Do</h2>
+      <div class="section-head">
+        <span class="number">02</span>
+        <span class="type">The Things I Do</span>
+      </div>
+
+      <h2>Try it.<br>See where it goes.</h2>
 
       <p>
-        I’ve tried a lot of different things, some I stayed with, some I didn’t.
+        I’ve tried a lot of different things, some I stayed with,
+        some I didn’t.
       </p>
 
       <p>
-        I like learning something new, messing around with it, and seeing where it goes.
+        I like learning something new, messing around with it,
+        and seeing where it goes.
       </p>
 
       <p>
-        I’m not trying to have everything figured out or be the best at everything.
-      </p>
-
-      <p>
-        I just like having things to explore.
+        I’m not trying to have everything figured out or be the best
+        at everything. I just like having things to explore.
       </p>
     </section>
 
+
+    <!-- 03 -->
+
     <section>
-      <span class="section-number">03</span>
-      <h2>Favourites</h2>
+      <div class="section-head">
+        <span class="number">03</span>
+        <span class="type">Favourites</span>
+      </div>
+
+      <h2>Things I keep<br>coming back to.</h2>
 
       <div class="favourites">
 
-        <div class="favourite-item">
-          <h3>BLUE</h3>
+        <div class="favourite">
+          <div class="favourite-title">Blue</div>
           <p>
-            Probably my favourite colour. I’ve liked it for as long as I can remember.
+            Probably my favourite colour. I’ve liked it for as long
+            as I can remember.
           </p>
         </div>
 
-        <div class="favourite-item">
-          <h3>MILK &amp; WATER</h3>
+        <div class="favourite">
+          <div class="favourite-title">Milk & Water</div>
           <p>
             My usual drinks. Nothing fancy. I just like them.
           </p>
         </div>
 
-        <div class="favourite-item">
-          <h3>MUSIC</h3>
+        <div class="favourite">
+          <div class="favourite-title">Music</div>
           <p>
-            Kendrick is one of my favourites, but that's definitely not the whole picture. My taste changes a lot. I listen to different genres, different artists, different sounds, basically whatever feels right at the time. There isn't really one box my music belongs in.
+            Kendrick is one of my favourites, but that's definitely not
+            the whole picture. My taste changes a lot. I listen to different
+            genres, different artists, different sounds, basically whatever
+            feels right at the time. There isn't really one box my music belongs in.
           </p>
         </div>
 
-        <div class="favourite-item">
-          <h3>GAMES</h3>
+        <div class="favourite">
+          <div class="favourite-title">Games</div>
           <p>
-            Free Fire, Roblox, Chess.com. I don't really stick to one type of game. I just play whatever I feel like playing.
+            Free Fire, Roblox, Chess.com. I don't really stick to one type
+            of game. I just play whatever I feel like playing.
           </p>
         </div>
 
-        <div class="favourite-item">
-          <h3>ANIMALS</h3>
+        <div class="favourite">
+          <div class="favourite-title">Animals</div>
           <p>
-            I like pretty much every animal. I’ve got dogs and bunnies, so those are probably the ones I’m around the most.
+            I like pretty much every animal. I’ve got dogs and bunnies,
+            so those are probably the ones I’m around the most.
           </p>
         </div>
 
       </div>
     </section>
 
+
+    <!-- 04 -->
+
     <section>
-      <span class="section-number">04</span>
-      <h2>Currently</h2>
+      <div class="section-head">
+        <span class="number">04</span>
+        <span class="type">Currently</span>
+      </div>
+
+      <h2>Still figuring<br>it out.</h2>
 
       <p>
         Currently a student.
+        Somewhere between figuring out what I want, learning what I can,
+        and slowly understanding what actually matters to me.
       </p>
 
       <p>
-        Somewhere between figuring out what I want, learning what I can, and slowly understanding what actually matters to me.
+        For now, I’m just taking it as it comes, learning, making mistakes,
+        finding things I enjoy, and keeping a few things close along the way.
       </p>
 
-      <p>
-        For now, I’m just taking it as it comes, learning, making mistakes, finding things I enjoy, and keeping a few things close along the way.
-      </p>
-
-      <p>
-        I don't have everything figured out yet. And honestly, I think that's okay.
-      </p>
+      <div class="statement">
+        I don't have everything figured out yet.
+        And honestly, I think that's okay.
+      </div>
     </section>
 
+
+    <!-- 05 -->
+
     <section>
-      <span class="section-number">05</span>
-      <h2>The People I Got Lucky With</h2>
+      <div class="section-head">
+        <span class="number">05</span>
+        <span class="type">The People I Got Lucky With</span>
+      </div>
+
+      <h2>Good people<br>matter.</h2>
 
       <p>
         I’ve met some genuinely great people, both in-game and in real life.
-      </p>
-
-      <p>
-        Different places, different stories, different kinds of friendships, but somehow they all became part of my life.
+        Different places, different stories, different kinds of friendships,
+        but somehow they all became part of my life.
       </p>
 
       <p>
         I don’t take that for granted.
-      </p>
-
-      <p>
         I feel pretty blessed to have the people I have.
       </p>
     </section>
 
+
+    <!-- 06 -->
+
     <section>
-      <span class="section-number">06</span>
-      <h2>Little Things</h2>
+      <div class="section-head">
+        <span class="number">06</span>
+        <span class="type">Little Things</span>
+      </div>
+
+      <h2>The small stuff<br>still counts.</h2>
 
       <p>
         Not everything about me needs a whole explanation.
-      </p>
-
-      <p>
-        I like small things that make everyday life better, good conversations, random laughs, late-night gaming, discovering something new, listening to music, spending time with people I care about, and having things that feel like mine.
+        I like small things that make everyday life better, good conversations,
+        random laughs, late-night gaming, discovering something new,
+        listening to music, spending time with people I care about,
+        and having things that feel like mine.
       </p>
 
       <p>
         I also appreciate simple things more than complicated ones.
-      </p>
-
-      <p>
         Sometimes the little things are enough.
       </p>
     </section>
 
+
+    <!-- 07 -->
+
     <section>
-      <span class="section-number">07</span>
-      <h2>Beliefs</h2>
+      <div class="section-head">
+        <span class="number">07</span>
+        <span class="type">Beliefs</span>
+      </div>
+
+      <h2>Stay<br>curious.</h2>
 
       <p>
-        I like thinking deeply about things, questioning what I'm told, and forming my own opinions.
+        I like thinking deeply about things, questioning what I'm told,
+        and forming my own opinions.
       </p>
 
       <p>
-        I'm interested in how people think, why things work the way they do, and ideas that actually make me stop and think.
+        I'm interested in how people think, why things work the way they do,
+        and ideas that actually make me stop and think.
       </p>
 
       <p>
         I don't believe being smart means knowing everything.
-      </p>
-
-      <p>
         For me, it's being curious enough to keep asking better questions.
       </p>
     </section>
 
+
+    <!-- 08 -->
+
     <section>
-      <span class="section-number">08</span>
-      <h2>Things I Like</h2>
+      <div class="section-head">
+        <span class="number">08</span>
+        <span class="type">Things I Like</span>
+      </div>
+
+      <h2>More than<br>one side.</h2>
 
       <p>
-        I like things that genuinely interest me, not just things that look impressive.
-      </p>
-
-      <p>
-        Games, music, animals, technology, interesting conversations, discovering random things online, and anything that gives me something new to explore.
+        I like things that genuinely interest me, not just things that look
+        impressive. Games, music, animals, technology, interesting conversations,
+        discovering random things online, and anything that gives me something
+        new to explore.
       </p>
 
       <p>
         My interests change over time, and that's part of it.
-      </p>
-
-      <p>
         I like having more than one side to myself.
       </p>
     </section>
 
+
+    <!-- 09 -->
+
     <section>
-      <span class="section-number">09</span>
-      <h2>Memories</h2>
+      <div class="section-head">
+        <span class="number">09</span>
+        <span class="type">Memories</span>
+      </div>
+
+      <h2>Things worth<br>keeping.</h2>
 
       <p>
         Some moments don't need to be posted everywhere to matter.
-      </p>
-
-      <p>
-        There are people I've met, conversations I've had, games I've played, stupid moments I've laughed at, and memories that stayed with me longer than I expected.
+        There are people I've met, conversations I've had, games I've played,
+        stupid moments I've laughed at, and memories that stayed with me
+        longer than I expected.
       </p>
 
       <p>
         This section is for those things.
-      </p>
-
-      <p>
         The moments I don't want to forget.
       </p>
     </section>
 
-    <section class="last-page">
-      <span class="section-number">10</span>
-      <h2>The Last Page</h2>
 
-      <h2>Demi / Shree</h2>
+    <!-- 10 -->
 
-      <img
-        class="demi-image"
-        src="demi.png"
-        alt="A memory from a game with Demi / Shree"
-      >
+    <section class="last">
+      <div class="section-head">
+        <span class="number">10</span>
+        <span class="type">The Last Page</span>
+      </div>
+
+      <div class="person">For Demi / Shree</div>
+
+      <h2>Some people<br>stay with you.</h2>
+
+      <div class="memory">
+        <div class="memory-frame">
+          <img
+            class="memory-image"
+            src="demi.png"
+            alt="A memory from a game with Demi / Shree"
+          >
+        </div>
+
+        <div class="memory-info">
+          <span>A memory</span>
+          <span>Kept here</span>
+        </div>
+      </div>
 
       <p>
-        The kindest girl I’ve ever met through a game, and genuinely one of the purest souls I’ve come across.
+        The kindest girl I’ve ever met through a game, and genuinely one
+        of the purest souls I’ve come across.
       </p>
 
       <p>
-        What makes her different is the way her kindness feels natural. She doesn't need a reason to be good to someone, and she doesn't seem to do it for attention either. That kind of person is rare.
+        What makes her different is the way her kindness feels natural.
+        She doesn't need a reason to be good to someone, and she doesn't
+        seem to do it for attention either. That kind of person is rare.
       </p>
 
       <p>
-        I admire the softness in her character, the way she can make someone feel comfortable just by being herself. There’s something really genuine about that.
+        I admire the softness in her character, the way she can make someone
+        feel comfortable just by being herself. There’s something really
+        genuine about that.
       </p>
 
       <p>
-        I don't have one perfect moment that explains why she matters. Sometimes it's not one big memory. It’s the collection of small things that slowly make someone important.
+        I don't have one perfect moment that explains why she matters.
+        Sometimes it's not one big memory. It’s the collection of small
+        things that slowly make someone important.
       </p>
 
       <p>
-        Meeting her through a game was random.
-      </p>
-
-      <p>
+        Meeting her through a game was random.<br>
         Keeping the memory of her isn't.
       </p>
 
-      <p>
-        If I had to describe her in three words:
-      </p>
-
-      <p class="highlight">
+      <div class="statement">
         Kind. Genuine. Pure.
-      </p>
+      </div>
 
       <p>
         And if she ever reads this, I’d want her to know one simple thing:
       </p>
 
-      <p class="final-line">
+      <p class="large-copy">
         I'm genuinely glad I met you.
       </p>
 
       <p>
-        I hope you never lose the part of yourself that makes you this kind. The world has enough people trying to be impressive. Staying genuinely good is something else.
+        I hope you never lose the part of yourself that makes you this kind.
+        The world has enough people trying to be impressive. Staying genuinely
+        good is something else.
       </p>
 
-      <p class="signature">
+      <div class="signature">
         For Demi / Shree.
-      </p>
+      </div>
     </section>
+
+
+    <footer>
+      <span>Jayé / Yarc</span>
+      <span class="credit">Made by @cvechz</span>
+    </footer>
 
   </main>
 
+
   <script>
+    /* STAR FIELD */
+
     const sky = document.getElementById("sky");
 
-    const starCount = 22;
+    const starCount = 34;
 
     for (let i = 0; i < starCount; i++) {
       const star = document.createElement("span");
 
       star.className = "star";
 
+      const size = Math.random() < 0.82 ? 1 : 2;
+      const opacity = 0.18 + Math.random() * 0.42;
+      const twinkle = 3 + Math.random() * 5;
+      const drift = 5 + Math.random() * 7;
+      const moveX = -3 + Math.random() * 6;
+      const moveY = -6 + Math.random() * 12;
+
       star.style.left = Math.random() * 100 + "%";
       star.style.top = Math.random() * 100 + "%";
-      star.style.setProperty(
-        "--duration",
-        (3 + Math.random() * 5).toFixed(2) + "s"
-      );
-      star.style.setProperty(
-        "--drift",
-        (4 + Math.random() * 5).toFixed(2) + "s"
-      );
+
+      star.style.setProperty("--size", size + "px");
+      star.style.setProperty("--opacity", opacity.toFixed(2));
+      star.style.setProperty("--twinkle", twinkle.toFixed(2) + "s");
+      star.style.setProperty("--drift", drift.toFixed(2) + "s");
+      star.style.setProperty("--move-x", moveX.toFixed(1) + "px");
+      star.style.setProperty("--move-y", moveY.toFixed(1) + "px");
+
+      star.style.animationDelay =
+        (-Math.random() * twinkle).toFixed(2) + "s";
 
       sky.appendChild(star);
     }
 
-    const sections = document.querySelectorAll("section");
+
+    /* SECTION REVEAL */
+
+    const sections = document.querySelectorAll(
+      "section:not(.hero)"
+    );
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -542,7 +878,30 @@
     sections.forEach((section) => {
       observer.observe(section);
     });
-  </script>
 
-</body>
-</html>
+
+    /* VERY LIGHT PHONE-FRIENDLY PARALLAX */
+
+    const glow = document.getElementById("glow");
+
+    let lastMove = 0;
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        const now = performance.now();
+
+        if (now - lastMove < 40) {
+          return;
+        }
+
+        lastMove = now;
+
+        const y = window.scrollY;
+
+        glow.style.transform =
+          `translate(-50%, calc(-50% + ${y * 0.025}px))`;
+      },
+      { passive: true }
+    );
+  </sc
