@@ -4,26 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#040507">
-  <meta
-    name="description"
-    content="Jayé / Yarc. A personal archive of things, people, memories and interests."
-  >
+  <meta name="description" content="Jayé / Yarc. A personal archive of things, people, memories and interests.">
   <title>Jayé / Yarc</title>
 
   <style>
     :root {
       --bg: #040507;
-      --bg-2: #070a10;
-
-      --text: #f5f6f8;
-      --soft: #b2b6c0;
-      --muted: #6d727d;
-
+      --bg2: #080b12;
+      --text: #f4f5f7;
+      --soft: #b5bac4;
+      --muted: #6e7480;
       --blue: #91b0ff;
-      --line: rgba(230, 235, 245, 0.10);
-      --line-strong: rgba(230, 235, 245, 0.16);
-
-      --content: 690px;
+      --line: rgba(235, 240, 250, 0.1);
+      --line2: rgba(235, 240, 250, 0.17);
+      --max: 700px;
     }
 
     * {
@@ -36,22 +30,21 @@
     }
 
     body {
-      min-width: 320px;
       margin: 0;
+      min-width: 320px;
       overflow-x: hidden;
 
       color: var(--text);
-
       background:
         radial-gradient(
-          700px 420px at 50% -80px,
-          rgba(39, 63, 113, 0.22),
+          650px 400px at 50% -100px,
+          rgba(45, 70, 125, 0.22),
           transparent 72%
         ),
         linear-gradient(
           180deg,
           #040507 0%,
-          #05070a 45%,
+          #06080d 48%,
           #040507 100%
         );
 
@@ -76,13 +69,13 @@
 
       background:
         radial-gradient(
-          420px 420px at 12% 28%,
-          rgba(34, 55, 99, 0.075),
-          transparent 70%
+          450px 450px at 8% 30%,
+          rgba(45, 70, 120, 0.07),
+          transparent 72%
         ),
         radial-gradient(
-          500px 500px at 88% 72%,
-          rgba(24, 42, 78, 0.06),
+          500px 500px at 92% 70%,
+          rgba(35, 55, 100, 0.06),
           transparent 72%
         );
     }
@@ -94,26 +87,26 @@
       z-index: -2;
       pointer-events: none;
 
-      opacity: 0.15;
+      opacity: 0.13;
 
       background-image:
         radial-gradient(
-          rgba(255, 255, 255, 0.65) 0.6px,
-          transparent 0.6px
+          rgba(255,255,255,0.7) 0.5px,
+          transparent 0.5px
         );
 
-      background-size: 92px 92px;
+      background-size: 95px 95px;
 
-      animation: grainMove 20s linear infinite;
+      animation: grain 22s linear infinite;
     }
 
-    @keyframes grainMove {
+    @keyframes grain {
       0% {
         transform: translate3d(0, 0, 0);
       }
 
       50% {
-        transform: translate3d(12px, -10px, 0);
+        transform: translate3d(10px, -8px, 0);
       }
 
       100% {
@@ -133,27 +126,25 @@
       top: 0;
       left: 0;
       right: 0;
-
-      z-index: 20;
+      z-index: 50;
 
       display: flex;
       justify-content: space-between;
-      align-items: center;
 
-      padding: 18px 20px 16px;
+      padding: 18px 20px;
 
       pointer-events: none;
 
       background:
         linear-gradient(
           180deg,
-          rgba(4, 5, 7, 0.76),
+          rgba(4,5,7,0.78),
           transparent
         );
     }
 
     .topbar span {
-      color: rgba(220, 225, 235, 0.46);
+      color: rgba(220,225,235,0.46);
 
       font-size: 9px;
       font-weight: 600;
@@ -161,13 +152,13 @@
       text-transform: uppercase;
     }
 
-    /* SMALL ANIMATED STAR */
+    /* LITTLE STAR */
 
     .little-star {
       position: absolute;
 
       top: 15%;
-      right: 11%;
+      right: 10%;
 
       width: 22px;
       height: 22px;
@@ -176,7 +167,7 @@
 
       animation:
         starFloat 5.5s ease-in-out infinite,
-        starRotate 12s linear infinite;
+        starRotate 14s linear infinite;
     }
 
     .little-star::before,
@@ -189,36 +180,37 @@
 
       transform: translate(-50%, -50%);
 
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(210, 224, 255, 0.9),
-        transparent
-      );
-
       border-radius: 999px;
     }
 
     .little-star::before {
       width: 22px;
       height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(210,225,255,0.95),
+          transparent
+        );
     }
 
     .little-star::after {
       width: 1px;
       height: 22px;
 
-      background: linear-gradient(
-        180deg,
-        transparent,
-        rgba(210, 224, 255, 0.9),
-        transparent
-      );
+      background:
+        linear-gradient(
+          180deg,
+          transparent,
+          rgba(210,225,255,0.95),
+          transparent
+        );
     }
 
-    .little-star-dot {
+    .star-dot {
       position: absolute;
-
       top: 50%;
       left: 50%;
 
@@ -228,24 +220,22 @@
       transform: translate(-50%, -50%);
 
       border-radius: 50%;
-
-      background: #edf3ff;
+      background: #f2f6ff;
 
       box-shadow:
-        0 0 7px rgba(158, 190, 255, 0.85),
-        0 0 16px rgba(128, 164, 235, 0.35);
+        0 0 7px rgba(158,190,255,0.9),
+        0 0 17px rgba(128,164,235,0.35);
 
       animation: starPulse 2.8s ease-in-out infinite;
     }
 
     @keyframes starFloat {
-      0%,
-      100% {
-        transform: translate3d(0, 0, 0);
+      0%, 100% {
+        transform: translate3d(0,0,0);
       }
 
       50% {
-        transform: translate3d(-3px, 7px, 0);
+        transform: translate3d(-3px,7px,0);
       }
     }
 
@@ -260,9 +250,8 @@
     }
 
     @keyframes starPulse {
-      0%,
-      100% {
-        opacity: 0.48;
+      0%, 100% {
+        opacity: 0.45;
         scale: 0.82;
       }
 
@@ -278,8 +267,7 @@
       position: relative;
       z-index: 1;
 
-      width: min(100%, var(--content));
-
+      width: min(100%, var(--max));
       margin: 0 auto;
 
       padding:
@@ -312,8 +300,7 @@
       letter-spacing: 0.23em;
       text-transform: uppercase;
 
-      animation:
-        fadeUp 0.8s ease both;
+      animation: heroUp 0.8s ease both;
     }
 
     .hero-title {
@@ -325,14 +312,12 @@
       font-weight: 750;
 
       animation:
-        heroIn 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+        heroTitle 1s cubic-bezier(0.2,0.7,0.2,1) both;
     }
 
     .hero-title .second {
       display: block;
-
       margin-left: 10%;
-
       color: var(--blue);
     }
 
@@ -345,16 +330,15 @@
       background:
         linear-gradient(
           90deg,
-          var(--line-strong),
+          var(--line2),
           transparent 72%
         );
 
-      animation:
-        fadeIn 1.1s 0.15s ease both;
+      animation: fadeIn 1s 0.15s ease both;
     }
 
     .hero-description {
-      max-width: 445px;
+      max-width: 460px;
 
       margin: 29px 0 0;
 
@@ -363,8 +347,7 @@
       font-size: 14px;
       line-height: 1.85;
 
-      animation:
-        fadeUp 0.9s 0.14s ease both;
+      animation: heroUp 0.9s 0.15s ease both;
     }
 
     .hero-bottom {
@@ -381,8 +364,7 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
 
-      animation:
-        fadeUp 1s 0.24s ease both;
+      animation: heroUp 1s 0.25s ease both;
     }
 
     .hero-bottom::before {
@@ -391,27 +373,23 @@
       width: 36px;
       height: 1px;
 
-      background: rgba(220, 228, 245, 0.20);
+      background: rgba(220,228,245,0.2);
     }
 
     .scroll-dot {
       width: 4px;
       height: 4px;
 
-      margin-left: 3px;
-
       border-radius: 50%;
-
       background: var(--blue);
 
-      animation:
-        dotPulse 2.4s ease-in-out infinite;
+      animation: dotPulse 2.4s ease-in-out infinite;
     }
 
-    @keyframes heroIn {
+    @keyframes heroTitle {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(24px);
       }
 
       to {
@@ -420,10 +398,10 @@
       }
     }
 
-    @keyframes fadeUp {
+    @keyframes heroUp {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(12px);
       }
 
       to {
@@ -443,75 +421,25 @@
     }
 
     @keyframes dotPulse {
-      0%,
-      100% {
+      0%, 100% {
         opacity: 0.35;
         transform: scale(0.8);
       }
 
       50% {
         opacity: 1;
-        transform: scale(1.25);
+        transform: scale(1.3);
       }
     }
 
     /* SECTIONS */
 
     section:not(.hero) {
+      position: relative;
+
       padding: 112px 0;
 
       border-top: 1px solid var(--line);
-
-      animation:
-        sectionIn 0.9s ease both;
-    }
-
-    section:nth-of-type(3) {
-      animation-delay: 0.04s;
-    }
-
-    section:nth-of-type(4) {
-      animation-delay: 0.08s;
-    }
-
-    section:nth-of-type(5) {
-      animation-delay: 0.12s;
-    }
-
-    section:nth-of-type(6) {
-      animation-delay: 0.16s;
-    }
-
-    section:nth-of-type(7) {
-      animation-delay: 0.20s;
-    }
-
-    section:nth-of-type(8) {
-      animation-delay: 0.24s;
-    }
-
-    section:nth-of-type(9) {
-      animation-delay: 0.28s;
-    }
-
-    section:nth-of-type(10) {
-      animation-delay: 0.32s;
-    }
-
-    section:nth-of-type(11) {
-      animation-delay: 0.36s;
-    }
-
-    @keyframes sectionIn {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .section-label {
@@ -537,8 +465,9 @@
 
       font-size: 8px;
       font-weight: 600;
-      letter-spacing: 0.18em;
       line-height: 1.5;
+      letter-spacing: 0.18em;
+
       text-align: right;
       text-transform: uppercase;
     }
@@ -578,12 +507,28 @@
       letter-spacing: -0.02em;
     }
 
+    /* REVEAL */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.2,0.7,0.2,1);
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ABOUT */
 
     .intro-block {
       padding-left: 18px;
 
-      border-left: 1px solid rgba(145, 176, 255, 0.55);
+      border-left: 1px solid rgba(145,176,255,0.55);
     }
 
     /* FAVOURITES */
@@ -596,9 +541,7 @@
 
     .favourite {
       display: grid;
-
-      grid-template-columns: 83px minmax(0, 1fr);
-
+      grid-template-columns: 83px minmax(0,1fr);
       gap: 17px;
 
       padding: 25px 0;
@@ -611,8 +554,8 @@
 
       font-size: 9px;
       font-weight: 600;
-      letter-spacing: 0.15em;
       line-height: 1.5;
+      letter-spacing: 0.15em;
 
       text-transform: uppercase;
     }
@@ -629,8 +572,7 @@
     .statement {
       margin-top: 44px;
 
-      padding:
-        20px 0 20px 18px;
+      padding: 20px 0 20px 18px;
 
       border-left: 1px solid var(--blue);
 
@@ -638,7 +580,6 @@
 
       font-size: 20px;
       line-height: 1.55;
-
       letter-spacing: -0.025em;
     }
 
@@ -655,7 +596,6 @@
 
       font-size: 9px;
       line-height: 1.7;
-
       letter-spacing: 0.10em;
 
       text-transform: uppercase;
@@ -672,14 +612,12 @@
 
       overflow: hidden;
 
-      border:
-        1px solid
-        rgba(220, 228, 245, 0.15);
+      border: 1px solid rgba(220,228,245,0.15);
 
       background: #080a0e;
 
       box-shadow:
-        0 24px 70px rgba(0, 0, 0, 0.28);
+        0 24px 70px rgba(0,0,0,0.28);
     }
 
     .memory-frame::after {
@@ -712,8 +650,8 @@
         brightness(0.94);
 
       transition:
-        transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
-        filter 0.9s ease;
+        transform 0.8s cubic-bezier(0.2,0.7,0.2,1),
+        filter 0.8s ease;
     }
 
     @media (hover: hover) and (pointer: fine) {
@@ -737,7 +675,6 @@
 
       font-size: 8px;
       font-weight: 600;
-
       letter-spacing: 0.17em;
 
       text-transform: uppercase;
@@ -757,7 +694,6 @@
 
       font-size: 9px;
       font-weight: 650;
-
       letter-spacing: 0.20em;
 
       text-transform: uppercase;
@@ -766,9 +702,8 @@
     .last-title {
       max-width: 570px;
 
-      font-size: clamp(49px, 13vw, 88px);
+      font-size: clamp(49px,13vw,88px);
       line-height: 0.88;
-
       letter-spacing: -0.075em;
     }
 
@@ -783,7 +718,6 @@
 
       font-size: 8px;
       font-weight: 600;
-
       letter-spacing: 0.19em;
 
       text-transform: uppercase;
@@ -809,19 +743,15 @@
 
       margin: 46px 0;
 
-      padding:
-        25px 19px
-        27px;
+      padding: 25px 19px 27px;
 
-      border:
-        1px solid
-        rgba(220, 228, 245, 0.10);
+      border: 1px solid rgba(220,228,245,0.1);
 
       background:
         linear-gradient(
           145deg,
-          rgba(23, 30, 43, 0.58),
-          rgba(7, 9, 13, 0.58)
+          rgba(23,30,43,0.58),
+          rgba(7,9,13,0.58)
         );
     }
 
@@ -833,7 +763,7 @@
       top: 5px;
       right: 16px;
 
-      color: rgba(145, 176, 255, 0.16);
+      color: rgba(145,176,255,0.16);
 
       font-family: Georgia, serif;
       font-size: 66px;
@@ -852,7 +782,6 @@
 
       font-size: 21px;
       line-height: 1.52;
-
       letter-spacing: -0.025em;
     }
 
@@ -863,7 +792,6 @@
 
       font-size: 8px;
       font-weight: 600;
-
       letter-spacing: 0.17em;
 
       text-transform: uppercase;
@@ -882,7 +810,7 @@
       background:
         linear-gradient(
           90deg,
-          var(--line-strong),
+          var(--line2),
           transparent
         );
     }
@@ -894,7 +822,6 @@
 
       font-size: 18px;
       line-height: 1.78;
-
       letter-spacing: -0.015em;
     }
 
@@ -905,7 +832,6 @@
 
       font-size: 9px;
       font-weight: 600;
-
       letter-spacing: 0.18em;
 
       text-transform: uppercase;
@@ -926,13 +852,12 @@
 
       font-size: 8px;
       font-weight: 600;
-
       letter-spacing: 0.16em;
 
       text-transform: uppercase;
     }
 
-    footer .credit {
+    .credit {
       color: #858a94;
     }
 
@@ -952,7 +877,7 @@
       .little-star {
         top: 14%;
         right: 8%;
-        transform: scale(0.88);
+        scale: 0.88;
       }
 
       .hero {
@@ -965,7 +890,7 @@
       }
 
       .favourite {
-        grid-template-columns: 71px minmax(0, 1fr);
+        grid-template-columns: 71px minmax(0,1fr);
         gap: 14px;
       }
 
@@ -984,15 +909,20 @@
 
       body::after,
       .little-star,
-      .little-star-dot,
+      .star-dot,
       .scroll-dot,
       .hero-title,
       .hero-kicker,
       .hero-description,
       .hero-bottom,
-      .hero-rule,
-      section:not(.hero) {
+      .hero-rule {
         animation: none;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
       }
 
       .memory-image {
@@ -1016,7 +946,7 @@
     <section class="hero">
 
       <div class="little-star" aria-hidden="true">
-        <span class="little-star-dot"></span>
+        <span class="star-dot"></span>
       </div>
 
       <div class="hero-kicker">
@@ -1129,16 +1059,13 @@
 
         <div class="favourite">
           <div class="favourite-name">Blue</div>
-
           <p>
-            Probably my favourite colour. I’ve liked it for as long
-            as I can remember.
+            Probably my favourite colour. I’ve liked it for as long as I can remember.
           </p>
         </div>
 
         <div class="favourite">
           <div class="favourite-name">Milk & Water</div>
-
           <p>
             My usual drinks. Nothing fancy. I just like them.
           </p>
@@ -1146,27 +1073,61 @@
 
         <div class="favourite">
           <div class="favourite-name">Music</div>
-
           <p>
-            Kendrick is one of my favourites, but that's definitely not
-            the whole picture. My taste changes a lot. I listen to different
-            genres, different artists, different sounds, basically whatever
-            feels right at the time. There isn't really one box my music belongs in.
+            Kendrick is one of my favourites, but that's definitely not the whole picture.
+            My taste changes a lot. I listen to different genres, different artists,
+            different sounds, basically whatever feels right at the time. There isn't
+            really one box my music belongs in.
           </p>
         </div>
 
         <div class="favourite">
           <div class="favourite-name">Games</div>
-
           <p>
-            Free Fire, Roblox, Chess.com. I don't really stick to one type
-            of game. I just play whatever I feel like playing.
+            Free Fire, Roblox, Chess.com. I don't really stick to one type of game.
+            I just play whatever I feel like playing.
           </p>
         </div>
 
         <div class="favourite">
           <div class="favourite-name">Animals</div>
-
           <p>
             I like pretty much every animal. I’ve got dogs and bunnies,
-            so those are probably the ones I’m around the m
+            so those are probably the ones I’m around the most.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- 04 -->
+
+    <section>
+
+      <div class="section-label">
+        <span class="section-number">04</span>
+        <span class="section-name">Currently</span>
+      </div>
+
+      <h2>
+        Still figuring<br>
+        it out.
+      </h2>
+
+      <p>
+        Currently a student.
+        Somewhere between figuring out what I want, learning what I can,
+        and slowly understanding what actually matters to me.
+      </p>
+
+      <p>
+        For now, I’m just taking it as it comes, learning, making mistakes,
+        finding things I enjoy, and keeping a few things close along the way.
+      </p>
+
+      <div class="statement">
+        I don't have everything figured out yet.
+        And honestly, I think that's okay.
+ 
