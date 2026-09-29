@@ -1415,3 +1415,93 @@ main {
     line-height: 1.9;
   }
 }
+/* =================================
+   MOBILE LAYOUT FIX
+================================= */
+
+@media (max-width: 760px) {
+
+  /* Keep sections inside the screen */
+  .section,
+  .fav-section {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Prevent horizontal scrolling */
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Main section spacing */
+  .section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* FAV section */
+  .fav-inner {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  /* FAV content becomes one clean column */
+  .fav-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 45px;
+  }
+
+  /* Image stays inside phone width */
+  .fav-image {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .fav-image img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Story becomes readable */
+  .fav-story {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  .fav-story p {
+    margin-bottom: 24px;
+  }
+
+  /* Shree heading */
+  .fav-heading {
+    margin-bottom: 40px;
+  }
+
+  .fav-heading h2 {
+    font-size: clamp(42px, 13vw, 64px);
+    line-height: 1;
+  }
+
+  .fav-heading h2 span {
+    display: block;
+    margin-top: 12px;
+    font-size: 11px;
+  }
+
+  /* Ending text */
+  .fav-ending {
+    margin-top: 35px !important;
+    padding-left: 16px;
+  }
+}
