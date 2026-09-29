@@ -29,35 +29,6 @@ subtle light, depth, motion, and restrained typography.
 Nothing is designed to compete for attention.
 
 The details are.
-
----
-
-## 03 — Built With
-
-```text
-HTML        structure
-CSS         visual system / animation
-JavaScript  interaction
-GitHub      version control / deployment/
-├── index.html
-├── style.css
-├── README.md
-└── assets/
-## 05 — Interaction
-
-The interface includes:
-
-- responsive layouts
-- animated typography
-- atmospheric background layers
-- constellation elements
-- scroll-based reveals
-- hover interactions
-- animated navigation
-- ambient visual motion
-- optional audio interaction
-- reduced-motion support
-
 The goal is movement without turning the interface
 into noise.## 07 — Status
 
