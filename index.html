@@ -636,13 +636,71 @@ section p:last-child{margin-bottom:0}
   background:linear-gradient(180deg,transparent 0%,transparent 54%,rgba(3,5,10,.42) 100%);
   pointer-events:none;
 }
-
+  
 .memory-image{
   display:block;
   width:100%;
   height:auto;
-  transform:scale(1.025);
-  transition:transform 1.4s cubic-bezier(.16,1,.3,1),filter 1.1s ease;
+  transform-origin:center center;
+  animation:memoryAwaken 7s ease-in-out infinite;
+}
+
+@keyframes memoryAwaken{
+  0%,100%{
+    transform:scale(1);
+    filter:brightness(.96);
+  }
+
+  50%{
+    transform:scale(1.018);
+    filter:brightness(1.035);
+  }
+}
+
+.memory-frame{
+  position:relative;
+  overflow:hidden;
+}
+
+.memory-frame::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-45%;
+  width:35%;
+  height:100%;
+  pointer-events:none;
+  background:linear-gradient(
+    105deg,
+    transparent,
+    rgba(150,200,255,.16),
+    transparent
+  );
+  transform:skewX(-18deg);
+  animation:memoryLight 5.5s ease-in-out 1.2s infinite;
+}
+
+@keyframes memoryLight{
+  0%,55%{
+    left:-45%;
+    opacity:0;
+  }
+
+  65%{
+    opacity:1;
+  }
+
+  85%,100%{
+    left:125%;
+    opacity:0;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .memory-image,
+  .memory-frame::after{
+    animation:none;
+  }
 }
 
 .js-ready .final-section.show .memory-image{
