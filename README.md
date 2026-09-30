@@ -1,4 +1,4 @@
-# jaye
+# jayé
 
 > A personal interface for the things that make up my digital space.
 
