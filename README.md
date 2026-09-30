@@ -1,53 +1,35 @@
-# ye
+<div align="center">
 
-> A personal interface for the things that make up my digital space.
+# Jaye
+
+**software · web · experiments**
 
 <br>
 
-[ Website ](https://jazz-ye.github.io/Jaye.github.io/) · [ Repository ](https://github.com/Jazz-ye/Jaye.github.io)
+[![website](https://img.shields.io/badge/website-cattzc.github.io-111111?style=flat-square&logo=googlechrome&logoColor=ffffff)](https://cattzc.github.io/Ye.github.io/)
+[![github](https://img.shields.io/badge/github-cattzc-111111?style=flat-square&logo=github&logoColor=ffffff)](https://github.com/cattzc)
+
+</div>
+
+<br>
+
+> I like turning ideas into things that actually work.
+
+I'm Jaye.
+
+I build software, explore the web, experiment with tools, and learn by making
+things rather than collecting technologies for a résumé.
 
 ---
 
-## 01 — Overview
+## `~/jaye`
 
-**Jaye** is a personal website built as an experiment in
-minimal digital design, atmosphere, and interaction.
-
-It isn't intended to be a conventional portfolio.
-
-The idea is simpler:
-
-a space that feels intentional.
-
----
-
-## 02 — Direction
-
-The interface is built around a dark navy visual system,
-subtle light, depth, motion, and restrained typography.
-
-Nothing is designed to compete for attention.
-
-The details are.
-The goal is movement without turning the interface
-into noise.## 07 — Status
-
-**Active**
-
-The website is an evolving personal project.
-Design, experiments, and details may change over time.
-
----
-
-## 08 — Credits
-
-Designed and built by **Jaye**.
-
-© 2026 Jaye
-
----
-
-## 09 — License
-
-This project is personal and primarily intended
-for learning, experimentation, and creative development.
+```text
+┌──────────────────────────────────────────────────────────────┐
+│                                                              │
+│  build        →  software, tools, experiments                │
+│  learn        →  by making and breaking things               │
+│  explore      →  ideas that are worth following              │
+│  improve      →  simplify, refine, rebuild                   │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
