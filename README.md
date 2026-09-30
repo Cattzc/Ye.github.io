@@ -23,7 +23,7 @@ I'm Jaye.
 
 I build things for the web, experiment with code, and turn ideas into projects I can actually use.
 
-This GitHub is where I keep the things I'm working on — from personal websites to smaller experiments and whatever comes next.
+This is where I keep my projects, experiments, and things I'm currently working on.
 
 ---
 
@@ -33,12 +33,13 @@ This GitHub is where I keep the things I'm working on — from personal websites
 
 My personal website and digital space.
 
-Built from scratch with **HTML, CSS and JavaScript**, with a focus on keeping the experience simple, personal and completely mine.
+Built from scratch with **HTML, CSS and JavaScript**.
 
-It brings together projects, interests, music, thoughts and other things I want to put on the web.
+A place for projects, interests, music, thoughts, and other things I want to put on the web.
 
-**→ [Visit the website](https://cattzc.github.io/Ye.github.io/)**  
-**→ [View the repository](https://github.com/Cattzc/Ye.github.io)**
+**[Visit the website →](https://cattzc.github.io/Ye.github.io/)**
+
+**[View the repository →](https://github.com/Cattzc/Ye.github.io)**
 
 ---
 
@@ -52,7 +53,7 @@ It brings together projects, interests, music, thoughts and other things I want 
 
 ---
 
-## What I'm Building
+## Projects
 
 <table>
 <tr>
@@ -64,7 +65,7 @@ Personal website built from scratch.
 
 `HTML` `CSS` `JavaScript`
 
-[Repository →](https://github.com/Cattzc/Ye.github.io)
+**[Repository →](https://github.com/Cattzc/Ye.github.io)**
 
 </td>
 
@@ -72,7 +73,7 @@ Personal website built from scratch.
 
 ### Experiments
 
-Small projects, ideas and things I'm testing while learning and building.
+Small projects, ideas, and things I'm testing while learning and building.
 
 `JavaScript` `Python`
 
@@ -82,20 +83,42 @@ Small projects, ideas and things I'm testing while learning and building.
 
 ---
 
-## GitHub
+## Featured
 
-<div align="center">
+<table>
+<tr>
+<td width="50%">
 
-<img src="https://github-readme-stats.vercel.app/api?username=Cattzc&show_icons=true&hide_border=true&bg_color=00000000&title_color=ffffff&text_color=9ca3af&icon_color=ffffff" />
+### `Ye.github.io`
 
-</div>
+Personal website and digital space.
+
+Built with:
+
+`HTML` · `CSS` · `JavaScript`
+
+**[Explore →](https://cattzc.github.io/Ye.github.io/)**
+
+</td>
+
+<td width="50%">
+
+### `Music.mp3`
+
+A small personal touch from the project.
+
+Part of the `Ye.github.io` repository.
+
+**[Repository →](https://github.com/Cattzc/Ye.github.io)**
+
+</td>
+</tr>
+</table>
 
 ---
 
 <div align="center">
 
-### Jaye · Cattzc
-
-`building quietly.`
+`Cattzc`
 
 </div>
