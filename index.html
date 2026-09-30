@@ -1,2533 +1,2097 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#040507">
-  <meta name="color-scheme" content="dark">
-  <meta name="description" content="Jayé / Yarc. A personal archive of things, people, memories and interests.">
-  <title>Jayé / Yarc</title>
-
-  <style>
-    :root {
-      --bg: #040507;
-      --bg-soft: #070a10;
-      --text: #f5f6f8;
-      --text-soft: #b8bcc5;
-      --muted: #6d727c;
-      --blue: #91b0ff;
-      --line: rgba(235,240,250,.10);
-      --line-strong: rgba(235,240,250,.16);
-      --max: 700px;
-      --side: 21px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      background: var(--bg);
-      scroll-behavior: smooth;
-      scroll-padding-top: 70px;
-    }
-
-    body {
-      margin: 0;
-      min-width: 320px;
-      overflow-x: hidden;
-      color: var(--text);
-      background:
-        radial-gradient(700px 450px at 50% -120px, rgba(40,62,110,.24), transparent 74%),
-        linear-gradient(180deg,#040507 0%,#05070a 48%,#040507 100%);
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -4;
-      pointer-events: none;
-      background:
-        radial-gradient(430px 430px at 5% 35%,rgba(33,55,100,.075),transparent 72%),
-        radial-gradient(460px 460px at 96% 72%,rgba(27,47,88,.065),transparent 72%);
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      pointer-events: none;
-      opacity: .12;
-      background-image:
-        radial-gradient(rgba(255,255,255,.7) .55px,transparent .6px);
-      background-size: 86px 86px;
-    }
-
-    ::selection {
-      background: #dce6ff;
-      color: #040507;
-    }
-
-    /* ========================================
-       DEMI DEVI JELLYFISH
-       ======================================== */
-
-    .demi-jelly {
-      position: fixed;
-      left: -100px;
-      top: 42%;
-      width: 76px;
-      height: 108px;
-      z-index: 0;
-      pointer-events: none;
-      opacity: .74;
-
-      filter:
-        drop-shadow(0 0 12px rgba(145,176,255,.40))
-        drop-shadow(0 0 26px rgba(120,145,230,.14));
-
-      animation: demiSwim 26s linear infinite;
-      will-change: left;
-    }
-
-    .jelly-float {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      animation: demiDrift 4.8s ease-in-out infinite;
-      will-change: transform;
-    }
-
-    .jelly-name {
-      position: absolute;
-      top: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-
-      color: rgba(205,216,255,.72);
-      font-size: 8px;
-      font-weight: 650;
-      letter-spacing: .12em;
-      white-space: nowrap;
-
-      text-shadow: 0 0 10px rgba(145,176,255,.38);
-    }
-
-    .jelly-body {
-      position: absolute;
-      left: 8px;
-      top: 20px;
-
-      width: 60px;
-      height: 47px;
-
-      overflow: hidden;
-
-      border-radius: 50% 50% 42% 42%;
-
-      background:
-        radial-gradient(
-          circle at 35% 27%,
-          rgba(235,242,255,.85) 0 3%,
-          rgba(174,201,255,.55) 8%,
-          rgba(122,153,231,.42) 30%,
-          rgba(91,112,190,.25) 60%,
-          rgba(62,78,140,.08) 78%,
-          transparent 100%
-        );
-
-      border: 1px solid rgba(188,210,255,.25);
-
-      box-shadow:
-        inset 0 -9px 18px rgba(48,65,125,.25),
-        0 0 15px rgba(130,162,240,.28);
-
-      animation: jellyPulse 2.8s ease-in-out infinite;
-    }
-
-    .jelly-body::after {
-      content: "";
-      position: absolute;
-      left: 8px;
-      right: 8px;
-      bottom: 3px;
-      height: 9px;
-      border-radius: 50%;
-      border-bottom: 2px solid rgba(177,202,255,.38);
-    }
-
-    .jelly-shine {
-      position: absolute;
-      left: 14px;
-      top: 8px;
-
-      width: 15px;
-      height: 23px;
-
-      border-radius: 50%;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(255,255,255,.42),
-          rgba(255,255,255,0)
-        );
-
-      transform: rotate(20deg);
-      opacity: .7;
-    }
-
-    .jelly-tentacles {
-      position: absolute;
-      left: 14px;
-      top: 60px;
-      width: 49px;
-      height: 43px;
-    }
-
-    .jelly-tentacles span {
-      position: absolute;
-      top: 0;
-
-      width: 2px;
-      height: 37px;
-
-      border-radius: 999px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(160,190,255,.55),
-          rgba(105,131,208,.12),
-          transparent
-        );
-
-      transform-origin: top center;
-    }
-
-    .jelly-tentacles span:nth-child(1) {
-      left: 3px;
-      animation: jellyT1 1.9s ease-in-out infinite;
-    }
-
-    .jelly-tentacles span:nth-child(2) {
-      left: 15px;
-      height: 42px;
-      animation: jellyT2 2.2s ease-in-out infinite;
-    }
-
-    .jelly-tentacles span:nth-child(3) {
-      left: 28px;
-      height: 39px;
-      animation: jellyT3 1.7s ease-in-out infinite;
-    }
-
-    .jelly-tentacles span:nth-child(4) {
-      left: 40px;
-      height: 34px;
-      animation: jellyT4 2.05s ease-in-out infinite;
-    }
-
-    @keyframes jellyPulse {
-      0%,100% {
-        transform: scaleX(.94) scaleY(.96);
-      }
-
-      50% {
-        transform: scaleX(1.04) scaleY(1.02);
-      }
-    }
-
-    @keyframes jellyT1 {
-      0%,100% {
-        transform: rotate(7deg);
-      }
-
-      50% {
-        transform: rotate(-11deg);
-      }
-    }
-
-    @keyframes jellyT2 {
-      0%,100% {
-        transform: rotate(-8deg);
-      }
-
-      50% {
-        transform: rotate(12deg);
-      }
-    }
-
-    @keyframes jellyT3 {
-      0%,100% {
-        transform: rotate(10deg);
-      }
-
-      50% {
-        transform: rotate(-14deg);
-      }
-    }
-
-    @keyframes jellyT4 {
-      0%,100% {
-        transform: rotate(-6deg);
-      }
-
-      50% {
-        transform: rotate(13deg);
-      }
-    }
-
-    @keyframes demiDrift {
-      0%,100% {
-        transform: translate3d(0,0,0) rotate(-2deg);
-      }
-
-      25% {
-        transform: translate3d(0,-18px,0) rotate(3deg);
-      }
-
-      50% {
-        transform: translate3d(0,8px,0) rotate(-1deg);
-      }
-
-      75% {
-        transform: translate3d(0,-12px,0) rotate(3deg);
-      }
-    }
-
-    @keyframes demiSwim {
-      0% {
-        left: -100px;
-      }
-
-      47% {
-        left: calc(100% + 24px);
-      }
-
-      100% {
-        left: -100px;
-      }
-    }
-
-    /* ========================================
-       AMBIENT LIGHT
-       ======================================== */
-
-    .ambient-light {
-      position: fixed;
-      z-index: -2;
-
-      width: 180px;
-      height: 180px;
-
-      left: 58%;
-      top: 12%;
-
-      pointer-events: none;
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(75,105,180,.14),
-          transparent 68%
-        );
-
-      animation: ambientDrift 12s ease-in-out infinite alternate;
-      will-change: transform,opacity;
-    }
-
-    .ambient-light.alt {
-      left: -25%;
-      top: 58%;
-      width: 230px;
-      height: 230px;
-      opacity: .5;
-      animation: ambientDriftAlt 15s ease-in-out infinite alternate;
-    }
-
-    @keyframes ambientDrift {
-      0% {
-        transform: translate3d(-10px,0,0);
-        opacity: .55;
-      }
-
-      50% {
-        transform: translate3d(7px,12px,0);
-        opacity: .9;
-      }
-
-      100% {
-        transform: translate3d(-4px,22px,0);
-        opacity: .65;
-      }
-    }
-
-    @keyframes ambientDriftAlt {
-      0% {
-        transform: translate3d(0,5px,0);
-        opacity: .25;
-      }
-
-      50% {
-        transform: translate3d(28px,-16px,0);
-        opacity: .55;
-      }
-
-      100% {
-        transform: translate3d(3px,21px,0);
-        opacity: .32;
-      }
-    }
-
-    /* ========================================
-       STARS
-       ======================================== */
-
-    .star {
-      position: absolute;
-      top: 15%;
-      right: 10%;
-
-      width: 24px;
-      height: 24px;
-
-      z-index: 2;
-      pointer-events: none;
-
-      animation: starFloat 6s ease-in-out infinite;
-    }
-
-    .star::before,
-    .star::after {
-      content: "";
-      position: absolute;
-
-      left: 50%;
-      top: 50%;
-
-      transform: translate(-50%,-50%);
-      border-radius: 999px;
-    }
-
-    .star::before {
-      width: 24px;
-      height: 1px;
-
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          rgba(220,230,255,.95),
-          transparent
-        );
-    }
-
-    .star::after {
-      width: 1px;
-      height: 24px;
-
-      background:
-        linear-gradient(
-          180deg,
-          transparent,
-          rgba(220,230,255,.95),
-          transparent
-        );
-    }
-
-    .star-core {
-      position: absolute;
-      inset: 9px;
-
-      border-radius: 50%;
-
-      background: #f1f5ff;
-
-      box-shadow:
-        0 0 7px rgba(160,193,255,.9),
-        0 0 18px rgba(132,167,235,.4);
-
-      animation: starPulse 3s ease-in-out infinite;
-    }
-
-    .star.s2 {
-      top: 31%;
-      right: auto;
-      left: 7%;
-
-      width: 13px;
-      height: 13px;
-
-      transform: scale(.65);
-      opacity: .65;
-
-      animation-duration: 8.5s;
-    }
-
-    .star.s2::before {
-      width: 13px;
-    }
-
-    .star.s2::after {
-      height: 13px;
-    }
-
-    .star.s2 .star-core {
-      inset: 5px;
-    }
-
-    .star.s3 {
-      top: 63%;
-      right: 18%;
-
-      width: 10px;
-      height: 10px;
-
-      transform: scale(.55);
-      opacity: .42;
-
-      animation-duration: 9.5s;
-    }
-
-    .star.s3::before {
-      width: 10px;
-    }
-
-    .star.s3::after {
-      height: 10px;
-    }
-
-    .star.s3 .star-core {
-      inset: 4px;
-    }
-
-    @keyframes starFloat {
-      0%,100% {
-        transform: translate3d(0,0,0);
-      }
-
-      50% {
-        transform: translate3d(-4px,8px,0);
-      }
-    }
-
-    @keyframes starPulse {
-      0%,100% {
-        opacity: .48;
-        transform: scale(.82);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.18);
-      }
-    }
-
-    /* ========================================
-       TOP BAR
-       ======================================== */
-
-    .topbar {
-      position: fixed;
-      inset: 0 0 auto;
-
-      z-index: 20;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 17px var(--side) 15px;
-
-      pointer-events: none;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(4,5,7,.8),
-          transparent
-        );
-    }
-
-    .topbar > span:first-child {
-      color: rgba(220,225,235,.48);
-      font-size: 9px;
-      font-weight: 650;
-      letter-spacing: .21em;
-    }
-
-    .time-wrap {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-
-      color: rgba(220,225,235,.56);
-
-      font-size: 8px;
-      font-weight: 650;
-      letter-spacing: .14em;
-
-      white-space: nowrap;
-    }
-
-    .time-dot {
-      width: 4px;
-      height: 4px;
-
-      border-radius: 50%;
-
-      background: var(--blue);
-
-      box-shadow:
-        0 0 10px rgba(145,176,255,.38);
-
-      animation: timeDot 2.2s ease-in-out infinite;
-    }
-
-    @keyframes timeDot {
-      0%,100% {
-        opacity: .35;
-        transform: scale(.8);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.2);
-      }
-    }
-
-    /* ========================================
-       SCROLL BEAM
-       ======================================== */
-
-    .scroll-beam {
-      position: fixed;
-      left: 0;
-      top: 0;
-
-      width: 2px;
-      height: 0;
-
-      z-index: 30;
-      pointer-events: none;
-
-      background:
-        linear-gradient(
-          180deg,
-          transparent,
-          var(--blue),
-          rgba(145,176,255,.1)
-        );
-
-      box-shadow:
-        0 0 16px rgba(145,176,255,.16);
-
-      opacity: .7;
-    }
-
-    /* ========================================
-       MAIN
-       ======================================== */
-
-    main {
-      position: relative;
-      z-index: 1;
-
-      width: min(100%,var(--max));
-      margin: 0 auto;
-
-      padding: 0 var(--side);
-    }
-
-    /* ========================================
-       HERO
-       ======================================== */
-
-    .hero {
-      position: relative;
-
-      min-height: 100svh;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-
-      padding: 100px 0 58px;
-    }
-
-    .hero-kicker,
-    .hero-title,
-    .hero-rule,
-    .hero-copy,
-    .hero-bottom {
-      animation:
-        riseIn .95s cubic-bezier(.2,.7,.2,1) both;
-    }
-
-    .hero-kicker {
-      animation-delay: .02s;
-    }
-
-    .hero-title {
-      animation-delay: .08s;
-    }
-
-    .hero-rule {
-      animation-delay: .15s;
-    }
-
-    .hero-copy {
-      animation-delay: .21s;
-    }
-
-    .hero-bottom {
-      animation-delay: .29s;
-    }
-
-    @keyframes riseIn {
-      from {
-        opacity: 0;
-        transform: translate3d(0,16px,0);
-      }
-
-      to {
-        opacity: 1;
-        transform: translate3d(0,0,0);
-      }
-    }
-
-    .hero-kicker {
-      margin-bottom: 28px;
-
-      color: var(--muted);
-
-      font-size: 9px;
-      font-weight: 650;
-      letter-spacing: .23em;
-      text-transform: uppercase;
-    }
-
-    .hero-title {
-      margin: 0;
-
-      max-width: 100%;
-
-      font-size: clamp(66px,18.5vw,126px);
-      line-height: .78;
-
-      letter-spacing: -.09em;
-      font-weight: 760;
-    }
-
-    .hero-title .accent {
-      display: block;
-      margin-left: 10%;
-      color: var(--blue);
-    }
-
-    .hero-rule {
-      width: 100%;
-      height: 1px;
-
-      margin-top: 48px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--line-strong),
-          transparent 74%
-        );
-    }
-
-    .hero-copy {
-      max-width: 475px;
-
-      margin: 29px 0 0;
-
-      color: var(--text-soft);
-
-      font-size: 14px;
-      line-height: 1.88;
-    }
-
-    .hero-bottom {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      margin-top: 50px;
-
-      color: var(--muted);
-
-      font-size: 8px;
-      font-weight: 650;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-    }
-
-    .hero-bottom::before {
-      content: "";
-
-      width: 34px;
-      height: 1px;
-
-      background: rgba(220,228,245,.2);
-    }
-
-    .scroll-dot {
-      width: 4px;
-      height: 4px;
-
-      border-radius: 50%;
-
-      background: var(--blue);
-
-      animation: dotPulse 2.5s ease-in-out infinite;
-    }
-
-    @keyframes dotPulse {
-      0%,100% {
-        opacity: .32;
-        transform: scale(.8);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.25);
-      }
-    }
-
-    /* ========================================
-       SECTIONS
-       ======================================== */
-
-    section:not(.hero) {
-      padding: 105px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .section-label {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-
-      gap: 18px;
-      margin-bottom: 31px;
-    }
-
-    .section-number {
-      color: var(--blue);
-
-      font-size: 9px;
-      font-weight: 650;
-      letter-spacing: .2em;
-    }
-
-    .section-name {
-      max-width: 69%;
-
-      color: var(--muted);
-
-      font-size: 8px;
-      font-weight: 650;
-      line-height: 1.55;
-      letter-spacing: .18em;
-      text-align: right;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      max-width: 640px;
-
-      margin: 0 0 34px;
-
-      font-size: clamp(41px,10.7vw,70px);
-      line-height: .93;
-
-      letter-spacing: -.066em;
-      font-weight: 690;
-    }
-
-    p {
-      max-width: 590px;
-
-      margin: 0 0 24px;
-
-      color: var(--text-soft);
-
-      font-size: 15px;
-      line-height: 1.9;
-    }
-
-    p:last-child {
-      margin-bottom: 0;
-    }
-
-    .lead {
-      color: #dce0e7;
-
-      font-size: 18px;
-      line-height: 1.75;
-
-      letter-spacing: -.02em;
-    }
-
-    .intro-block {
-      padding-left: 17px;
-
-      border-left:
-        1px solid rgba(145,176,255,.58);
-    }
-
-    /* ========================================
-       SCROLL REVEAL
-       ======================================== */
-
-    .enhanced [data-reveal] {
-      opacity: 0;
-      transform: translate3d(0,18px,0);
-    }
-
-    .enhanced [data-reveal].is-visible {
-      opacity: 1;
-      transform: translate3d(0,0,0);
-
-      transition:
-        opacity .7s ease,
-        transform .7s cubic-bezier(.2,.7,.2,1);
-    }
-
-    /* ========================================
-       FAVOURITES
-       ======================================== */
-
-    .favourites {
-      margin-top: 44px;
-      border-top: 1px solid var(--line);
-    }
-
-    .favourite {
-      display: grid;
-      grid-template-columns: 82px minmax(0,1fr);
-
-      gap: 17px;
-
-      padding: 24px 0;
-
-      border-bottom: 1px solid var(--line);
-
-      transition:
-        border-color .25s ease,
-        transform .25s ease;
-    }
-
-    .favourite:active {
-      transform: translate3d(3px,0,0);
-    }
-
-    .favourite-name {
-      color: #e8ebef;
-
-      font-size: 9px;
-      font-weight: 650;
-      line-height: 1.5;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-    }
-
-    .favourite p {
-      margin: 0;
-
-      font-size: 14px;
-      line-height: 1.82;
-    }
-
-    /* ========================================
-       STATEMENT
-       ======================================== */
-
-    .statement {
-      margin-top: 44px;
-
-      padding: 20px 0 20px 18px;
-
-      border-left: 1px solid var(--blue);
-
-      color: #e1e4ea;
-
-      font-size: 20px;
-      line-height: 1.55;
-      letter-spacing: -.025em;
-    }
-
-    .people-note {
-      margin-top: 43px;
-      padding-top: 18px;
-
-      border-top: 1px solid var(--line);
-
-      color: var(--muted);
-
-      font-size: 9px;
-      line-height: 1.7;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    /* ========================================
-       LAST PAGE
-       ======================================== */
-
-    .last-page {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-
-      padding-top: 123px !important;
-      padding-bottom: 120px !important;
-    }
-
-    .last-page::before {
-      content: "";
-
-      position: absolute;
-
-      left: 50%;
-      top: 128px;
-
-      width: 420px;
-      height: 420px;
-
-      transform:
-        translate(-50%,0)
-        scale(.82);
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(82,110,184,.13),
-          transparent 68%
-        );
-
-      opacity: 0;
-
-      z-index: -2;
-
-      transition:
-        opacity 1.2s ease,
-        transform 1.4s cubic-bezier(.2,.7,.2,1);
-
-      pointer-events: none;
-    }
-
-    .last-page.memory-active::before {
-      opacity: 1;
-
-      transform:
-        translate(-50%,0)
-        scale(1);
-    }
-
-    .last-intro {
-      margin-bottom: 8px;
-
-      color: var(--blue);
-
-      font-size: 9px;
-      font-weight: 650;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-    }
-
-    .last-title {
-      max-width: 620px;
-
-      font-size: clamp(47px,12.7vw,88px);
-      line-height: .88;
-
-      letter-spacing: -.076em;
-    }
-
-    .dedication {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-
-      margin: 6px 0 38px;
-
-      color: #8f949e;
-
-      font-size: 8px;
-      font-weight: 650;
-      letter-spacing: .19em;
-      text-transform: uppercase;
-    }
-
-    .dedication::before {
-      content: "";
-
-      width: 26px;
-      height: 1px;
-
-      background: var(--blue);
-    }
-
-    /* ========================================
-       MEMORY IMAGE
-       ======================================== */
-
-    .memory-card {
-      position: relative;
-
-      margin: 46px 0 49px;
-    }
-
-    .memory-card::before {
-      content: "MEMORY 10";
-
-      position: absolute;
-
-      right: 0;
-      top: -23px;
-
-      color: rgba(145,176,255,.42);
-
-      font-size: 7px;
-      font-weight: 700;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-
-    .memory-frame {
-      position: relative;
-
-      overflow: hidden;
-
-      border:
-        1px solid rgba(220,228,245,.14);
-
-      background: #080a0e;
-
-      box-shadow:
-        0 24px 70px rgba(0,0,0,.28);
-
-      transform:
-        translate3d(0,14px,0)
-        scale(.985);
-
-      opacity: .72;
-
-      transition:
-        transform 1s cubic-bezier(.2,.7,.2,1),
-        opacity 1s ease,
-        box-shadow 1s ease;
-    }
-
-    .memory-active .memory-frame {
-      transform:
-        translate3d(0,0,0)
-        scale(1);
-
-      opacity: 1;
-
-      box-shadow:
-        0 28px 90px rgba(0,0,0,.38),
-        0 0 45px rgba(79,108,180,.12);
-    }
-
-    .memory-frame::before {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      z-index: 1;
-
-      pointer-events: none;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,.045),
-          transparent 28%,
-          transparent 72%,
-          rgba(113,145,220,.05)
-        );
-    }
-
-    .memory-frame::after {
-      content: "";
-
-      position: absolute;
-
-      top: 0;
-      left: -55%;
-
-      width: 26%;
-      height: 100%;
-
-      z-index: 2;
-
-      pointer-events: none;
-
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          rgba(255,255,255,.12),
-          transparent
-        );
-
-      transform: skewX(-14deg);
-      opacity: 0;
-    }
-
-    .memory-active .memory-frame::after {
-      animation:
-        memorySheen 1.35s cubic-bezier(.2,.7,.2,1) .22s both;
-    }
-
-    @keyframes memorySheen {
-      0% {
-        left: -55%;
-        opacity: 0;
-      }
-
-      18% {
-        opacity: .7;
-      }
-
-      100% {
-        left: 132%;
-        opacity: 0;
-      }
-    }
-
-    .memory-image {
-      display: block;
-
-      width: 100%;
-      height: auto;
-
-      filter:
-        saturate(.84)
-        contrast(1.04)
-        brightness(.95);
-
-      transform:
-        translate3d(0,0,0)
-        scale(1.025);
-
-      transition:
-        transform 1.25s cubic-bezier(.2,.7,.2,1),
-        filter 1.25s ease;
-    }
-
-    .memory-active .memory-image {
-      transform:
-        translate3d(0,0,0)
-        scale(1);
-
-      filter:
-        saturate(.9)
-        contrast(1.04)
-        brightness(.98);
-    }
-
-    .memory-frame:active .memory-image {
-      transform:
-        translate3d(0,-1px,0)
-        scale(1.025);
-
-      filter:
-        saturate(.96)
-        contrast(1.04)
-        brightness(1);
-    }
-
-    @media (hover:hover) and (pointer:fine) {
-      .memory-frame:hover .memory-image {
-        transform:
-          translate3d(0,-2px,0)
-          scale(1.018);
-
-        filter:
-          saturate(.95)
-          contrast(1.04)
-          brightness(1);
-      }
-    }
-
-    .memory-meta {
-      display: flex;
-      justify-content: space-between;
-
-      gap: 16px;
-
-      padding-top: 11px;
-
-      color: var(--muted);
-
-      font-size: 8px;
-      font-weight: 650;
-      letter-spacing: .17em;
-      text-transform: uppercase;
-    }
-
-    /* ========================================
-       DEMI TEXT ANIMATION
-       ======================================== */
-
-    .memory-intro,
-    .last-page > p,
-    .quote-card,
-    .closing,
-    .signature {
-      opacity: .68;
-
-      transform:
-        translate3d(0,13px,0);
-
-      transition:
-        opacity .85s ease,
-        transform .85s cubic-bezier(.2,.7,.2,1);
-    }
-
-    .memory-active .memory-intro {
-      transition-delay: .18s;
-    }
-
-    .memory-active .last-page > p:nth-of-type(2) {
-      transition-delay: .27s;
-    }
-
-    .memory-active .last-page > p:nth-of-type(3) {
-      transition-delay: .34s;
-    }
-
-    .memory-active .last-page > p:nth-of-type(4) {
-      transition-delay: .41s;
-    }
-
-    .memory-active .last-page > p:nth-of-type(5) {
-      transition-delay: .48s;
-    }
-
-    .memory-active .quote-card {
-      transition-delay: .56s;
-    }
-
-    .memory-active .last-page > p:nth-of-type(6) {
-      transition-delay: .64s;
-    }
-
-    .memory-active .closing-text {
-      transition-delay: .72s;
-    }
-
-    .memory-active .closing {
-      transition-delay: .82s;
-    }
-
-    .memory-active .signature {
-      transition-delay: .92s;
-    }
-
-    .memory-active .memory-intro,
-    .memory-active .last-page > p,
-    .memory-active .quote-card,
-    .memory-active .closing,
-    .memory-active .signature {
-      opacity: 1;
-
-      transform:
-        translate3d(0,0,0);
-    }
-
-    /* ========================================
-       QUOTE
-       ======================================== */
-
-    .quote-card {
-      position: relative;
-
-      margin: 46px 0;
-
-      padding: 25px 19px 27px;
-
-      border:
-        1px solid rgba(220,228,245,.1);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(22,29,42,.58),
-          rgba(7,9,13,.58)
-        );
-
-      overflow: hidden;
-    }
-
-    .quote-card::before {
-      content: "“";
-
-      position: absolute;
-
-      top: 3px;
-      right: 15px;
-
-      color: rgba(145,176,255,.15);
-
-      font-family: Georgia,serif;
-      font-size: 68px;
-      line-height: 1;
-    }
-
-    .quote-card::after {
-      content: "";
-
-      position: absolute;
-
-      left: 0;
-      bottom: 0;
-
-      width: 0;
-      height: 1px;
-
-      background: var(--blue);
-
-      opacity: .75;
-
-      transition:
-        width 1s cubic-bezier(.2,.7,.2,1) .65s;
-    }
-
-    .memory-active .quote-card::after {
-      width: 68%;
-    }
-
-    .quote {
-      position: relative;
-      z-index: 1;
-
-      margin: 0;
-
-      color: #eef0f4;
-
-      font-size: 21px;
-      line-height: 1.52;
-
-      letter-spacing: -.025em;
-    }
-
-    .quote-sub {
-      margin-top: 15px;
-
-      color: var(--muted);
-
-      font-size: 8px;
-      font-weight: 650;
-      letter-spacing: .17em;
-      text-transform: uppercase;
-    }
-
-    .memory-intro {
-      margin-bottom: 38px;
-      color: #d5d9e0;
-    }
-
-    .closing {
-      margin-top: 48px;
-    }
-
-    .closing-line {
-      width: 100%;
-      height: 1px;
-
-      margin-bottom: 27px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--line-strong),
-          transparent
-        );
-    }
-
-    .closing-text {
-      max-width: 520px;
-
-      color: #dfe2e8;
-
-      font-size: 18px;
-      line-height: 1.78;
-
-      letter-spacing: -.015em;
-    }
-
-    .signature {
-      margin-top: 52px;
-
-      color: #aeb3bd;
-
-      font-size: 9px;
-      font-weight: 650;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-
-    /* ========================================
-       MUSIC
-       ======================================== */
-
-    .sound-control {
-      position: fixed;
-
-      right: 14px;
-      bottom: 14px;
-
-      z-index: 40;
-
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 7px 8px 7px 10px;
-
-      border:
-        1px solid rgba(220,228,245,.1);
-
-      background:
-        rgba(6,8,12,.76);
-
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-
-      border-radius: 999px;
-    }
-
-    .sound-label {
-      color: var(--muted);
-
-      font-size: 7px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    .sound-button {
-      width: 30px;
-      height: 30px;
-
-      padding: 0;
-
-      border:
-        1px solid rgba(145,176,255,.22);
-
-      border-radius: 50%;
-
-      background:
-        rgba(145,176,255,.08);
-
-      color: var(--text);
-
-      font: inherit;
-
-      cursor: pointer;
-
-      display: grid;
-      place-items: center;
-
-      touch-action: manipulation;
-    }
-
-    .sound-button span {
-      display: block;
-
-      width: 10px;
-      height: 8px;
-
-      border-left: 2px solid currentColor;
-      border-right: 2px solid currentColor;
-
-      opacity: .82;
-    }
-
-    .sound-button.playing {
-      border-color: rgba(145,176,255,.52);
-
-      box-shadow:
-        0 0 18px rgba(145,176,255,.12);
-
-      animation:
-        soundPulse 1.8s ease-in-out infinite;
-    }
-
-    @keyframes soundPulse {
-      0%,100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.04);
-      }
-    }
-
-    /* ========================================
-       FOOTER
-       ======================================== */
-
-    footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 20px;
-
-      padding: 28px 0 38px;
-
-      border-top: 1px solid var(--line);
-
-      color: var(--muted);
-
-      font-size: 8px;
-      font-weight: 650;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    footer .credit {
-      color: #858a94;
-    }
-
-    /* ========================================
-       SMALL PHONES
-       ======================================== */
-
-    @media (max-width:400px) {
-      :root {
-        --side: 18px;
-      }
-
-      .hero {
-        padding-bottom: 51px;
-      }
-
-      section:not(.hero) {
-        padding-top: 94px;
-        padding-bottom: 94px;
-      }
-
-      .favourite {
-        grid-template-columns: 70px minmax(0,1fr);
-        gap: 14px;
-      }
-
-      .last-page {
-        padding-top: 108px !important;
-        padding-bottom: 106px !important;
-      }
-
-      .last-page::before {
-        width: 330px;
-        height: 330px;
-      }
-
-      .sound-control {
-        right: 10px;
-        bottom: 10px;
-      }
-    }
-
-    /* ========================================
-       ACCESSIBILITY
-       ======================================== */
-
-    :focus-visible {
-      outline: 1px solid var(--blue);
-      outline-offset: 4px;
-    }
-
-    @media (prefers-reduced-motion:reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
-      }
-
-      .demi-jelly {
-        display: none;
-      }
-
-      .scroll-beam {
-        display: none;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#03050a">
+<meta name="description" content="Jayé / Yarc personal archive">
+<title>Jayé / Yarc</title>
+
+<style>
+:root{
+  --bg:#03050a;
+  --bg-soft:#07101b;
+  --text:#edf4ff;
+  --muted:#aab6c7;
+  --dim:#69778a;
+  --line:rgba(150,180,220,.14);
+  --line-strong:rgba(150,190,235,.28);
+  --blue:#86baff;
+  --blue-soft:rgba(109,171,255,.18);
+  --lilac:#c7b9ff;
+  --lilac-soft:rgba(184,160,255,.16);
+}
+
+*{box-sizing:border-box}
+
+button{
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+html{
+  scroll-behavior:smooth;
+  background:var(--bg);
+}
+
+body{
+  margin:0;
+  min-width:320px;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 50% -5%,#10213a 0%,#07101b 26%,#03050a 68%),
+    var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:-16%;
+  pointer-events:none;
+  z-index:0;
+  opacity:.24;
+  background:
+    radial-gradient(circle at 18% 24%,rgba(137,190,255,.32) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 76% 63%,rgba(137,190,255,.22) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 54% 12%,rgba(255,255,255,.18) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 83% 16%,rgba(137,190,255,.14) 0 1.5px,transparent 2px);
+  background-size:180px 180px,260px 260px,320px 320px,390px 390px;
+  animation:grainDrift 28s linear infinite;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(circle at 15% 70%,rgba(72,124,206,.06),transparent 28%),
+    radial-gradient(circle at 88% 40%,rgba(102,75,194,.05),transparent 30%);
+  animation:ambientShift 13s ease-in-out infinite alternate;
+}
+
+@keyframes grainDrift{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(-26px,18px,0)}
+}
+
+@keyframes ambientShift{
+  from{transform:scale(1);opacity:.72}
+  to{transform:scale(1.04);opacity:1}
+}
+
+/* =========================
+   TWINKLING STARS
+   ========================= */
+
+.twinkle-field{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+}
+
+.twinkle{
+  position:absolute;
+  width:2px;
+  height:2px;
+  border-radius:50%;
+  background:rgba(224,239,255,.82);
+  box-shadow:0 0 7px 1px rgba(133,190,255,.55);
+  opacity:.25;
+  animation:twinkle 4.8s ease-in-out infinite;
+}
+
+.twinkle::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:10px;
+  height:1px;
+  transform:translate(-50%,-50%);
+  background:rgba(190,220,255,.18);
+}
+
+.twinkle.t1{left:9%;top:18%;animation-delay:.4s}
+.twinkle.t2{left:24%;top:31%;animation-delay:2.1s}
+.twinkle.t3{left:42%;top:14%;animation-delay:1.2s}
+.twinkle.t4{left:61%;top:24%;animation-delay:3.2s}
+.twinkle.t5{left:78%;top:17%;animation-delay:.8s}
+.twinkle.t6{left:91%;top:33%;animation-delay:2.8s}
+.twinkle.t7{left:14%;top:58%;animation-delay:3.8s}
+.twinkle.t8{left:34%;top:69%;animation-delay:1.7s}
+.twinkle.t9{left:55%;top:57%;animation-delay:4.1s}
+.twinkle.t10{left:73%;top:71%;animation-delay:2.5s}
+.twinkle.t11{left:87%;top:61%;animation-delay:1.4s}
+.twinkle.t12{left:47%;top:84%;animation-delay:3.5s}
+
+@keyframes twinkle{
+  0%,100%{
+    opacity:.12;
+    transform:scale(.65);
+  }
+
+  45%{
+    opacity:.82;
+    transform:scale(1.45);
+  }
+
+  58%{
+    opacity:.38;
+    transform:scale(.9);
+  }
+}
+
+/* =========================
+   BIG STAR
+   ========================= */
+
+.big-star{
+  position:fixed;
+  top:11vh;
+  right:12vw;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#eef6ff;
+  box-shadow:
+    0 0 9px 2px rgba(172,212,255,.82),
+    0 0 28px 6px rgba(80,150,255,.18);
+  animation:starPulse 4.2s ease-in-out infinite;
+  pointer-events:none;
+  z-index:1;
+}
+
+.big-star::before,
+.big-star::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(210,230,255,.66);
+}
+
+.big-star::before{
+  width:31px;
+  height:1px;
+}
+
+.big-star::after{
+  width:1px;
+  height:31px;
+}
+
+@keyframes starPulse{
+  0%,100%{
+    opacity:.52;
+    transform:scale(.84);
+  }
+
+  48%{
+    opacity:1;
+    transform:scale(1.12);
+  }
+
+  56%{
+    opacity:.75;
+    transform:scale(.98);
+  }
+}
+
+/* =========================
+   MUSIC
+   ========================= */
+
+.sound-control{
+  position:fixed;
+  top:max(14px,env(safe-area-inset-top));
+  right:14px;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 8px 7px 11px;
+  border:1px solid rgba(154,193,236,.18);
+  border-radius:999px;
+  background:rgba(3,7,13,.72);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.04);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.sound-label{
+  min-width:56px;
+  color:#8190a5;
+  font-size:.56rem;
+  letter-spacing:.15em;
+  text-align:right;
+}
+
+.sound-button{
+  width:34px;
+  height:34px;
+  padding:0;
+  border:1px solid rgba(156,196,241,.22);
+  border-radius:50%;
+  background:#07111e;
+  color:#edf4ff;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    border-color .25s ease;
+}
+
+.sound-button:active{
+  transform:scale(.94);
+}
+
+.sound-button:focus-visible{
+  outline:2px solid rgba(134,186,255,.72);
+  outline-offset:3px;
+}
+
+.sound-icon{
+  width:15px;
+  height:15px;
+  display:block;
+}
+
+.sound-icon::before{
+  content:"";
+  display:block;
+  width:0;
+  height:0;
+  margin-left:1px;
+  border-top:5px solid transparent;
+  border-bottom:5px solid transparent;
+  border-left:7px solid #dfeeff;
+}
+
+.sound-button.is-playing .sound-icon::before{
+  width:3px;
+  height:10px;
+  margin:0;
+  border:0;
+  background:currentColor;
+  box-shadow:5px 0 0 currentColor;
+}
+
+.sound-bars{
+  position:absolute;
+  width:18px;
+  height:10px;
+  right:18px;
+  bottom:7px;
+  display:none;
+  gap:2px;
+  align-items:end;
+  pointer-events:none;
+}
+
+.sound-bars span{
+  width:2px;
+  border-radius:3px;
+  background:#8cbfff;
+  animation:bar .8s ease-in-out infinite alternate;
+}
+
+.sound-bars span:nth-child(1){
+  height:4px;
+  animation-delay:0s;
+}
+
+.sound-bars span:nth-child(2){
+  height:9px;
+  animation-delay:.18s;
+}
+
+.sound-bars span:nth-child(3){
+  height:6px;
+  animation-delay:.34s;
+}
+
+.sound-control.playing .sound-bars{
+  display:flex;
+}
+
+@keyframes bar{
+  from{
+    transform:scaleY(.45);
+    opacity:.55;
+  }
+
+  to{
+    transform:scaleY(1);
+    opacity:1;
+  }
+}
+
+/* =========================
+   LAYOUT
+   ========================= */
+
+main{
+  position:relative;
+  z-index:2;
+  width:min(100% - 30px,760px);
+  margin:0 auto;
+}
+
+.hero{
+  min-height:92vh;
+  padding:88px 0 78px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.kicker{
+  color:var(--blue);
+  font-size:.68rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+  animation:heroIn .9s ease both;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(4rem,20vw,8.3rem);
+  line-height:.81;
+  letter-spacing:-.08em;
+  animation:heroIn 1s .1s cubic-bezier(.16,1,.3,1) both;
+}
+
+.hero h1 span{
+  display:block;
+  color:#8190a5;
+}
+
+.hero-intro{
+  max-width:600px;
+  margin-top:35px;
+  color:#adb8c8;
+  font-size:.96rem;
+  animation:heroIn 1s .23s cubic-bezier(.16,1,.3,1) both;
+}
+
+.hero-rule{
+  width:76px;
+  height:1px;
+  margin-top:34px;
+  background:linear-gradient(
+    90deg,
+    rgba(134,186,255,.72),
+    rgba(134,186,255,0)
+  );
+  transform-origin:left center;
+  animation:ruleIn 1s .4s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes heroIn{
+  from{
+    opacity:0;
+    transform:translateY(24px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes ruleIn{
+  from{
+    opacity:0;
+    transform:scaleX(.2);
+  }
+
+  to{
+    opacity:1;
+    transform:scaleX(1);
+  }
+}
+
+section{
+  position:relative;
+  padding:92px 0;
+  border-top:1px solid var(--line);
+  opacity:1;
+  transform:none;
+}
+
+.js-ready section:not(.hero-section){
+  opacity:.96;
+  transform:translateY(20px);
+  transition:
+    opacity .9s ease,
+    transform 1s cubic-bezier(.16,1,.3,1);
+}
+
+.js-ready section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+section::before{
+  content:"";
+  position:absolute;
+  top:-1px;
+  left:0;
+  width:0;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    rgba(134,186,255,.66),
+    transparent
+  );
+  transition:width 1.15s cubic-bezier(.16,1,.3,1);
+}
+
+.js-ready section.show::before{
+  width:82px;
+}
+
+.section-number{
+  color:#6f7e91;
+  font-size:.66rem;
+  letter-spacing:.21em;
+  margin-bottom:18px;
+}
+
+section h2{
+  margin:0 0 28px;
+  font-size:clamp(2.3rem,10vw,3.7rem);
+  line-height:.94;
+  letter-spacing:-.058em;
+}
+
+section p{
+  margin:0 0 19px;
+  color:var(--muted);
+  font-size:.96rem;
+}
+
+section p:last-child{
+  margin-bottom:0;
+}
+
+.reveal-piece{
+  opacity:1;
+  transform:none;
+}
+
+.js-ready .reveal-piece{
+  opacity:0;
+  transform:translateY(18px);
+  transition:
+    opacity .72s ease,
+    transform .85s cubic-bezier(.16,1,.3,1);
+}
+
+.js-ready section.show .reveal-piece{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.js-ready section.show .reveal-piece:nth-of-type(1){
+  transition-delay:.02s;
+}
+
+.js-ready section.show .reveal-piece:nth-of-type(2){
+  transition-delay:.08s;
+}
+
+.js-ready section.show .reveal-piece:nth-of-type(3){
+  transition-delay:.14s;
+}
+
+.js-ready section.show .reveal-piece:nth-of-type(4){
+  transition-delay:.20s;
+}
+
+.js-ready section.show .reveal-piece:nth-of-type(5){
+  transition-delay:.26s;
+}
+
+/* =========================
+   FAVOURITES
+   ========================= */
+
+.favourites{
+  display:grid;
+  gap:1px;
+  margin-top:12px;
+  background:var(--line);
+  border:1px solid var(--line);
+}
+
+.fav{
+  position:relative;
+  overflow:hidden;
+  background:rgba(5,9,16,.88);
+  padding:23px 19px;
+  transition:
+    transform .35s ease,
+    background .35s ease;
+}
+
+.fav::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      115deg,
+      transparent 18%,
+      rgba(130,180,255,.06) 48%,
+      transparent 78%
+    );
+  transform:translateX(-110%);
+  transition:transform .75s cubic-bezier(.16,1,.3,1);
+  pointer-events:none;
+}
+
+@media (hover:hover){
+  .fav:hover{
+    transform:translateY(-3px);
+    background:rgba(8,14,24,.96);
+  }
+
+  .fav:hover::after{
+    transform:translateX(110%);
+  }
+}
+
+.fav-label{
+  color:#708096;
+  font-size:.61rem;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.fav-value{
+  color:#e7f0ff;
+  font-size:1.08rem;
+  margin-bottom:8px;
+}
+
+.fav p{
+  font-size:.86rem;
+  margin:0;
+}
+
+/* =========================
+   FINAL DEMI SECTION
+   ========================= */
+
+.final-section{
+  padding-top:112px;
+  padding-bottom:120px;
+  overflow:hidden;
+}
+
+.final-section::after{
+  content:"";
+  position:absolute;
+  width:340px;
+  height:340px;
+  right:-190px;
+  top:180px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(112,150,255,.08),
+    transparent 68%
+  );
+  pointer-events:none;
+}
+
+.final-intro{
+  margin-bottom:46px;
+}
+
+.final-name{
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:9px;
+  line-height:.9;
+}
+
+.final-name .primary{
+  font-size:clamp(4rem,18vw,7rem);
+  letter-spacing:-.08em;
+  color:#edf4ff;
+}
+
+.final-name .secondary{
+  font-size:clamp(2.2rem,9vw,3.5rem);
+  letter-spacing:-.06em;
+  color:#68778c;
+}
+
+.final-tag{
+  margin-top:20px;
+  color:#6e7e93;
+  font-size:.63rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+.final-note{
+  position:relative;
+  z-index:2;
+  max-width:650px;
+}
+
+.final-copy{
+  color:#adb9ca;
+  margin-bottom:23px;
+}
+
+.final-copy:nth-child(5){
+  color:#e2ebfa;
+}
+
+.memory-wrap{
+  margin-top:58px;
+}
+
+.memory-frame{
+  position:relative;
+  padding:8px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(144,188,255,.16),
+      rgba(108,93,177,.08),
+      rgba(144,188,255,.02)
+    );
+  border:1px solid rgba(157,193,235,.17);
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.34),
+    0 0 60px rgba(78,120,206,.06);
+}
+
+.memory{
+  position:relative;
+  overflow:hidden;
+  background:#050912;
+  border:1px solid rgba(255,255,255,.04);
+}
+
+.memory-image{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:620px;
+  object-fit:cover;
+  opacity:.9;
+  filter:saturate(.86) contrast(1.04);
+}
+
+.memory::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2,5,10,.02),
+      rgba(2,5,10,.14) 60%,
+      rgba(2,5,10,.66)
+    );
+  pointer-events:none;
+}
+
+.memory-mark{
+  position:absolute;
+  top:15px;
+  left:15px;
+  z-index:2;
+  padding:5px 8px;
+  border:1px solid rgba(206,225,255,.16);
+  background:rgba(3,7,13,.54);
+  color:#b4c1d3;
+  font-size:.55rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+}
+
+.memory-caption{
+  position:absolute;
+  left:17px;
+  bottom:15px;
+  z-index:2;
+  color:#e4edfb;
+  font-size:.73rem;
+  letter-spacing:.08em;
+}
+
+.final-signoff{
+  margin-top:34px;
+  color:#68778a;
+  font-size:.7rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+footer{
+  position:relative;
+  z-index:2;
+  padding:30px 0 52px;
+  color:#4f5d70;
+  font-size:.64rem;
+  letter-spacing:.14em;
+  text-align:center;
+}
+
+/* =========================
+   SCROLL PROGRESS
+   ========================= */
+
+.scroll-progress{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  height:2px;
+  z-index:30;
+  pointer-events:none;
+  background:rgba(255,255,255,.03);
+}
+
+.scroll-progress span{
+  display:block;
+  width:100%;
+  height:100%;
+  transform:scaleX(0);
+  transform-origin:left center;
+  background:linear-gradient(
+    90deg,
+    rgba(106,166,255,.2),
+    rgba(180,200,255,.8),
+    rgba(130,155,255,.25)
+  );
+  box-shadow:0 0 12px rgba(117,170,255,.45);
+}
+
+/* =========================
+   DEMI DEVI JELLYFISH
+   ========================= */
+
+.demi-jelly{
+  position:fixed;
+  left:-115px;
+  top:48%;
+  width:62px;
+  height:91px;
+  z-index:3;
+  pointer-events:none;
+  opacity:.78;
+  filter:
+    drop-shadow(0 0 9px rgba(120,170,255,.42))
+    drop-shadow(0 0 25px rgba(98,132,225,.16));
+  animation:jellyAcross 30s linear infinite;
+}
+
+.demi-jelly-inner{
+  position:absolute;
+  inset:0;
+  animation:jellyFloat 4.8s ease-in-out infinite;
+}
+
+.jelly-name{
+  position:absolute;
+  top:-20px;
+  left:50%;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  color:rgba(211,225,255,.7);
+  font-size:7px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-shadow:0 0 9px rgba(122,170,255,.42);
+}
+
+.jelly-bell{
+  position:absolute;
+  left:5px;
+  top:15px;
+  width:52px;
+  height:42px;
+  overflow:hidden;
+  border-radius:50% 50% 43% 43%;
+  background:
+    radial-gradient(
+      ellipse at 37% 26%,
+      rgba(240,248,255,.78) 0 4%,
+      rgba(171,210,255,.55) 13%,
+      rgba(111,160,242,.38) 38%,
+      rgba(76,112,196,.22) 67%,
+      rgba(39,58,108,.06) 100%
+    );
+  border:1px solid rgba(194,220,255,.28);
+  box-shadow:
+    inset 0 -8px 15px rgba(49,74,138,.2),
+    inset 0 4px 8px rgba(255,255,255,.08),
+    0 0 15px rgba(119,171,255,.27);
+  animation:bellPulse 2.9s ease-in-out infinite;
+}
+
+.jelly-bell::before{
+  content:"";
+  position:absolute;
+  left:11px;
+  top:7px;
+  width:13px;
+  height:20px;
+  border-radius:50%;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.48),
+    rgba(255,255,255,0)
+  );
+  transform:rotate(19deg);
+}
+
+.jelly-bell::after{
+  content:"";
+  position:absolute;
+  left:7px;
+  right:7px;
+  bottom:3px;
+  height:8px;
+  border-bottom:2px solid rgba(184,215,255,.42);
+  border-radius:50%;
+}
+
+.jelly-core{
+  position:absolute;
+  left:21px;
+  top:34px;
+  width:19px;
+  height:19px;
+  border-radius:50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(211,232,255,.42),
+      rgba(105,151,235,.14) 55%,
+      transparent 72%
+    );
+  filter:blur(.3px);
+}
+
+.jelly-tentacles{
+  position:absolute;
+  left:10px;
+  top:53px;
+  width:43px;
+  height:38px;
+}
+
+.jelly-tentacle{
+  position:absolute;
+  top:0;
+  width:2px;
+  border-radius:999px;
+  transform-origin:top center;
+  background:linear-gradient(
+    180deg,
+    rgba(171,207,255,.62),
+    rgba(105,149,230,.25),
+    transparent
+  );
+}
+
+.jelly-tentacle:nth-child(1){
+  left:3px;
+  height:31px;
+  animation:tenta1 2.1s ease-in-out infinite;
+}
+
+.jelly-tentacle:nth-child(2){
+  left:13px;
+  height:37px;
+  animation:tenta2 2.45s ease-in-out infinite;
+}
+
+.jelly-tentacle:nth-child(3){
+  left:24px;
+  height:34px;
+  animation:tenta3 1.95s ease-in-out infinite;
+}
+
+.jelly-tentacle:nth-child(4){
+  left:35px;
+  height:28px;
+  animation:tenta4 2.3s ease-in-out infinite;
+}
+
+.jelly-bubble{
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(164,202,255,.24);
+  box-shadow:0 0 7px rgba(120,175,255,.15);
+  animation:bubbleRise 4s linear infinite;
+}
+
+.jelly-bubble.b1{
+  width:4px;
+  height:4px;
+  left:-6px;
+  bottom:10px;
+  animation-delay:.2s;
+}
+
+.jelly-bubble.b2{
+  width:3px;
+  height:3px;
+  right:-8px;
+  bottom:20px;
+  animation-delay:1.8s;
+}
+
+.jelly-bubble.b3{
+  width:3px;
+  height:3px;
+  left:0;
+  bottom:3px;
+  animation-delay:3s;
+}
+
+@keyframes bellPulse{
+  0%,100%{
+    transform:scaleX(.94) scaleY(.96);
+  }
+
+  50%{
+    transform:scaleX(1.04) scaleY(1.02);
+  }
+}
+
+@keyframes jellyFloat{
+  0%,100%{
+    transform:translateY(0) rotate(-2deg);
+  }
+
+  25%{
+    transform:translateY(-12px) rotate(2deg);
+  }
+
+  50%{
+    transform:translateY(5px) rotate(-1deg);
+  }
+
+  75%{
+    transform:translateY(-8px) rotate(2deg);
+  }
+}
+
+@keyframes jellyAcross{
+  0%{
+    left:-115px;
+  }
+
+  47%{
+    left:calc(100% + 30px);
+  }
+
+  100%{
+    left:-115px;
+  }
+}
+
+@keyframes tenta1{
+  0%,100%{transform:rotate(8deg)}
+  50%{transform:rotate(-13deg)}
+}
+
+@keyframes tenta2{
+  0%,100%{transform:rotate(-9deg)}
+  50%{transform:rotate(13deg)}
+}
+
+@keyframes tenta3{
+  0%,100%{transform:rotate(11deg)}
+  50%{transform:rotate(-15deg)}
+}
+
+@keyframes tenta4{
+  0%,100%{transform:rotate(-7deg)}
+  50%{transform:rotate(12deg)}
+}
+
+@keyframes bubbleRise{
+  0%{
+    opacity:0;
+    transform:translateY(7px) scale(.7);
+  }
+
+  25%{
+    opacity:.7;
+  }
+
+  100%{
+    opacity:0;
+    transform:translateY(-28px) translateX(4px) scale(1);
+  }
+}
+
+/* =========================
+   TOUCH ANIMATION
+   ========================= */
+
+#touchFxLayer{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.touch-burst{
+  position:absolute;
+  width:0;
+  height:0;
+  pointer-events:none;
+}
+
+.touch-burst::before,
+.touch-burst::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  border-radius:50%;
+  transform:translate(-50%,-50%) scale(.15);
+  opacity:0;
+}
+
+.touch-burst::before{
+  width:44px;
+  height:44px;
+  border:1px solid rgba(157,207,255,.9);
+  box-shadow:
+    0 0 12px rgba(102,173,255,.5),
+    inset 0 0 12px rgba(150,205,255,.15);
+  animation:touchRing .72s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.touch-burst::after{
+  width:76px;
+  height:76px;
+  border:1px solid rgba(136,180,255,.28);
+  animation:touchRingOuter .82s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.touch-burst-core{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#f2f8ff;
+  box-shadow:
+    0 0 7px 2px rgba(205,231,255,.95),
+    0 0 22px 6px rgba(91,166,255,.52);
+  transform:translate(-50%,-50%) scale(.3);
+  animation:touchCore .55s ease-out forwards;
+}
+
+.touch-burst-dot{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:#cfe8ff;
+  box-shadow:0 0 7px 2px rgba(117,183,255,.65);
+  transform:
+    translate(-50%,-50%)
+    rotate(var(--angle))
+    translateX(7px)
+    scale(.2);
+  animation:touchDot .7s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes touchRing{
+  0%{
+    opacity:.9;
+    transform:translate(-50%,-50%) scale(.15);
+  }
+
+  60%{
+    opacity:.45;
+  }
+
+  100%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(1.25);
+  }
+}
+
+@keyframes touchRingOuter{
+  0%{
+    opacity:.55;
+    transform:translate(-50%,-50%) scale(.15);
+  }
+
+  100%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(1);
+  }
+}
+
+@keyframes touchCore{
+  0%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(.3);
+  }
+
+  45%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.45);
+  }
+
+  100%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.5);
+  }
+}
+
+@keyframes touchDot{
+  0%{
+    opacity:1;
+    transform:
+      translate(-50%,-50%)
+      rotate(var(--angle))
+      translateX(7px)
+      scale(.2);
+  }
+
+  100%{
+    opacity:0;
+    transform:
+      translate(-50%,-50%)
+      rotate(var(--angle))
+      translateX(31px)
+      scale(1);
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+   ========================= */
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    scroll-behavior:auto !important;
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+
+  .demi-jelly{
+    display:none;
+  }
+}
+
+/* =========================
+   SMALL PHONES
+   ========================= */
+
+@media(max-width:380px){
+  main{
+    width:min(100% - 24px,760px);
+  }
+
+  .hero{
+    padding-top:80px;
+  }
+
+  section{
+    padding:78px 0;
+  }
+
+  .sound-label{
+    display:none;
+  }
+
+  .sound-control{
+    padding:6px;
+  }
+
+  .demi-jelly{
+    transform:scale(.9);
+    transform-origin:center;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- Ambient background -->
-  <div class="ambient-light" aria-hidden="true"></div>
-  <div class="ambient-light alt" aria-hidden="true"></div>
+<!-- TWINKLING NIGHT SKY -->
+<div class="twinkle-field" aria-hidden="true">
+  <span class="twinkle t1"></span>
+  <span class="twinkle t2"></span>
+  <span class="twinkle t3"></span>
+  <span class="twinkle t4"></span>
+  <span class="twinkle t5"></span>
+  <span class="twinkle t6"></span>
+  <span class="twinkle t7"></span>
+  <span class="twinkle t8"></span>
+  <span class="twinkle t9"></span>
+  <span class="twinkle t10"></span>
+  <span class="twinkle t11"></span>
+  <span class="twinkle t12"></span>
+</div>
 
-  <!-- ======================================
-       DEMI DEVI JELLYFISH
-       ====================================== -->
+<div class="big-star" aria-hidden="true"></div>
 
-  <div class="demi-jelly" aria-label="Demi Devi">
-    <div class="jelly-float">
+<!-- MUSIC -->
+<div class="sound-control">
+  <span class="sound-label" id="soundLabel">MUSIC OFF</span>
 
-      <div class="jelly-name">
-        Demi Devi
-      </div>
+  <button
+    class="sound-button"
+    id="soundButton"
+    type="button"
+    aria-label="Play background music"
+    aria-pressed="false"
+  >
+    <span class="sound-icon" aria-hidden="true"></span>
+  </button>
 
-      <div class="jelly-body">
-        <div class="jelly-shine"></div>
-      </div>
+  <div class="sound-bars" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
 
-      <div class="jelly-tentacles">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+<audio id="siteAudio" loop preload="metadata">
+  <source src="Music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- DEMI DEVI JELLYFISH -->
+<div class="demi-jelly" aria-label="Demi Devi">
+  <div class="demi-jelly-inner">
+
+    <div class="jelly-name">Demi Devi</div>
+
+    <div class="jelly-bell">
+      <div class="jelly-core"></div>
+    </div>
+
+    <div class="jelly-tentacles">
+      <span class="jelly-tentacle"></span>
+      <span class="jelly-tentacle"></span>
+      <span class="jelly-tentacle"></span>
+      <span class="jelly-tentacle"></span>
+    </div>
+
+    <span class="jelly-bubble b1"></span>
+    <span class="jelly-bubble b2"></span>
+    <span class="jelly-bubble b3"></span>
+
+  </div>
+</div>
+
+<!-- TOUCH EFFECT LAYER -->
+<div id="touchFxLayer" aria-hidden="true"></div>
+
+<div class="scroll-progress">
+  <span></span>
+</div>
+
+<main>
+
+<section class="hero hero-section">
+
+  <div class="kicker">PERSONAL ARCHIVE / 2026</div>
+
+  <h1>
+    Jayé
+    <span>/ Yarc</span>
+  </h1>
+
+  <div class="hero-intro">
+    I’m Jayé. Most people know me as Yarc.
+    A place for the things I like, the things I create,
+    the people and memories that matter, and pieces of
+    myself I want to keep somewhere.
+  </div>
+
+  <div class="hero-rule"></div>
+
+</section>
+
+<section>
+  <div class="section-number">01</div>
+
+  <h2>About Me.</h2>
+
+  <p class="reveal-piece">
+    I’m Jayé. Most people know me as Yarc.
+  </p>
+
+  <p class="reveal-piece">
+    I’m a student, still figuring things out and trying different things.
+    I’m not an editor or designer, just someone who likes making things,
+    experimenting, and keeping things that mean something to me.
+  </p>
+
+  <p class="reveal-piece">
+    I’ve got great people around me, both in games and in real life,
+    and I feel pretty blessed to have met them.
+  </p>
+</section>
+
+<section>
+  <div class="section-number">02</div>
+
+  <h2>The Things I Do.</h2>
+
+  <p class="reveal-piece">
+    I’ve tried a lot of different things, some I stayed with, some I didn’t.
+  </p>
+
+  <p class="reveal-piece">
+    I like learning something new, messing around with it, and seeing where it goes.
+  </p>
+
+  <p class="reveal-piece">
+    I’m not trying to have everything figured out or be the best at everything.
+  </p>
+
+  <p class="reveal-piece">
+    I just like having things to explore.
+  </p>
+</section>
+
+<section>
+  <div class="section-number">03</div>
+
+  <h2>Favourites.</h2>
+
+  <div class="favourites">
+
+    <div class="fav reveal-piece">
+      <div class="fav-label">Colour</div>
+      <div class="fav-value">BLUE</div>
+      <p>
+        Probably my favourite colour. I’ve liked it for as long as I can remember.
+      </p>
+    </div>
+
+    <div class="fav reveal-piece">
+      <div class="fav-label">Drinks</div>
+      <div class="fav-value">MILK &amp; WATER</div>
+      <p>
+        My usual drinks. Nothing fancy. I just like them.
+      </p>
+    </div>
+
+    <div class="fav reveal-piece">
+      <div class="fav-label">Music</div>
+      <div class="fav-value">MUSIC</div>
+      <p>
+        Kendrick is one of my favourites, but that's definitely not the whole picture.
+        My taste changes a lot. I listen to different genres, different artists,
+        different sounds, basically whatever feels right at the time.
+        There isn't really one box my music belongs in.
+      </p>
+    </div>
+
+    <div class="fav reveal-piece">
+      <div class="fav-label">Games</div>
+      <div class="fav-value">GAMES</div>
+      <p>
+        Free Fire, Roblox, Chess.com. I don't really stick to one type of game.
+        I just play whatever I feel like playing.
+      </p>
+    </div>
+
+    <div class="fav reveal-piece">
+      <div class="fav-label">Animals</div>
+      <div class="fav-value">ANIMALS</div>
+      <p>
+        I like pretty much every animal. I’ve got dogs and bunnies,
+        so those are probably the ones I’m around the most.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="section-number">04</div>
+
+  <h2>Currently.</h2>
+
+  <p class="reveal-piece">
+    Currently a student.
+  </p>
+
+  <p class="reveal-piece">
+    Somewhere between figuring out what I want, learning what I can,
+    and slowly understanding what actually matters to me.
+  </p>
+
+  <p class="reveal-piece">
+    For now, I’m just taking it as it comes, learning, making mistakes,
+    finding things I enjoy, and keeping a few things close along the way.
+  </p>
+
+  <p class="reveal-piece">
+    I don't have everything figured out yet. And honestly, I think that's okay.
+  </p>
+</section>
+
+<section>
+  <div class="section-number">05</div>
+
+  <h2>The People I Got Lucky With.</h2>
+
+  <p class="reveal-piece">
+    I’ve met some genuinely great people, both in-game and in real life.
+  </p>
+
+  <p class="reveal-piece">
+    Different places, different stories, different kinds of friendships,
+    but somehow they all became part of my life.
+  </p>
+
+  <p class="reveal-piece">
+    I don’t take that for granted.
+  </p>
+
+  <p class="reveal-piece">
+    I feel pretty blessed to have the people I have.
+  </p>
+</section>
+
+<section>
+  <div class="section-number">06</div>
+
+  <h2>Little Things.</h2>
+
+  <p class="reveal-piece">
+    Not everything about me needs a whole explanation.
+  </p>
+
+  <p class="reveal-piece">
+    I like small things that make everyday life better, good conversations,
+    random laughs, late-night gaming, discovering something new, listening to music,
+    spending time with people I care about, and having things that feel like mine.
+  </p>
+
+  <p class="reveal-piece">
+    I also appreciate simple things more than complicated ones.
+    Sometimes the little things are enough.
+  </p>
+</section>
+
+<section>
+  <div class="section-number">07</div>
+
+  <h2>Beliefs.</h2>
+
+  <p class="reveal-piece">
+    I like thinking deeply about things, questioning what I'm told,
+    and forming my own opinions.
+  </p>
+
+  <p class="reveal-piece">
+    I'm interested in how people think, why things work the way they do,
+    and ideas that actually make me stop and think.
+  </p>
+
+  <p class="reveal-piece">
+    I don't believe being smart means knowing everything.
+  </p>
+
+  <p class="reveal-piece">
+    For me, it's being curious enough to keep asking better questions.
+  </p>
+</section>
+
+<section>
+  <div class="section-number">08</div>
+
+  <h2>Things I Like.</h2>
+
+  <p class="reveal-piece">
+    I like things that genuinely interest me, not just things that look impressive.
+  </p>
+
+  <p class="reveal-piece">
+    Games, music, animals, technology, interesting conversations,
+    discovering random things online, and anything that gives me something new to explore.
+  </p>
+
+  <p class="reveal-piece">
+    My interests change over time, and that's part of it.
+  </p>
+
+  <p class="reveal-piece">
+    I like having more than one side to myself.
+  </p>
+</section>
+
+<section>
+  <div class="section-number">09</div>
+
+  <h2>Memories.</h2>
+
+  <p class="reveal-piece">
+    Some moments don't need to be posted everywhere to matter.
+  </p>
+
+  <p class="reveal-piece">
+    There are people I've met, conversations I've had, games I've played,
+    stupid moments I've laughed at, and memories that stayed with me longer
+    than I expected.
+  </p>
+
+  <p class="reveal-piece">
+    This section is for those things.
+  </p>
+
+  <p class="reveal-piece">
+    The moments I don't want to forget.
+  </p>
+</section>
+
+<section class="final-section">
+
+  <div class="section-number">
+    10 / THE LAST PAGE
+  </div>
+
+  <div class="final-intro">
+
+    <div class="final-name">
+      <span class="primary">Demi</span>
+      <span class="secondary">/ Shree</span>
+    </div>
+
+    <div class="final-tag">
+      A page kept for someone kind
+    </div>
+
+  </div>
+
+  <div class="final-note">
+
+    <p class="final-copy">
+      The kindest girl I’ve ever met through a game,
+      and genuinely one of the purest souls I’ve come across.
+    </p>
+
+    <p class="final-copy">
+      What makes her different is the way her kindness feels natural.
+      She doesn't need a reason to be good to someone,
+      and she doesn't seem to do it for attention either.
+      That kind of person is rare.
+    </p>
+
+    <p class="final-copy">
+      I admire the softness in her character,
+      the way she can make someone feel comfortable just by being herself.
+      There’s something really genuine about that.
+    </p>
+
+    <p class="final-copy">
+      I don't have one perfect moment that explains why she matters.
+      Sometimes it's not one big memory.
+      It’s the collection of small things that slowly make someone important.
+    </p>
+
+    <p class="final-copy">
+      Meeting her through a game was random.<br>
+      Keeping the memory of her isn't.
+    </p>
+
+    <p class="final-copy">
+      If I had to describe her in three words:
+      <br><br>
+      Kind. Genuine. Pure.
+    </p>
+
+    <p class="final-copy">
+      And if she ever reads this,
+      I’d want her to know one simple thing:
+    </p>
+
+    <p class="final-copy">
+      I'm genuinely glad I met you.
+    </p>
+
+    <p class="final-copy">
+      I hope you never lose the part of yourself that makes you this kind.
+      The world has enough people trying to be impressive.
+      Staying genuinely good is something else.
+    </p>
+
+    <p class="final-copy">
+      For Demi / Shree.
+    </p>
+
+  </div>
+
+  <div class="memory-wrap">
+
+    <div class="memory-frame">
+
+      <div class="memory">
+
+        <div class="memory-mark">
+          one good memory
+        </div>
+
+        <img
+          class="memory-image"
+          src="demi.png"
+          alt="A memory from a game with Demi / Shree"
+          loading="lazy"
+        >
+
+        <div class="memory-caption">
+          A memory worth keeping
+        </div>
+
       </div>
 
     </div>
-  </div>
-
-  <!-- Scroll effects -->
-  <div class="scroll-beam" aria-hidden="true"></div>
-
-  <!-- Header -->
-  <header class="topbar" aria-label="Site header">
-    <span>J / Y</span>
-
-    <span class="time-wrap">
-      <span class="time-dot" aria-hidden="true"></span>
-      <span id="siteTime">--:--:-- --</span>
-    </span>
-  </header>
-
-  <main>
-
-    <!-- ======================================
-         HERO
-         ====================================== -->
-
-    <section class="hero" aria-labelledby="hero-title">
-
-      <div class="star" aria-hidden="true">
-        <span class="star-core"></span>
-      </div>
-
-      <div class="star s2" aria-hidden="true">
-        <span class="star-core"></span>
-      </div>
-
-      <div class="star s3" aria-hidden="true">
-        <span class="star-core"></span>
-      </div>
-
-      <div class="hero-kicker">
-        Jayé / Yarc · 2026
-      </div>
-
-      <h1 id="hero-title" class="hero-title">
-        JAYÉ
-        <span class="accent">/ YARC</span>
-      </h1>
-
-      <div class="hero-rule"></div>
-
-      <p class="hero-copy">
-        A place for the things I like, the things I create,
-        the people and memories that matter, and pieces of
-        myself I want to keep somewhere.
-      </p>
-
-      <div class="hero-bottom">
-        Scroll to explore
-        <span class="scroll-dot"></span>
-      </div>
-
-    </section>
-
-    <!-- ======================================
-         01 ABOUT
-         ====================================== -->
-
-    <section data-reveal>
-
-      <div class="section-label">
-        <span class="section-number">01</span>
-        <span class="section-name">About</span>
-      </div>
-
-      <h2>
-        A little<br>
-        context.
-      </h2>
-
-      <div class="intro-block">
-
-        <p class="lead">
-          I’m Jayé. Most people know me as Yarc.
-        </p>
-
-        <p>
-          I’m currently a student, figuring things out as I go.
-          I’m not an editor or designer, and I’m not trying to
-          act like I’m the best at everything.
-        </p>
-
-        <p>
-          I just like trying things, learning something new,
-          and seeing what happens.
-        </p>
-
-      </div>
-
-    </section>
-
-    <!-- ======================================
-         02 THINGS I DO
-         ====================================== -->
-
-    <section data-reveal>
-
-      <div class="section-label">
-        <span class="section-number">02</span>
-        <span class="section-name">The Things I Do</span>
-      </div>
-
-      <h2>
-        Try it.<br>
-        See where it goes.
-      </h2>
-
-      <p>
-        I’ve tried a lot of different things, some I stayed with,
-        some I didn’t.
-      </p>
-
-      <p>
-        I like learning something new, messing around with it,
-        and seeing where it goes.
-      </p>
-
-      <p>
-        I’m not trying to have everything figured out or be the
-        best at everything. I just like having things to explore.
-      </p>
-
-    </section>
-
-    <!-- ======================================
-         03 FAVOURITES
-         ====================================== -->
-
-    <section data-reveal>
-
-      <div class="section-label">
-        <span class="section-number">03</span>
-        <span class="section-name">Favourites</span>
-      </div>
-
-      <h2>
-        Things I keep<br>
-        coming back to.
-      </h2>
-
-      <div class="favourites">
-
-        <article class="favourite">
-          <div class="favourite-name">
-            Blue
-          </div>
-
-          <p>
-            Probably my favourite colour. I’ve liked it for
-            as long as I can remember.
-          </p>
-        </article>
-
-        <article class="favourite">
-          <div class="favourite-name">
-            Milk & Water
-          </div>
-
-          <p>
-            My usual drinks. Nothing fancy. I just like them.
-          </p>
-        </article>
-
-        <article class="favourite">
-          <div class="favourite-name">
-            Music
-          </div>
-
-          <p>
-            Kendrick is one of my favourites, but that's definitely
-            not the whole picture. My taste changes a lot. I listen
-            to different genres, different artists, different sounds,
-            basically whatever feels right at the time. There isn't
-            really one box my music belongs in.
-          </p>
-        </article>
-
-        <article class="favourite">
-          <div class="favourite-name">
-            Games
-          </div>
-
-          <p>
-            Free Fire, Roblox, Chess.com. I don't really stick to
-            one type of game. I just play whatever I feel like playing.
-          </p>
-        </article>
-
-        <article class="favourite">
-          <div class="favourite-name">
-            Animals
-          </div>
-
-          <p>
-            I like pretty much every animal. I’ve got dogs and bunnies,
-            so those are probably the ones I’m around the most.
-          </p>
-        </article>
-
-      </div>
-
-    </section>
-
-    <!-- ======================================
-         04 CURRENTLY
-         ====================================== -->
-
-    <section data-reveal>
-
-      <div class="section-label">
-        <span class="section-number">04</span>
-        <span class="section-name">Currently</span>
-      </div>
-
-      <h2>
-        Still figuring<br>
-        it out.
-      </h2>
-
-      <p>
-        Currently a student. Somewhere between figuring out what I want,
-        learning what I can, and slowly understanding what actually
-        matters to me.
-      </p>
-
-      <p>
-        For now, I’m just taking it as it comes, learning, making mistakes,
-        finding things I enjoy, and keeping a few things close along the way.
-      </p>
-
-      <div class="statement">
-        I don't have everything figured out yet.
-        And honestly, I think that's okay.
-      </div>
-
-    </section>
-
-    <!-- ======================================
-         05 PEOPLE
-         ====================================== -->
-
-    <section data-reveal>
-
-      <div class="section-label">
-        <span class="section-number">05</span>
-        <span class="section-name">
-          The People I Got Lucky With
-        </span>
-      </div>
-
-      <h2>
-        Good people<br>
-        matter.
-      </h2>
-
-      <p>
-        I’ve met some genuinely great people, both in-game and in real life.
-        Different places, different stories, different kinds of friendships,
-        but somehow they all became part of my life.
-      </p>
-
-      <p>
-        I don’t take that for granted.
-        I feel pretty blessed to have the people I have.
-      </p>
-
-      <div class="people-note">
-        In-game · Real life · Different places · Real memories
-      </div>
-
-    </section>
-
-    <!-- ======================================
-         06 LITTLE THINGS
-         ====================================== -->
-
-    <section data-reveal>
-
-      <div class="section-label">
-        <span class="section-number">06</span>
-        <span class="section-name">Little Things</span>
-      </div>
-
-      <h2>
-        The small stuff<br>
-        still counts.
-      </h2>
-
-      <p>
-        Not everything about me needs a whole explanation.
-        I like small things that make everyday life better,
-        good conversations, random laughs, late-night gaming,
-        discovering something new, listening to music, spending
-        time with people I care about, and having things that
-        feel like mine.
-      </p>
-
-      <p>
-        I also appreciate simple things more than complicated ones.
-        Sometimes the little things are enough.
-      </p>
-
-    </section>
-
-    <!-- ======================================
-         07 BELIEFS
-         ====================================== -->
-
-    <section data-reveal>
-
-      <div class="section-label">
-        <span class="section-number">07</span>
-        <span class="section-name">Beliefs</span>
-      </div>
-
-      <h2>
-        Stay<br>
-        curious.
-      </h2>
-
-      <p>
-        I like thinking deeply about things, questioning what I'm told,
-        and forming my own opinions.
-      </p>
-
-      <p>
-        I'm interested in how people think, why things work the way
-        they do, and ideas that actually make me stop and think.
-      </p>
-
-      <p>
-        I don't believe being smart means knowing everything.
-        For me, it's being curious enough to keep asking better questions.
-      </p>
-
-    </section>
-
-    <!-- ======================================
-         08 THINGS I LIKE
-         ====================================== -->
-
-    <section data-reveal>
-
-      <div class="section-label">
-        <span class="section-number">08</span>
-        <span class="section-name">Things I Like</span>
-      </div>
-
-      <h2>
-        More than<br>
-        one side.
-      </h2>
-
-      <p>
-        I like things that genuinely interest me, not just things that
-        look impressive. Games, music, animals, technology, interesting
-        conversations, discovering random things online, and anything
-        that gives me something new to explore.
-      </p>
-
-      <p>
-        My interests change over time, and that's part of it.
-        I like having more than one side to myself.
-      </p>
-
-    </section>
-
-    <!-- ======================================
-         09 MEMORIES
-         ====================================== -->
-
-    <section data-reveal>
-
-      <div class="section-label">
-        <span class="section-number">09</span>
-        <span class="section-name">Memories</span>
-      </div>
-
-      <h2>
-        Things worth<br>
-        keeping.
-      </h2>
-
-      <p>
-        Some moments don't need to be posted everywhere to matter.
-        There are people I've met, conversations I've had, games I've played,
-        stupid moments I've laughed at, and memories that stayed with me
-        longer than I expected.
-      </p>
-
-      <p>
-        This section is for those things.
-        The moments I don't want to forget.
-      </p>
-
-    </section>
-
-    <!-- ======================================
-         10 THE LAST PAGE
-         ====================================== -->
-
-    <section class="last-page" data-reveal>
-
-      <div class="section-label">
-        <span class="section-number">10</span>
-        <span class="section-name">The Last Page</span>
-      </div>
-
-      <div class="last-intro">
-        For someone worth remembering
-      </div>
-
-      <h2 class="last-title">
-        Some people<br>
-        stay with you.
-      </h2>
-
-      <div class="dedication">
-        Demi / Shree
-      </div>
-
-      <!-- Demi image -->
-      <div class="memory-card">
-
-        <div class="memory-frame">
-
-          <img
-            class="memory-image"
-            src="demi.png"
-            alt="A memory from a game with Demi / Shree"
-            loading="lazy"
-            decoding="async"
-          >
-
-        </div>
-
-        <div class="memory-meta">
-          <span>A memory</span>
-          <span>Kept here</span>
-        </div>
-
-      </div>
-
-      <p class="memory-intro">
-        The kindest girl I’ve ever met through a game,
-        and genuinely one of the purest souls I’ve come across.
-      </p>
-
-      <p>
-        What makes her different is the way her kindness feels natural.
-        She doesn't need a reason to be good to someone, and she doesn't
-        seem to do it for attention either. That kind of person is rare.
-      </p>
-
-      <p>
-        I admire the softness in her character, the way she can make
-        someone feel comfortable just by being herself.
-        There’s something really genuine about that.
-      </p>
-
-      <p>
-        I don't have one perfect moment that explains why she matters.
-        Sometimes it's not one big memory. It’s the collection of small
-        things that slowly make someone important.
-      </p>
-
-      <p>
-        Meeting her through a game was random.<br>
-        Keeping the memory of her isn't.
-      </p>
-
-      <div class="quote-card">
-
-        <p class="quote">
-          Kind. Genuine. Pure.
-        </p>
-
-        <div class="quote-sub">
-          Three words
-        </div>
-
-      </div>
-
-      <p>
-        And if she ever reads this, I’d want her to know one simple thing:
-      </p>
-
-      <p class="closing-text">
-        I'm genuinely glad I met you.
-      </p>
-
-      <div class="closing">
-
-        <div class="closing-line"></div>
-
-        <p>
-          I hope you never lose the part of yourself that makes you this kind.
-          The world has enough people trying to be impressive.
-          Staying genuinely good is something else.
-        </p>
-
-      </div>
-
-      <div class="signature">
-        For Demi / Shree.
-      </div>
-
-    </section>
-
-    <!-- ======================================
-         FOOTER
-         ====================================== -->
-
-    <footer>
-      <span>
-        Jayé / Yarc
-      </span>
-
-      <span class="credit">
-        Made by @cvechz
-      </span>
-    </footer>
-
-  </main>
-
-  <!-- ======================================
-       MUSIC
-       ====================================== -->
-
-  <audio
-    id="siteAudio"
-    loop
-    preload="metadata"
-    aria-hidden="true"
-  >
-    <source src="Music.mp3" type="audio/mpeg">
-  </audio>
-
-  <div class="sound-control">
-
-    <span class="sound-label" id="soundLabel">
-      SOUND OFF
-    </span>
-
-    <button
-      class="sound-button"
-      id="soundButton"
-      type="button"
-      aria-label="Play music"
-    >
-      <span aria-hidden="true"></span>
-    </button>
 
   </div>
 
-  <!-- ======================================
-       JAVASCRIPT
-       ====================================== -->
+  <div class="final-signoff">
+    Some pages are meant to be remembered.
+  </div>
 
-  <script>
-    (() => {
+</section>
 
-      /* ================================
-         LIVE TIME
-         ================================ */
+<footer>
+  Made by @cvechz
+</footer>
 
-      const timeElement =
-        document.getElementById("siteTime");
+</main>
 
-      function updateTime() {
-        if (!timeElement) return;
+<script>
+(function(){
 
-        const now = new Date();
+  document.body.classList.add("js-ready");
 
-        let hours = now.getHours();
-        const minutes =
-          String(now.getMinutes()).padStart(2,"0");
-        const seconds =
-          String(now.getSeconds()).padStart(2,"0");
+  /* =========================
+     SECTION REVEALS
+     ========================= */
 
-        const period = hours >= 12 ? "PM" : "AM";
+  const sections = document.querySelectorAll("main > section");
 
-        hours = hours % 12;
+  if("IntersectionObserver" in window){
 
-        if (hours === 0) {
-          hours = 12;
-        }
+    const observer = new IntersectionObserver(
+      function(entries){
 
-        timeElement.textContent =
-          `${hours}:${minutes}:${seconds} ${period}`;
-      }
+        entries.forEach(function(entry){
 
-      updateTime();
-
-      setInterval(updateTime,1000);
-
-
-      /* ================================
-         SCROLL REVEAL
-         ================================ */
-
-      try {
-
-        if ("IntersectionObserver" in window) {
-
-          document.documentElement.classList.add("enhanced");
-
-          const items =
-            document.querySelectorAll("[data-reveal]");
-
-          const observer =
-            new IntersectionObserver(
-              (entries,obs) => {
-
-                entries.forEach(entry => {
-
-                  if (!entry.isIntersecting) {
-                    return;
-                  }
-
-                  entry.target.classList.add("is-visible");
-
-                  obs.unobserve(entry.target);
-
-                });
-
-              },
-              {
-                root: null,
-                rootMargin: "0px 0px -8% 0px",
-                threshold: .08
-              }
-            );
-
-          items.forEach(item => {
-            observer.observe(item);
-          });
-
-        }
-
-      } catch (error) {
-
-        document.documentElement.classList.remove("enhanced");
-
-      }
-
-
-      /* ================================
-         SCROLL BEAM
-         ================================ */
-
-      const beam =
-        document.querySelector(".scroll-beam");
-
-      function updateBeam() {
-
-        if (!beam) return;
-
-        const scrollTop =
-          window.scrollY || window.pageYOffset;
-
-        const documentHeight =
-          document.documentElement.scrollHeight -
-          window.innerHeight;
-
-        if (documentHeight <= 0) {
-          beam.style.height = "0px";
-          return;
-        }
-
-        const progress =
-          Math.min(
-            1,
-            Math.max(
-              0,
-              scrollTop / documentHeight
-            )
-          );
-
-        beam.style.height =
-          `${progress * 100}vh`;
-      }
-
-      window.addEventListener(
-        "scroll",
-        updateBeam,
-        { passive: true }
-      );
-
-      updateBeam();
-
-
-      /* ================================
-         DEMI MEMORY ACTIVATION
-         ================================ */
-
-      const lastPage =
-        document.querySelector(".last-page");
-
-      if (
-        lastPage &&
-        "IntersectionObserver" in window
-      ) {
-
-        const memoryObserver =
-          new IntersectionObserver(
-            entries => {
-
-              entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-                  lastPage.classList.add("memory-active");
-                }
-
-              });
-
-            },
-            {
-              threshold: .16
-            }
-          );
-
-        memoryObserver.observe(lastPage);
-      }
-
-
-      /* ================================
-         MUSIC CONTROL
-         ================================ */
-
-      const audio =
-        document.getElementById("siteAudio");
-
-      const button =
-        document.getElementById("soundButton");
-
-      const label =
-        document.getElementById("soundLabel");
-
-      if (audio && button && label) {
-
-        button.addEventListener("click", async () => {
-
-          try {
-
-            if (audio.paused) {
-
-              await audio.play();
-
-              button.classList.add("playing");
-
-              label.textContent =
-                "SOUND ON";
-
-              button.setAttribute(
-                "aria-label",
-                "Pause music"
-              );
-
-            } else {
-
-              audio.pause();
-
-              button.classList.remove("playing");
-
-              label.textContent =
-                "SOUND OFF";
-
-              button.setAttribute(
-                "aria-label",
-                "Play music"
-              );
-
-            }
-
-          } catch (error) {
-
-            label.textContent =
-              "TAP AGAIN";
-
+          if(entry.isIntersecting){
+            entry.target.classList.add("show");
           }
 
         });
 
-        audio.addEventListener("play",() => {
+      },
+      {
+        threshold:0.08,
+        rootMargin:"0px 0px -40px 0px"
+      }
+    );
 
-          button.classList.add("playing");
+    sections.forEach(function(section){
+      observer.observe(section);
+    });
 
-          label.textContent =
-            "SOUND ON";
+  }else{
 
-        });
+    sections.forEach(function(section){
+      section.classList.add("show");
+    });
 
-        audio.addEventListener("pause",() => {
+  }
 
-          button.classList.remove("playing");
+  /* =========================
+     MUSIC UI
+     ========================= */
 
-          label.textContent =
-            "SOUND OFF";
+  const audio = document.getElementById("siteAudio");
+  const button = document.getElementById("soundButton");
+  const label = document.getElementById("soundLabel");
+  const control = document.querySelector(".sound-control");
 
-        });
+  function syncMusicUI(mode){
+
+    if(!audio || !button || !label || !control){
+      return;
+    }
+
+    const playing =
+      !audio.paused &&
+      !audio.ended &&
+      audio.readyState > 2;
+
+    control.classList.toggle("playing",playing);
+    control.classList.remove("loading");
+
+    button.classList.toggle("is-playing",playing);
+
+    button.setAttribute(
+      "aria-pressed",
+      String(playing)
+    );
+
+    button.setAttribute(
+      "aria-label",
+      playing
+        ? "Pause background music"
+        : "Play background music"
+    );
+
+    if(mode === "error"){
+
+      label.textContent = "MUSIC ERROR";
+
+      control.classList.remove("playing");
+      button.classList.remove("is-playing");
+
+      button.setAttribute(
+        "aria-pressed",
+        "false"
+      );
+
+      button.setAttribute(
+        "aria-label",
+        "Music file could not be played"
+      );
+
+      return;
+    }
+
+    if(playing){
+      label.textContent = "MUSIC ON";
+    }else{
+      label.textContent = "MUSIC OFF";
+    }
+
+  }
+
+  if(audio && button){
+
+    button.addEventListener(
+      "click",
+      async function(){
+
+        control.classList.add("loading");
+
+        if(audio.paused){
+
+          try{
+
+            await audio.play();
+
+            syncMusicUI();
+
+          }catch(error){
+
+            control.classList.remove("loading");
+
+            label.textContent = "MUSIC ERROR";
+
+            button.setAttribute(
+              "aria-label",
+              "Music file could not be played"
+            );
+
+          }
+
+        }else{
+
+          audio.pause();
+
+          syncMusicUI();
+
+        }
+
+      }
+    );
+
+    [
+      "play",
+      "playing",
+      "pause",
+      "ended",
+      "loadeddata",
+      "canplay",
+      "emptied"
+    ].forEach(function(eventName){
+
+      audio.addEventListener(
+        eventName,
+        function(){
+          syncMusicUI();
+        }
+      );
+
+    });
+
+    audio.addEventListener(
+      "error",
+      function(){
+        syncMusicUI("error");
+      }
+    );
+
+    syncMusicUI();
+
+  }
+
+  /* =========================
+     PREMIUM TOUCH ANIMATION
+     ========================= */
+
+  const touchLayer =
+    document.getElementById("touchFxLayer");
+
+  let lastTouch = 0;
+
+  function makeTouchBurst(x,y){
+
+    if(
+      !touchLayer ||
+      !Number.isFinite(x) ||
+      !Number.isFinite(y)
+    ){
+      return;
+    }
+
+    const now = performance.now();
+
+    if(now - lastTouch < 45){
+      return;
+    }
+
+    lastTouch = now;
+
+    const burst =
+      document.createElement("span");
+
+    burst.className = "touch-burst";
+
+    burst.style.left =
+      x + "px";
+
+    burst.style.top =
+      y + "px";
+
+    const core =
+      document.createElement("span");
+
+    core.className =
+      "touch-burst-core";
+
+    burst.appendChild(core);
+
+    [
+      0,
+      60,
+      120,
+      180,
+      240,
+      300
+    ].forEach(function(angle){
+
+      const dot =
+        document.createElement("span");
+
+      dot.className =
+        "touch-burst-dot";
+
+      dot.style.setProperty(
+        "--angle",
+        angle + "deg"
+      );
+
+      burst.appendChild(dot);
+
+    });
+
+    touchLayer.appendChild(burst);
+
+    window.setTimeout(
+      function(){
+
+        if(burst.parentNode){
+          burst.remove();
+        }
+
+      },
+      760
+    );
+
+    while(touchLayer.childElementCount > 4){
+
+      touchLayer.firstElementChild.remove();
+
+    }
+
+  }
+
+  let lastTouchEvent = 0;
+
+  document.addEventListener(
+    "pointerdown",
+    function(event){
+
+      if(
+        event.pointerType !== "touch" &&
+        event.pointerType !== "pen"
+      ){
+        return;
+      }
+
+      lastTouchEvent =
+        performance.now();
+
+      makeTouchBurst(
+        event.clientX,
+        event.clientY
+      );
+
+    },
+    {
+      passive:true
+    }
+  );
+
+  document.addEventListener(
+    "touchstart",
+    function(event){
+
+      if(!event.touches.length){
+        return;
+      }
+
+      const now =
+        performance.now();
+
+      if(now - lastTouchEvent < 80){
+        return;
+      }
+
+      const touch =
+        event.touches[0];
+
+      makeTouchBurst(
+        touch.clientX,
+        touch.clientY
+      );
+
+    },
+    {
+      passive:true
+    }
+  );
+
+  /* =========================
+     SCROLL PROGRESS
+     ========================= */
+
+  const progress =
+    document.querySelector(
+      ".scroll-progress span"
+    );
+
+  let rafPending = false;
+
+  function updateScrollEffects(){
+
+    rafPending = false;
+
+    const max =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
+
+    const ratio =
+      max > 0
+        ? Math.min(
+            1,
+            Math.max(
+              0,
+              window.scrollY / max
+            )
+          )
+        : 0;
+
+    if(progress){
+
+      progress.style.transform =
+        "scaleX(" + ratio + ")";
+
+    }
+
+  }
+
+  window.addEventListener(
+    "scroll",
+    function(){
+
+      if(!rafPending){
+
+        rafPending = true;
+
+        requestAnimationFrame(
+          updateScrollEffects
+        );
 
       }
 
-    })();
-  </script>
+    },
+    {
+      passive:true
+    }
+  );
+
+  updateScrollEffects();
+
+})();
+</script>
 
 </body>
 </html>
