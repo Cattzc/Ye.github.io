@@ -1704,6 +1704,247 @@ footer{
   updateScroll();
 
 })();
+  })();
+
+/* ================================
+   PEAK YARC EFFECT
+   ================================ */
+
+(function () {
+
+  const style = document.createElement("style");
+
+  style.textContent = `
+    #peak-flare {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9997;
+      opacity: 0;
+      background:
+        radial-gradient(
+          circle at var(--px, 50%) var(--py, 50%),
+          rgba(134, 186, 255, 0.20) 0%,
+          rgba(134, 186, 255, 0.07) 12%,
+          transparent 38%
+        );
+      transition: opacity 0.28s ease;
+      mix-blend-mode: screen;
+    }
+
+    #peak-flare.active {
+      opacity: 1;
+    }
+
+    #peak-ring {
+      position: fixed;
+      width: 16px;
+      height: 16px;
+      border: 1px solid rgba(134, 186, 255, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 0;
+      box-shadow:
+        0 0 16px rgba(134, 186, 255, 0.45),
+        0 0 38px rgba(134, 186, 255, 0.16);
+    }
+
+    #peak-ring.active {
+      animation: peak-ring 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes peak-ring {
+      0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(7);
+        opacity: 0;
+      }
+    }
+
+    #peak-flash {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9996;
+      background: rgba(134, 186, 255, 0.035);
+      opacity: 0;
+    }
+
+    #peak-flash.active {
+      animation: peak-flash 0.48s ease-out;
+    }
+
+    @keyframes peak-flash {
+      0% {
+        opacity: 0;
+      }
+
+      16% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #peak-flare,
+      #peak-ring,
+      #peak-flash {
+        display: none;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+
+  const flare = document.createElement("div");
+  flare.id = "peak-flare";
+
+  const ring = document.createElement("div");
+  ring.id = "peak-ring";
+
+  const flash = document.createElement("div");
+  flash.id = "peak-flash";
+
+  document.body.appendChild(flare);
+  document.body.appendChild(ring);
+  document.body.appendChild(flash);
+
+
+  /* ----------------
+     TOUCH LIGHT
+     ---------------- */
+
+  let activePointer = false;
+
+  function updateLight(x, y) {
+
+    const px = (x / window.innerWidth) * 100;
+    const py = (y / window.innerHeight) * 100;
+
+    flare.style.setProperty("--px", px + "%");
+    flare.style.setProperty("--py", py + "%");
+
+    ring.style.left = x + "px";
+    ring.style.top = y + "px";
+  }
+
+
+  document.addEventListener(
+    "pointerdown",
+    function (event) {
+
+      activePointer = true;
+
+      updateLight(event.clientX, event.clientY);
+
+      flare.classList.add("active");
+
+      ring.classList.remove("active");
+      void ring.offsetWidth;
+      ring.classList.add("active");
+
+      flash.classList.remove("active");
+      void flash.offsetWidth;
+      flash.classList.add("active");
+
+    },
+    { passive: true }
+  );
+
+
+  document.addEventListener(
+    "pointermove",
+    function (event) {
+
+      if (!activePointer) return;
+
+      updateLight(event.clientX, event.clientY);
+
+    },
+    { passive: true }
+  );
+
+
+  function releasePointer() {
+
+    activePointer = false;
+    flare.classList.remove("active");
+
+  }
+
+  document.addEventListener(
+    "pointerup",
+    releasePointer,
+    { passive: true }
+  );
+
+  document.addEventListener(
+    "pointercancel",
+    releasePointer,
+    { passive: true }
+  );
+
+
+  /* ----------------
+     SECTION FLASH
+     ---------------- */
+
+  const peakSections =
+    document.querySelectorAll("main > section");
+
+  if ("IntersectionObserver" in window) {
+
+    let lastSection = -1;
+
+    const peakObserver =
+      new IntersectionObserver(
+        function (entries) {
+
+          entries.forEach(function (entry) {
+
+            if (!entry.isIntersecting) return;
+
+            const index =
+              Array.from(peakSections).indexOf(entry.target);
+
+            if (index === -1) return;
+
+            if (index !== lastSection) {
+
+              lastSection = index;
+
+              flash.classList.remove("active");
+
+              void flash.offsetWidth;
+
+              flash.classList.add("active");
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.55
+        }
+      );
+
+    peakSections.forEach(function (section) {
+      peakObserver.observe(section);
+    });
+
+  }
+
+})();
 </script>
 
 </body>
