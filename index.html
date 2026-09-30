@@ -642,18 +642,23 @@ section p:last-child{margin-bottom:0}
   width:100%;
   height:auto;
   transform-origin:center center;
-  animation:memoryAwaken 7s ease-in-out infinite;
+  animation:memoryAwaken 4.5s ease-in-out infinite;
 }
 
 @keyframes memoryAwaken{
-  0%,100%{
+  0%{
     transform:scale(1);
-    filter:brightness(.96);
+    filter:brightness(.9);
   }
 
   50%{
-    transform:scale(1.018);
-    filter:brightness(1.035);
+    transform:scale(1.06);
+    filter:brightness(1.1);
+  }
+
+  100%{
+    transform:scale(1);
+    filter:brightness(.9);
   }
 }
 
