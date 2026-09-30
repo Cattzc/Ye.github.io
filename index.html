@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#03050a">
 <meta name="description" content="Jayé / Yarc personal archive">
+<meta name="color-scheme" content="dark">
 <title>Jayé / Yarc</title>
 
 <style>
@@ -20,6 +21,8 @@
   --blue-soft:rgba(109,171,255,.18);
   --lilac:#c7b9ff;
   --lilac-soft:rgba(184,160,255,.16);
+  --font-body:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-display:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 
 *{box-sizing:border-box}
@@ -38,11 +41,14 @@ body{
     radial-gradient(circle at 50% -8%,#0a1422 0%,#050a12 22%,#02040a 58%,#010209 100%),
     var(--bg);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-family:var(--font-body);
   line-height:1.7;
+  letter-spacing:-.006em;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
+
+/* Typography uses local/system stacks only, so no web-font download is required. */
 
 /* Ambient night texture. It moves with transform only for smooth mobile performance. */
 body::before{
@@ -259,6 +265,8 @@ main{
 
 .hero h1{
   margin:0;
+  font-family:var(--font-display);
+  font-weight:800;
   font-size:clamp(4rem,20vw,8.3rem);
   line-height:.81;
   letter-spacing:-.08em;
@@ -339,15 +347,31 @@ section::before{
 
 section h2{
   margin:0 0 28px;
+  font-family:var(--font-display);
   font-size:clamp(2.3rem,10vw,3.7rem);
   line-height:.94;
+  font-weight:780;
   letter-spacing:-.058em;
+  text-wrap:balance;
 }
 
 section p{
   margin:0 0 19px;
   color:var(--muted);
   font-size:.96rem;
+  line-height:1.78;
+  font-weight:430;
+}
+
+section p strong{
+  color:#f1f6ff;
+  font-weight:800;
+  letter-spacing:-.012em;
+}
+
+.hero-intro strong{
+  color:#eaf2ff;
+  font-weight:750;
 }
 
 section p:last-child{margin-bottom:0}
@@ -674,8 +698,8 @@ section p:last-child{margin-bottom:0}
   opacity:0;
   transform:translateY(18px);
   transition:opacity .8s ease .72s,transform .9s cubic-bezier(.16,1,.3,1) .72s;
-}
-
+  }
+ 
 .js-ready .final-section.show .final-signoff{
   opacity:1;
   transform:translateY(0);
@@ -691,6 +715,7 @@ footer{
 
 @media(max-width:520px){
   main{width:calc(100% - 30px)}
+  body{letter-spacing:-.004em}
   .hero{min-height:88vh;padding:66px 0 62px}
   .hero h1{font-size:clamp(3.7rem,20vw,6.2rem)}
   .hero-intro{font-size:.93rem}
@@ -902,6 +927,96 @@ section h2::after{
   }
 }
 
+
+/* =========================
+   MODERN DEMI TYPOGRAPHY
+   ========================= */
+.final-section .section-number{
+  letter-spacing:.18em;
+}
+.final-section .final-name{
+  font-family:var(--font-display);
+  font-weight:800;
+  letter-spacing:-.065em;
+}
+.final-section .final-name .primary{
+  font-weight:800;
+}
+.final-section .final-name .secondary{
+  font-weight:650;
+  letter-spacing:-.02em;
+}
+.final-section .final-tag{
+  font-family:var(--font-body);
+  letter-spacing:.13em;
+}
+.final-note{
+  max-width:650px;
+}
+.final-copy{
+  color:#aeb8c8;
+  font-size:.97rem;
+  line-height:1.84;
+  letter-spacing:-.006em;
+}
+.final-copy:first-child{
+  color:#dfe7f2;
+  font-size:1.03rem;
+  line-height:1.76;
+}
+.final-copy .demi-emphasis{
+  color:#edf4ff;
+  font-weight:800;
+}
+.final-copy .demi-emphasis-soft{
+  color:#cbd8ea;
+  font-weight:650;
+}
+.final-copy .demi-break-line{
+  display:inline-block;
+  margin-top:6px;
+  color:#eef3ff;
+  font-weight:800;
+}
+.final-copy .demi-words{
+  display:inline-block;
+  margin-top:4px;
+  color:#eef1ff;
+  font-family:var(--font-display);
+  font-size:1.02em;
+  font-weight:800;
+  letter-spacing:.015em;
+}
+.final-copy .demi-closing{
+  color:#eef3ff;
+  font-weight:800;
+}
+.final-signoff{
+  font-family:var(--font-display);
+  font-weight:650;
+  letter-spacing:.01em;
+}
+
+/* Strong text system: weight contrast is intentional and mobile-friendly. */
+.final-section .final-name .primary{
+  font-weight:850;
+}
+.final-section .final-name .secondary{
+  font-weight:700;
+}
+.final-copy .demi-emphasis,
+.final-copy .demi-break-line,
+.final-copy .demi-words,
+.final-copy .demi-closing{
+  font-weight:850;
+  color:#f3f7ff;
+}
+.final-copy .demi-closing{
+  display:inline-block;
+  font-size:1.16em;
+  line-height:1.35;
+  letter-spacing:-.028em;
+}
 
 /* =========================
    DEMI DEVI / NIGHT BUTTERFLY
@@ -1138,6 +1253,250 @@ body::after{opacity:.24 !important;}
 .twinkle{filter:drop-shadow(0 0 3px rgba(220,238,255,.96)) drop-shadow(0 0 8px rgba(126,186,255,.7));}
 .big-star{box-shadow:0 0 10px 2px rgba(188,220,255,.95),0 0 30px 7px rgba(80,150,255,.18);}
 
+
+/* =========================
+   FINAL VISUAL PASS V3
+   Stronger typography + sharper night sky
+   ========================= */
+:root{
+  --font-body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --font-display:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+body{
+  background:#010208 !important;
+  color:#f4f7fc;
+  font-family:var(--font-body);
+  line-height:1.72;
+}
+
+/* Keep the atmosphere mostly still. The stars carry the motion now. */
+body::before{
+  inset:0;
+  opacity:.16 !important;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(25,45,72,.24),transparent 34%),
+    radial-gradient(circle at 8% 72%,rgba(52,83,130,.055),transparent 28%),
+    radial-gradient(circle at 92% 38%,rgba(83,63,145,.045),transparent 28%);
+  background-size:auto;
+  animation:none;
+}
+body::after{
+  opacity:.08 !important;
+  background:radial-gradient(circle at 50% 48%,rgba(92,133,195,.06),transparent 44%);
+  animation:none;
+}
+
+.twinkle-field{z-index:1;}
+.twinkle{
+  width:2px;
+  height:2px;
+  background:#f5f9ff;
+  border-radius:50%;
+  box-shadow:0 0 4px rgba(220,238,255,.95),0 0 11px rgba(116,181,255,.72);
+  opacity:.18;
+  animation:sharpTwinkle 4.6s ease-in-out infinite;
+  will-change:opacity,transform;
+}
+.twinkle::before,
+.twinkle::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  border-radius:999px;
+  transform:translate(-50%,-50%) scale(.35);
+  opacity:0;
+  background:rgba(224,239,255,.9);
+}
+.twinkle::before{width:13px;height:1px}
+.twinkle::after{width:1px;height:13px}
+.twinkle.t1,.twinkle.t4,.twinkle.t7,.twinkle.t10{width:2.5px;height:2.5px}
+.twinkle.t2,.twinkle.t5,.twinkle.t8,.twinkle.t11{animation-duration:5.4s}
+.twinkle.t3,.twinkle.t6,.twinkle.t9,.twinkle.t12{animation-duration:4.1s}
+@keyframes sharpTwinkle{
+  0%,100%{opacity:.12;transform:scale(.72)}
+  38%{opacity:.28;transform:scale(.86)}
+  48%{opacity:1;transform:scale(1.28)}
+  54%{opacity:.54;transform:scale(.98)}
+  62%{opacity:.2;transform:scale(.76)}
+}
+.twinkle.t1::before,.twinkle.t1::after,
+.twinkle.t4::before,.twinkle.t4::after,
+.twinkle.t7::before,.twinkle.t7::after,
+.twinkle.t10::before,.twinkle.t10::after{
+  animation:starCross 4.6s ease-in-out infinite;
+}
+@keyframes starCross{
+  0%,42%,68%,100%{opacity:0;transform:translate(-50%,-50%) scale(.25)}
+  50%{opacity:.8;transform:translate(-50%,-50%) scale(1)}
+  58%{opacity:.22;transform:translate(-50%,-50%) scale(.6)}
+}
+
+.big-star{
+  width:6px;
+  height:6px;
+  background:#fff;
+  box-shadow:0 0 5px 1px rgba(225,240,255,1),0 0 18px 4px rgba(106,176,255,.48);
+  animation:bigSharpStar 4.8s ease-in-out infinite;
+}
+.big-star::before{width:34px;height:1px;background:rgba(220,237,255,.82)}
+.big-star::after{width:1px;height:34px;background:rgba(220,237,255,.82)}
+@keyframes bigSharpStar{
+  0%,100%{opacity:.5;transform:scale(.82)}
+  46%{opacity:1;transform:scale(1.08)}
+  52%{opacity:.7;transform:scale(.96)}
+}
+
+/* Typography is deliberately high-contrast now, not colour-dependent. */
+.hero h1,
+section h2,
+.final-name,
+.final-copy .demi-words,
+.final-copy .demi-closing{
+  font-family:var(--font-display);
+  font-synthesis:weight;
+  font-kerning:normal;
+}
+.hero h1{
+  font-weight:850;
+  letter-spacing:-.075em;
+  line-height:.82;
+}
+.hero h1 span{font-weight:760;color:#7f8da3}
+.hero-intro{
+  max-width:34rem;
+  color:#aeb9c9;
+  font-size:1rem;
+  line-height:1.78;
+  font-weight:420;
+}
+
+.section-number{
+  color:#7c8ba0;
+  font-size:.62rem;
+  font-weight:650;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+section h2{
+  margin-bottom:32px;
+  font-size:clamp(2.55rem,11vw,4.1rem);
+  line-height:.9;
+  font-weight:850;
+  letter-spacing:-.067em;
+}
+section h2::after{width:46px;margin-top:16px;background:linear-gradient(90deg,#9ac7ff,transparent)}
+section p{
+  max-width:39rem;
+  color:#a8b4c5;
+  font-size:.985rem;
+  line-height:1.86;
+  font-weight:430;
+  letter-spacing:-.009em;
+}
+section p strong{
+  color:#f5f8ff;
+  font-weight:850;
+    letter-spacing:-.02em;
+}
+
+/* These lines are meant to read as visual anchors. */
+section p strong:only-child{
+  display:block;
+  max-width:32rem;
+  font-size:1.04em;
+  line-height:1.5;
+}
+
+.fav-label{
+  font-weight:700;
+  letter-spacing:.2em;
+}
+.fav p{font-weight:430}
+
+.final-section{padding-top:108px}
+.final-section .section-number{font-weight:700;letter-spacing:.2em}
+.final-name{
+  font-weight:850;
+  letter-spacing:-.08em;
+}
+.final-name .primary{font-size:1em;font-weight:900}
+.final-name .secondary{font-size:.42em;font-weight:720;color:#8f98ac}
+.final-tag{font-weight:650;letter-spacing:.16em}
+.final-note{padding-left:20px}
+.final-copy{
+  max-width:38rem;
+  color:#aeb9c9;
+  font-size:1rem;
+  line-height:1.86;
+  font-weight:430;
+}
+.final-copy:first-child{
+  color:#e5ebf4;
+  font-size:1.07rem;
+  line-height:1.78;
+  font-weight:520;
+}
+.final-copy .demi-emphasis,
+.final-copy .demi-break-line,
+.final-copy .demi-words,
+.final-copy .demi-closing{
+  color:#f7f9ff;
+  font-weight:900;
+}
+.final-copy .demi-emphasis-soft{color:#dce5f2;font-weight:700}
+.final-copy .demi-break-line{font-size:1.05em}
+.final-copy .demi-words{
+  font-size:1.15em;
+  letter-spacing:.01em;
+}
+.final-copy .demi-closing{
+  display:inline-block;
+  font-size:1.34em;
+  line-height:1.25;
+  letter-spacing:-.035em;
+}
+.final-signoff{font-weight:700}
+
+/* Keep the butterfly visible but quiet. */
+.demi-butterfly{
+  width:104px;
+  height:132px;
+  opacity:0;
+  filter:none;
+}
+.demi-butterfly-stage{animation-duration:5.8s}
+.demi-butterfly-label{
+  font-size:6px;
+  font-weight:700;
+  color:rgba(231,240,255,.82);
+  background:rgba(2,5,11,.72);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 6px 18px rgba(0,0,0,.22);
+}
+
+/* The touch burst stays peak, but its glow is painted smaller for mobile. */
+.touch-flash{box-shadow:0 0 7px 2px rgba(255,255,255,.98),0 0 17px 5px rgba(156,212,255,.82),0 0 34px 8px rgba(121,131,255,.3)}
+.touch-ring{box-shadow:0 0 10px rgba(120,184,255,.4),inset 0 0 10px rgba(173,210,255,.1)}
+.touch-ring.r3{box-shadow:0 0 12px rgba(125,115,255,.16)}
+
+@media(max-width:520px){
+  main{width:calc(100% - 32px)}
+  .hero{padding-top:72px}
+  .hero h1{font-size:clamp(3.8rem,19vw,6.2rem)}
+  section{padding:84px 0}
+  section h2{font-size:clamp(2.55rem,10.8vw,3.45rem);margin-bottom:30px}
+  section p{font-size:.975rem;line-height:1.84}
+  .final-section{padding-top:96px;padding-bottom:108px}
+  .final-copy{font-size:.98rem;line-height:1.84}
+  .final-copy:first-child{font-size:1.04rem}
+  .final-copy .demi-closing{font-size:1.28em}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .twinkle,.twinkle::before,.twinkle::after,.big-star{animation:none!important}
+}
+
 </style>
 </head>
 
@@ -1245,9 +1604,8 @@ body::after{opacity:.24 !important;}
 
   <div class="hero-intro">
     I’m Jayé. Most people know me as Yarc.<br><br>
-    A place for the things I like, the things I create,
-    the people and memories that matter, and pieces of myself
-    I want to keep somewhere.
+    A small place for the things I like, the things I create,
+    the people who matter to me, and the memories I want to keep.
   </div>
 
   <div class="hero-rule" aria-hidden="true"></div>
@@ -1255,58 +1613,61 @@ body::after{opacity:.24 !important;}
 
 <section>
   <div class="section-number">01</div>
-  <h2>Intro.</h2>
-  <p class="reveal-piece">This is just a small space that belongs to me. Nothing here is meant to be perfect or overly serious.</p>
-  <p class="reveal-piece">It’s a place to keep things I like, things I make, memories I want to remember, and parts of my life that I don't want to disappear into the internet.</p>
+  <h2>About Me.</h2>
+  <p class="reveal-piece">I’m Jayé. Most people know me as Yarc.</p>
+  <p class="reveal-piece">This is a small place for the things I like, the things I create, the people and memories that matter, and pieces of myself I want to keep somewhere.</p>
 </section>
 
 <section>
   <div class="section-number">02</div>
-  <h2>The Things I Do.</h2>
-  <p class="reveal-piece">I’ve tried a lot of different things, some I stayed with, some I didn’t.</p>
-  <p class="reveal-piece">I like learning something new, messing around with it, and seeing where it goes.</p>
-  <p class="reveal-piece">I’m not trying to have everything figured out or be the best at everything. I just like having things to explore.</p>
+  <h2>Beliefs.</h2>
+  <p class="reveal-piece">I like thinking deeply about things, questioning what I'm told, and forming my own opinions.</p>
+  <p class="reveal-piece">I'm interested in how people think, why things work the way they do, and ideas that actually make me stop and think.</p>
+  <p class="reveal-piece">I don't believe being smart means knowing everything.</p>
+  <p class="reveal-piece">For me, it's being curious enough to keep asking better questions.</p>
 </section>
 
 <section>
   <div class="section-number">03</div>
-  <h2>Favourites.</h2>
-
-  <div class="favourites">
-    <div class="fav">
-      <div class="fav-label">BLUE</div>
-      <p>Probably my favourite colour. I’ve liked it for as long as I can remember.</p>
-    </div>
-
-    <div class="fav">
-      <div class="fav-label">MILK &amp; WATER</div>
-      <p>My usual drinks. Nothing fancy. I just like them.</p>
-    </div>
-
-    <div class="fav">
-      <div class="fav-label">MUSIC</div>
-      <p>Kendrick is one of my favourites, but that's definitely not the whole picture. My taste changes a lot. I listen to different genres, different artists, different sounds, basically whatever feels right at the time. There isn't really one box my music belongs in.</p>
-    </div>
-
-    <div class="fav">
-      <div class="fav-label">GAMES</div>
-      <p>Free Fire, Roblox, Chess.com. I don't really stick to one type of game. I just play whatever I feel like playing.</p>
-    </div>
-
-    <div class="fav">
-      <div class="fav-label">ANIMALS</div>
-      <p>I like pretty much every animal. I’ve got dogs and bunnies, so those are probably the ones I’m around the most.</p>
-    </div>
-  </div>
+  <h2>The Things I Do.</h2>
+  <p class="reveal-piece">I’ve tried a lot of things over the years. Some stayed with me, some disappeared after a while, and some taught me something even though I never got good at them.</p>
+  <p class="reveal-piece"><strong>I like that about myself.</strong></p>
+  <p class="reveal-piece">I don't think everything I try has to become a talent, a hobby, or something I can show people. Sometimes I just want to know what something feels like, what I can learn from it, or whether it belongs in my life at all.</p>
+  <p class="reveal-piece">There were things I started because I was curious. Things I kept doing because they made me happy. And a few things I left behind because I realized they <strong>weren't really for me.</strong></p>
+  <p class="reveal-piece"><strong>I’m still trying things. Still learning. Still changing my mind sometimes.</strong></p>
+  <p class="reveal-piece">I think that's probably going to be a part of me for a long time.</p>
 </section>
 
 <section>
   <div class="section-number">04</div>
-  <h2>Currently.</h2>
-  <p class="reveal-piece">Currently a student.</p>
-  <p class="reveal-piece">Somewhere between figuring out what I want, learning what I can, and slowly understanding what actually matters to me.</p>
-  <p class="reveal-piece">For now, I’m just taking it as it comes, learning, making mistakes, finding things I enjoy, and keeping a few things close along the way.</p>
-  <p class="reveal-piece">I don't have everything figured out yet. And honestly, I think that's okay.</p>
+  <h2>A Favourites.</h2>
+
+  <div class="favourites">
+    <div class="fav">
+      <div class="fav-label">BLUE</div>
+      <p>Probably my favourite colour. I’ve liked it for as long as I can remember.<br><br>I’ve grown, changed, and gone through different phases of life, but somehow, <strong>I still come back to blue.</strong></p>
+    </div>
+
+    <div class="fav">
+      <div class="fav-label">MILK &amp; WATER</div>
+      <p>My usual drinks. Nothing fancy. I just like them.<br><br>There’s something nice about having a few simple things you never really get tired of.</p>
+    </div>
+
+    <div class="fav">
+      <div class="fav-label">MUSIC</div>
+      <p>Kendrick is one of my favourites, but that's definitely not the whole picture.<br><br>My taste changes a lot. Different genres, different artists, different sounds, depending on what feels right.<br><br>Some songs are just songs.<br><br>Others become attached to <strong>people, places, and moments you didn't know you'd remember.</strong></p>
+    </div>
+
+    <div class="fav">
+      <div class="fav-label">GAMES</div>
+      <p>Free Fire, Roblox, Chess.com.<br><br>I've played a lot of games over the years. Some stayed for a long time, some didn't.<br><br>But when I look back, I don't remember every match or every win.<br><br><strong>I remember the people, the laughs, and the nights that somehow became memories.</strong></p>
+    </div>
+
+    <div class="fav">
+      <div class="fav-label">ANIMALS</div>
+      <p>I like pretty much every animal. I’ve got dogs and bunnies, so those are probably the ones I'm around the most.<br><br>They become part of your everyday life so naturally that you don't really notice it happening.<br><br>Until you realize <strong>they've become part of home.</strong></p>
+    </div>
+  </div>
 </section>
 
 <section>
@@ -1314,7 +1675,7 @@ body::after{opacity:.24 !important;}
   <h2>The People I Got Lucky With.</h2>
   <p class="reveal-piece">I’ve met some genuinely great people, both in-game and in real life.</p>
   <p class="reveal-piece">Different places, different stories, different kinds of friendships, but somehow they all became part of my life.</p>
-  <p class="reveal-piece">I don’t take that for granted.</p>
+  <p class="reveal-piece"><strong>I don’t take that for granted.</strong></p>
   <p class="reveal-piece">I feel pretty blessed to have the people I have.</p>
 </section>
 
@@ -1323,16 +1684,17 @@ body::after{opacity:.24 !important;}
   <h2>Little Things.</h2>
   <p class="reveal-piece">Not everything about me needs a whole explanation.</p>
   <p class="reveal-piece">I like small things that make everyday life better, good conversations, random laughs, late-night gaming, discovering something new, listening to music, spending time with people I care about, and having things that feel like mine.</p>
-  <p class="reveal-piece">I also appreciate simple things more than complicated ones. Sometimes the little things are enough.</p>
+  <p class="reveal-piece">I also appreciate simple things more than complicated ones.<br><br>Sometimes the little things are enough.</p>
 </section>
 
 <section>
   <div class="section-number">07</div>
-  <h2>Beliefs.</h2>
-  <p class="reveal-piece">I like thinking deeply about things, questioning what I'm told, and forming my own opinions.</p>
-  <p class="reveal-piece">I'm interested in how people think, why things work the way they do, and ideas that actually make me stop and think.</p>
-  <p class="reveal-piece">I don't believe being smart means knowing everything.</p>
-  <p class="reveal-piece">For me, it's being curious enough to keep asking better questions.</p>
+  <h2>Things I’m Still Figuring Out.</h2>
+  <p class="reveal-piece">I don't have everything figured out, and honestly, I don't think I'm supposed to.</p>
+  <p class="reveal-piece">There are things I still don't understand about myself, things I change my mind about, and things I'm still trying to become better at.</p>
+  <p class="reveal-piece">Some days I feel like I know where I'm going. Other days, I really don't.</p>
+  <p class="reveal-piece"><strong>I'm still growing into the person I'm going to be.</strong></p>
+  <p class="reveal-piece">And I think it's okay not to have the whole story figured out yet.</p>
 </section>
 
 <section>
@@ -1347,14 +1709,19 @@ body::after{opacity:.24 !important;}
 <section>
   <div class="section-number">09</div>
   <h2>Memories.</h2>
-  <p class="reveal-piece">Some moments don't need to be posted everywhere to matter.</p>
-  <p class="reveal-piece">There are people I've met, conversations I've had, games I've played, stupid moments I've laughed at, and memories that stayed with me longer than I expected.</p>
-  <p class="reveal-piece">This section is for those things.</p>
-  <p class="reveal-piece">The moments I don't want to forget.</p>
+  <p class="reveal-piece">Some moments don't feel important while you're living them.</p>
+  <p class="reveal-piece">They're just normal days, random conversations, late nights, stupid jokes, games with people you happened to meet, and little things you never thought you'd miss.</p>
+  <p class="reveal-piece">Then time passes.</p>
+  <p class="reveal-piece">Some people stayed. Some left. Some I had to leave behind. Some came into my life for a while, <strong>taught me something I needed to learn, and eventually became a memory.</strong></p>
+  <p class="reveal-piece">Not every memory is a happy one either. There were difficult days, unfortunate moments, mistakes, and things I wish had gone differently.</p>
+  <p class="reveal-piece">But even those days became part of who I am.</p>
+  <p class="reveal-piece"><strong>I think that's what memories really are. Pieces of people, places, and moments that once meant something to us.</strong></p>
+  <p class="reveal-piece">Some are still close. Some feel far away now.</p>
+  <p class="reveal-piece">But I wouldn't want to erase any of them.</p>
 </section>
 
 <section class="final-section">
-  <div class="section-number">10 / THE LAST PAGE</div>
+  <div class="section-number">10 / THE LAST PAGE OF CAT</div>
 
   <div class="final-intro">
     <div class="final-name">
@@ -1368,21 +1735,21 @@ body::after{opacity:.24 !important;}
   <div class="final-note">
     <p class="final-copy">The kindest girl I’ve ever met through a game, and genuinely one of the purest souls I’ve come across.</p>
 
-    <p class="final-copy">What makes her different is the way her kindness feels natural. She doesn't need a reason to be good to someone, and she doesn't seem to do it for attention either. That kind of person is rare.</p>
+    <p class="final-copy">What makes her different is the way her kindness feels natural. She doesn't need a reason to be good to someone, and she doesn't seem to do it for attention either. <span class="demi-emphasis">That kind of person is rare.</span></p>
 
-    <p class="final-copy">I admire the softness in her character, the way she can make someone feel comfortable just by being herself. There’s something really genuine about that.</p>
+    <p class="final-copy">I admire the softness in her character, the way she can make someone feel comfortable just by being herself. <span class="demi-emphasis-soft">There’s something really genuine about that.</span></p>
 
-    <p class="final-copy">I don't have one perfect moment that explains why she matters. Sometimes it's not one big memory. It’s the collection of small things that slowly make someone important.</p>
+    <p class="final-copy">I don't have one perfect moment that explains why she matters. Sometimes it's not one big memory. <span class="demi-emphasis-soft">It’s the collection of small things that slowly make someone important.</span></p>
 
-    <p class="final-copy">Meeting her through a game was random.<br>Keeping the memory of her isn't.</p>
+    <p class="final-copy">Meeting her through a game was random.<br><span class="demi-break-line">Keeping the memory of her isn't.</span></p>
 
-    <p class="final-copy">If I had to describe her in three words:<br><br>Kind. Genuine. Pure.</p>
+    <p class="final-copy">If I had to describe her in three words:<br><br><span class="demi-words">Kind. Genuine. Pure.</span></p>
 
     <p class="final-copy">And if she ever reads this, I’d want her to know one simple thing:</p>
 
-    <p class="final-copy">I'm genuinely glad I met you.</p>
+    <p class="final-copy"><span class="demi-closing">I'm genuinely glad I met you.</span></p>
 
-    <p class="final-copy">I hope you never lose the part of yourself that makes you this kind. The world has enough people trying to be impressive. Staying genuinely good is something else.</p>
+    <p class="final-copy">I hope you never lose the part of yourself that makes you this kind. The world has enough people trying to be impressive. <span class="demi-emphasis">Staying genuinely good is something else.</span></p>
 
     <p class="final-copy">For Demi / Shree.</p>
   </div>
