@@ -2,10 +2,16 @@
 
 # Jaye
 
-### Software · Web · Technology
+### `code · systems · the web`
 
-[![Website](https://img.shields.io/badge/website-cattzc.github.io-111111?style=flat-square&logo=googlechrome&logoColor=white)](https://cattzc.github.io/Ye.github.io/)
-[![GitHub](https://img.shields.io/badge/github-Cattzc-111111?style=flat-square&logo=github&logoColor=white)](https://github.com/Cattzc)
+<p>
+  <a href="https://cattzc.github.io/Ye.github.io/">
+    <img src="https://img.shields.io/badge/Website-111111?style=for-the-badge&logo=googlechrome&logoColor=white" />
+  </a>
+  <a href="https://github.com/Cattzc">
+    <img src="https://img.shields.io/badge/GitHub-111111?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+</p>
 
 </div>
 
@@ -15,13 +21,9 @@
 
 I'm Jaye.
 
-I build software, websites, tools, and experiments around things that
-interest me. Most of what I learn comes from actually building — then
-iterating when the first version inevitably isn't good enough.
+I build things for the web, experiment with code, and turn ideas into projects I can actually use.
 
-My interests aren't limited to one part of technology. I like moving between
-development, infrastructure, creative tools, and whatever else becomes useful
-for the thing I'm working on.
+This GitHub is where I keep the things I'm working on — from personal websites to smaller experiments and whatever comes next.
 
 ---
 
@@ -29,63 +31,54 @@ for the thing I'm working on.
 
 ### `Ye.github.io`
 
-A personal space for things I want to keep on the internet — interests,
-music, thoughts, experiments, and other pieces of my digital world.
+My personal website and digital space.
 
-**Built with:** `HTML` `CSS` `JavaScript`
+Built from scratch with **HTML, CSS and JavaScript**, with a focus on keeping the experience simple, personal and completely mine.
 
-→ [Visit](https://cattzc.github.io/Ye.github.io/)  
-→ [Source](https://github.com/Cattzc/Ye.github.io)
+It brings together projects, interests, music, thoughts and other things I want to put on the web.
 
-### More experiments
-
-I'm continuously working on smaller projects and experiments alongside the
-main site.
-
-New ideas usually start small. Some stay that way. Others turn into something
-worth keeping.
+**→ [Visit the website](https://cattzc.github.io/Ye.github.io/)**  
+**→ [View the repository](https://github.com/Cattzc/Ye.github.io)**
 
 ---
 
-## Tech Stack
+## Stack
 
-> A practical stack, not a collection of everything I've ever touched.
+<p>
+  <img src="https://skillicons.dev/icons?i=html,css,js,python" />
+</p>
 
-### Languages
-
-`Python` · `JavaScript` · `TypeScript` · `HTML` · `CSS`
-
-### Development
-
-`React` · `Next.js` · `Node.js` · `Express.js` · `Electron`
-
-### Data
-
-`MySQL` · `MongoDB`
-
-### Infrastructure
-
-`Git` · `GitHub` · `Cloudflare` · `Vercel` · `Netlify`
-
-### Creative
-
-`Figma` · `GIMP` · `Adobe Premiere Pro`
+`HTML` · `CSS` · `JavaScript` · `Python`
 
 ---
 
-## What I'm Interested In
+## What I'm Building
 
-**Software Development**  
-Building useful software and understanding the systems behind it.
+<table>
+<tr>
+<td width="50%">
 
-**Web**  
-Interfaces, applications, experimentation, and the wider web ecosystem.
+### Ye.github.io
 
-**Tools & Automation**  
-Small pieces of software that remove friction or make something possible.
+Personal website built from scratch.
 
-**Creative Technology**  
-The overlap between code, design, media, and digital experimentation.
+`HTML` `CSS` `JavaScript`
+
+[Repository →](https://github.com/Cattzc/Ye.github.io)
+
+</td>
+
+<td width="50%">
+
+### Experiments
+
+Small projects, ideas and things I'm testing while learning and building.
+
+`JavaScript` `Python`
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -99,18 +92,10 @@ The overlap between code, design, media, and digital experimentation.
 
 ---
 
-## Around the Web
-
-🌐 **Website**  
-[ c attzc.github.io/Ye.github.io ](https://cattzc.github.io/Ye.github.io/)
-
-🐙 **GitHub**  
-[ github.com/Cattzc ](https://github.com/Cattzc)
-
----
-
 <div align="center">
 
-**Jaye**
+### Jaye · Cattzc
+
+`building quietly.`
 
 </div>
