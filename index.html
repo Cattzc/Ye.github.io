@@ -1,1133 +1,837 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#040507">
-  <meta name="description" content="Jayé / Yarc. A personal archive of things, people, memories and interests.">
-  <title>Jayé / Yarc</title>
-
-  <style>
-    :root {
-      --bg: #040507;
-      --bg2: #080b12;
-      --text: #f4f5f7;
-      --soft: #b5bac4;
-      --muted: #6e7480;
-      --blue: #91b0ff;
-      --line: rgba(235, 240, 250, 0.1);
-      --line2: rgba(235, 240, 250, 0.17);
-      --max: 700px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      background: var(--bg);
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-width: 320px;
-      overflow-x: hidden;
-
-      color: var(--text);
-      background:
-        radial-gradient(
-          650px 400px at 50% -100px,
-          rgba(45, 70, 125, 0.22),
-          transparent 72%
-        ),
-        linear-gradient(
-          180deg,
-          #040507 0%,
-          #06080d 48%,
-          #040507 100%
-        );
-
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      pointer-events: none;
-
-      background:
-        radial-gradient(
-          450px 450px at 8% 30%,
-          rgba(45, 70, 120, 0.07),
-          transparent 72%
-        ),
-        radial-gradient(
-          500px 500px at 92% 70%,
-          rgba(35, 55, 100, 0.06),
-          transparent 72%
-        );
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-
-      opacity: 0.13;
-
-      background-image:
-        radial-gradient(
-          rgba(255,255,255,0.7) 0.5px,
-          transparent 0.5px
-        );
-
-      background-size: 95px 95px;
-
-      animation: grain 22s linear infinite;
-    }
-
-    @keyframes grain {
-      0% {
-        transform: translate3d(0, 0, 0);
-      }
-
-      50% {
-        transform: translate3d(10px, -8px, 0);
-      }
-
-      100% {
-        transform: translate3d(0, 0, 0);
-      }
-    }
-
-    ::selection {
-      background: #dbe5ff;
-      color: #050609;
-    }
-
-    /* TOP BAR */
-
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 50;
-
-      display: flex;
-      justify-content: space-between;
-
-      padding: 18px 20px;
-
-      pointer-events: none;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(4,5,7,0.78),
-          transparent
-        );
-    }
-
-    .topbar span {
-      color: rgba(220,225,235,0.46);
-
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-    }
-
-    /* LITTLE STAR */
-
-    .little-star {
-      position: absolute;
-
-      top: 15%;
-      right: 10%;
-
-      width: 22px;
-      height: 22px;
-
-      pointer-events: none;
-
-      animation:
-        starFloat 5.5s ease-in-out infinite,
-        starRotate 14s linear infinite;
-    }
-
-    .little-star::before,
-    .little-star::after {
-      content: "";
-
-      position: absolute;
-      top: 50%;
-      left: 50%;
-
-      transform: translate(-50%, -50%);
-
-      border-radius: 999px;
-    }
-
-    .little-star::before {
-      width: 22px;
-      height: 1px;
-
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          rgba(210,225,255,0.95),
-          transparent
-        );
-    }
-
-    .little-star::after {
-      width: 1px;
-      height: 22px;
-
-      background:
-        linear-gradient(
-          180deg,
-          transparent,
-          rgba(210,225,255,0.95),
-          transparent
-        );
-    }
-
-    .star-dot {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-
-      width: 5px;
-      height: 5px;
-
-      transform: translate(-50%, -50%);
-
-      border-radius: 50%;
-      background: #f2f6ff;
-
-      box-shadow:
-        0 0 7px rgba(158,190,255,0.9),
-        0 0 17px rgba(128,164,235,0.35);
-
-      animation: starPulse 2.8s ease-in-out infinite;
-    }
-
-    @keyframes starFloat {
-      0%, 100% {
-        transform: translate3d(0,0,0);
-      }
-
-      50% {
-        transform: translate3d(-3px,7px,0);
-      }
-    }
-
-    @keyframes starRotate {
-      from {
-        rotate: 0deg;
-      }
-
-      to {
-        rotate: 360deg;
-      }
-    }
-
-    @keyframes starPulse {
-      0%, 100% {
-        opacity: 0.45;
-        scale: 0.82;
-      }
-
-      50% {
-        opacity: 1;
-        scale: 1.18;
-      }
-    }
-
-    /* MAIN */
-
-    main {
-      position: relative;
-      z-index: 1;
-
-      width: min(100%, var(--max));
-      margin: 0 auto;
-
-      padding:
-        0 23px
-        env(safe-area-inset-bottom);
-    }
-
-    /* HERO */
-
-    .hero {
-      position: relative;
-
-      min-height: 100svh;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-
-      padding-top: 100px;
-      padding-bottom: 62px;
-    }
-
-    .hero-kicker {
-      margin-bottom: 27px;
-
-      color: var(--muted);
-
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.23em;
-      text-transform: uppercase;
-
-      animation: heroUp 0.8s ease both;
-    }
-
-    .hero-title {
-      margin: 0;
-
-      font-size: clamp(68px, 19vw, 125px);
-      line-height: 0.77;
-      letter-spacing: -0.09em;
-      font-weight: 750;
-
-      animation:
-        heroTitle 1s cubic-bezier(0.2,0.7,0.2,1) both;
-    }
-
-    .hero-title .second {
-      display: block;
-      margin-left: 10%;
-      color: var(--blue);
-    }
-
-    .hero-rule {
-      width: 100%;
-      height: 1px;
-
-      margin-top: 48px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--line2),
-          transparent 72%
-        );
-
-      animation: fadeIn 1s 0.15s ease both;
-    }
-
-    .hero-description {
-      max-width: 460px;
-
-      margin: 29px 0 0;
-
-      color: var(--soft);
-
-      font-size: 14px;
-      line-height: 1.85;
-
-      animation: heroUp 0.9s 0.15s ease both;
-    }
-
-    .hero-bottom {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-
-      margin-top: 53px;
-
-      color: var(--muted);
-
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-
-      animation: heroUp 1s 0.25s ease both;
-    }
-
-    .hero-bottom::before {
-      content: "";
-
-      width: 36px;
-      height: 1px;
-
-      background: rgba(220,228,245,0.2);
-    }
-
-    .scroll-dot {
-      width: 4px;
-      height: 4px;
-
-      border-radius: 50%;
-      background: var(--blue);
-
-      animation: dotPulse 2.4s ease-in-out infinite;
-    }
-
-    @keyframes heroTitle {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes heroUp {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes dotPulse {
-      0%, 100% {
-        opacity: 0.35;
-        transform: scale(0.8);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.3);
-      }
-    }
-
-    /* SECTIONS */
-
-    section:not(.hero) {
-      position: relative;
-
-      padding: 112px 0;
-
-      border-top: 1px solid var(--line);
-    }
-
-    .section-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-
-      margin-bottom: 32px;
-    }
-
-    .section-number {
-      color: var(--blue);
-
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.20em;
-    }
-
-    .section-name {
-      max-width: 65%;
-
-      color: var(--muted);
-
-      font-size: 8px;
-      font-weight: 600;
-      line-height: 1.5;
-      letter-spacing: 0.18em;
-
-      text-align: right;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      max-width: 630px;
-
-      margin: 0 0 34px;
-
-      font-size: clamp(41px, 10.5vw, 69px);
-      line-height: 0.93;
-      letter-spacing: -0.065em;
-      font-weight: 680;
-    }
-
-    p {
-      max-width: 575px;
-
-      margin: 0 0 24px;
-
-      color: var(--soft);
-
-      font-size: 15px;
-      line-height: 1.9;
-    }
-
-    p:last-child {
-      margin-bottom: 0;
-    }
-
-    .lead {
-      color: #d9dce2;
-
-      font-size: 18px;
-      line-height: 1.75;
-
-      letter-spacing: -0.02em;
-    }
-
-    /* REVEAL */
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-
-      transition:
-        opacity 0.8s ease,
-        transform 0.8s cubic-bezier(0.2,0.7,0.2,1);
-    }
-
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ABOUT */
-
-    .intro-block {
-      padding-left: 18px;
-
-      border-left: 1px solid rgba(145,176,255,0.55);
-    }
-
-    /* FAVOURITES */
-
-    .favourites {
-      margin-top: 44px;
-
-      border-top: 1px solid var(--line);
-    }
-
-    .favourite {
-      display: grid;
-      grid-template-columns: 83px minmax(0,1fr);
-      gap: 17px;
-
-      padding: 25px 0;
-
-      border-bottom: 1px solid var(--line);
-    }
-
-    .favourite-name {
-      color: #e9ebef;
-
-      font-size: 9px;
-      font-weight: 600;
-      line-height: 1.5;
-      letter-spacing: 0.15em;
-
-      text-transform: uppercase;
-    }
-
-    .favourite p {
-      margin: 0;
-
-      font-size: 14px;
-      line-height: 1.82;
-    }
-
-    /* STATEMENT */
-
-    .statement {
-      margin-top: 44px;
-
-      padding: 20px 0 20px 18px;
-
-      border-left: 1px solid var(--blue);
-
-      color: #e1e4ea;
-
-      font-size: 20px;
-      line-height: 1.55;
-      letter-spacing: -0.025em;
-    }
-
-    /* PEOPLE */
-
-    .people-note {
-      margin-top: 43px;
-
-      padding-top: 18px;
-
-      border-top: 1px solid var(--line);
-
-      color: var(--muted);
-
-      font-size: 9px;
-      line-height: 1.7;
-      letter-spacing: 0.10em;
-
-      text-transform: uppercase;
-    }
-
-    /* MEMORY */
-
-    .memory-card {
-      margin: 46px 0 48px;
-    }
-
-    .memory-frame {
-      position: relative;
-
-      overflow: hidden;
-
-      border: 1px solid rgba(220,228,245,0.15);
-
-      background: #080a0e;
-
-      box-shadow:
-        0 24px 70px rgba(0,0,0,0.28);
-    }
-
-    .memory-frame::after {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      pointer-events: none;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,0.045),
-          transparent 28%,
-          transparent 72%,
-          rgba(113,145,220,0.04)
-        );
-    }
-
-    .memory-image {
-      display: block;
-
-      width: 100%;
-      height: auto;
-
-      filter:
-        saturate(0.82)
-        contrast(1.05)
-        brightness(0.94);
-
-      transition:
-        transform 0.8s cubic-bezier(0.2,0.7,0.2,1),
-        filter 0.8s ease;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .memory-frame:hover .memory-image {
-        transform: scale(1.018);
-
-        filter:
-          saturate(0.94)
-          contrast(1.05)
-          brightness(1);
-      }
-    }
-
-    .memory-meta {
-      display: flex;
-      justify-content: space-between;
-
-      padding-top: 11px;
-
-      color: var(--muted);
-
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.17em;
-
-      text-transform: uppercase;
-    }
-
-    /* LAST PAGE */
-
-    .last-page {
-      padding-top: 130px !important;
-      padding-bottom: 130px !important;
-    }
-
-    .last-intro {
-      margin-bottom: 7px;
-
-      color: var(--blue);
-
-      font-size: 9px;
-      font-weight: 650;
-      letter-spacing: 0.20em;
-
-      text-transform: uppercase;
-    }
-
-    .last-title {
-      max-width: 570px;
-
-      font-size: clamp(49px,13vw,88px);
-      line-height: 0.88;
-      letter-spacing: -0.075em;
-    }
-
-    .dedication {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-
-      margin: 5px 0 37px;
-
-      color: #8f949e;
-
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.19em;
-
-      text-transform: uppercase;
-    }
-
-    .dedication::before {
-      content: "";
-
-      width: 25px;
-      height: 1px;
-
-      background: var(--blue);
-    }
-
-    .memory-intro {
-      margin-bottom: 38px;
-
-      color: #d5d8df;
-    }
-
-    .quote-card {
-      position: relative;
-
-      margin: 46px 0;
-
-      padding: 25px 19px 27px;
-
-      border: 1px solid rgba(220,228,245,0.1);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(23,30,43,0.58),
-          rgba(7,9,13,0.58)
-        );
-    }
-
-    .quote-card::before {
-      content: "“";
-
-      position: absolute;
-
-      top: 5px;
-      right: 16px;
-
-      color: rgba(145,176,255,0.16);
-
-      font-family: Georgia, serif;
-      font-size: 66px;
-      line-height: 1;
-    }
-
-    .quote {
-      position: relative;
-      z-index: 1;
-
-      max-width: none;
-
-      margin: 0;
-
-      color: #eef0f4;
-
-      font-size: 21px;
-      line-height: 1.52;
-      letter-spacing: -0.025em;
-    }
-
-    .quote-sub {
-      margin-top: 15px;
-
-      color: var(--muted);
-
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.17em;
-
-      text-transform: uppercase;
-    }
-
-    .closing {
-      margin-top: 48px;
-    }
-
-    .closing-line {
-      width: 100%;
-      height: 1px;
-
-      margin-bottom: 27px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--line2),
-          transparent
-        );
-    }
-
-    .closing-text {
-      max-width: 520px;
-
-      color: #dfe2e8;
-
-      font-size: 18px;
-      line-height: 1.78;
-      letter-spacing: -0.015em;
-    }
-
-    .signature {
-      margin-top: 52px;
-
-      color: #aeb3bd;
-
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-
-      text-transform: uppercase;
-    }
-
-    /* FOOTER */
-
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-
-      padding: 28px 0 38px;
-
-      border-top: 1px solid var(--line);
-
-      color: var(--muted);
-
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-
-      text-transform: uppercase;
-    }
-
-    .credit {
-      color: #858a94;
-    }
-
-    /* SMALL PHONES */
-
-    @media (max-width: 400px) {
-      main {
-        padding-left: 19px;
-        padding-right: 19px;
-      }
-
-      .topbar {
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-
-      .little-star {
-        top: 14%;
-        right: 8%;
-        scale: 0.88;
-      }
-
-      .hero {
-        padding-bottom: 52px;
-      }
-
-      section:not(.hero) {
-        padding-top: 96px;
-        padding-bottom: 96px;
-      }
-
-      .favourite {
-        grid-template-columns: 71px minmax(0,1fr);
-        gap: 14px;
-      }
-
-      .last-page {
-        padding-top: 112px !important;
-        padding-bottom: 112px !important;
-      }
-    }
-
-    /* REDUCED MOTION */
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      body::after,
-      .little-star,
-      .star-dot,
-      .scroll-dot,
-      .hero-title,
-      .hero-kicker,
-      .hero-description,
-      .hero-bottom,
-      .hero-rule {
-        animation: none;
-      }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
-
-      .memory-image {
-        transition: none;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jayé / Yarc</title>
+
+<style>
+:root{
+  --bg:#03050a;
+  --navy:#07111f;
+  --text:#edf4ff;
+  --muted:#8e9bad;
+  --line:rgba(150,180,220,.12);
+  --blue:#7db9ff;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 50% 0%, #0a1a2e 0%, #050912 32%, #03050a 72%);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* ---------- ATMOSPHERE ---------- */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.18;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(130,180,255,.35) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 75% 65%, rgba(130,180,255,.22) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 55% 15%, rgba(255,255,255,.18) 0 1px, transparent 1.5px);
+  background-size:170px 170px,230px 230px,310px 310px;
+  animation:stars 22s linear infinite;
+}
+
+@keyframes stars{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(-25px,18px,0)}
+}
+
+/* Large subtle star */
+
+.big-star{
+  position:fixed;
+  top:12vh;
+  right:9vw;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#dcecff;
+  box-shadow:
+    0 0 8px 2px rgba(160,205,255,.75),
+    0 0 28px 5px rgba(80,150,255,.18);
+  animation:
+    starPulse 4s ease-in-out infinite,
+    starFloat 12s ease-in-out infinite;
+  pointer-events:none;
+  z-index:0;
+}
+
+.big-star::before,
+.big-star::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background:linear-gradient(90deg,transparent,rgba(200,225,255,.8),transparent);
+}
+
+.big-star::before{
+  width:32px;
+  height:1px;
+}
+
+.big-star::after{
+  width:1px;
+  height:32px;
+}
+
+@keyframes starPulse{
+  0%,100%{opacity:.55;transform:scale(.85)}
+  50%{opacity:1;transform:scale(1.15)}
+}
+
+@keyframes starFloat{
+  0%,100%{margin-top:0;margin-right:0}
+  50%{margin-top:18px;margin-right:-10px}
+}
+
+/* ---------- LAYOUT ---------- */
+
+main{
+  position:relative;
+  z-index:1;
+  width:min(100% - 34px, 760px);
+  margin:auto;
+}
+
+.hero{
+  min-height:92vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:80px 0 70px;
+}
+
+.kicker{
+  color:var(--blue);
+  font-size:.72rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+  opacity:0;
+  animation:heroUp .9s .1s ease forwards;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(3.5rem,18vw,8rem);
+  line-height:.82;
+  letter-spacing:-.07em;
+  font-weight:700;
+  opacity:0;
+  animation:heroUp 1s .18s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.hero h1 span{
+  display:block;
+  color:#fff;
+}
+
+.hero h1 .soft{
+  color:#8194ad;
+}
+
+.hero-intro{
+  max-width:580px;
+  margin-top:35px;
+  color:#aeb9c9;
+  font-size:1rem;
+  opacity:0;
+  animation:heroUp 1s .34s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes heroUp{
+  from{
+    opacity:0;
+    transform:translateY(28px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* ---------- SECTIONS ---------- */
+
+section{
+  position:relative;
+  padding:92px 0;
+  border-top:1px solid var(--line);
+}
+
+.section-number{
+  color:#5e6c7e;
+  font-size:.7rem;
+  letter-spacing:.18em;
+  margin-bottom:18px;
+}
+
+section h2{
+  margin:0 0 28px;
+  font-size:clamp(2rem,9vw,3.5rem);
+  line-height:1;
+  letter-spacing:-.045em;
+}
+
+section p{
+  margin:0 0 18px;
+  color:#aeb8c6;
+  font-size:.98rem;
+}
+
+section p:last-child{
+  margin-bottom:0;
+}
+
+/* ---------- FAVOURITES ---------- */
+
+.favourites{
+  display:grid;
+  gap:1px;
+  margin-top:10px;
+  border:1px solid var(--line);
+  background:var(--line);
+}
+
+.fav{
+  background:rgba(5,9,16,.88);
+  padding:24px 20px;
+}
+
+.fav-label{
+  color:var(--blue);
+  font-size:.68rem;
+  letter-spacing:.17em;
+  margin-bottom:8px;
+}
+
+.fav p{
+  font-size:.93rem;
+}
+
+/* ---------- MEMORY ---------- */
+
+.memory{
+  margin-top:38px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#05080d;
+}
+
+.memory-image{
+  display:block;
+  width:100%;
+  height:auto;
+  transition:
+    transform .9s cubic-bezier(.16,1,.3,1),
+    filter .9s ease;
+  transform:scale(1.015);
+}
+
+.memory:active .memory-image{
+  transform:scale(1.045);
+  filter:brightness(1.08);
+}
+
+/* ---------- FINAL ---------- */
+
+.final-name{
+  font-size:clamp(2.5rem,12vw,5rem);
+  letter-spacing:-.055em;
+  margin-bottom:30px;
+}
+
+.final-note{
+  padding-left:18px;
+  border-left:1px solid rgba(125,185,255,.35);
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+  padding:80px 0 50px;
+  color:#586577;
+  font-size:.72rem;
+  letter-spacing:.08em;
+  text-align:center;
+}
+
+/* ---------- SCROLL ANIMATION ---------- */
+
+/*
+  Important:
+  Sections remain visible if JavaScript is unavailable.
+  JS only adds the animation class.
+*/
+
+.reveal{
+  opacity:0;
+  transform:translateY(55px) scale(.985);
+  transition:
+    opacity .8s ease,
+    transform 1s cubic-bezier(.16,1,.3,1);
+}
+
+.reveal.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* Heading and text stagger */
+
+.reveal h2{
+  opacity:0;
+  transform:translateY(22px);
+  transition:
+    opacity .7s ease .08s,
+    transform .8s cubic-bezier(.16,1,.3,1) .08s;
+}
+
+.reveal p{
+  opacity:0;
+  transform:translateY(16px);
+  transition:
+    opacity .7s ease .16s,
+    transform .8s cubic-bezier(.16,1,.3,1) .16s;
+}
+
+.reveal.show h2,
+.reveal.show p{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.reveal .favourites{
+  opacity:0;
+  transform:translateY(25px);
+  transition:
+    opacity .8s ease .2s,
+    transform .9s cubic-bezier(.16,1,.3,1) .2s;
+}
+
+.reveal.show .favourites{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.reveal .memory{
+  opacity:0;
+  transform:translateY(35px) scale(.97);
+  transition:
+    opacity .9s ease .2s,
+    transform 1s cubic-bezier(.16,1,.3,1) .2s;
+}
+
+.reveal.show .memory{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* Little movement between sections */
+
+section:nth-of-type(even).show{
+  transform:translateY(0) scale(1);
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:520px){
+
+  main{
+    width:min(100% - 30px,760px);
+  }
+
+  .hero{
+    min-height:88vh;
+    padding:65px 0 60px;
+  }
+
+  .hero h1{
+    font-size:clamp(3.4rem,19vw,6rem);
+  }
+
+  .hero-intro{
+    font-size:.95rem;
+    max-width:95%;
+  }
+
+  section{
+    padding:78px 0;
+  }
+
+  section h2{
+    font-size:2.45rem;
+  }
+
+  section p{
+    font-size:.94rem;
+  }
+
+  .big-star{
+    top:10vh;
+    right:13vw;
+  }
+
+  .fav{
+    padding:21px 17px;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media(prefers-reduced-motion:reduce){
+
+  html{
+    scroll-behavior:auto;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+
+  .reveal,
+  .reveal h2,
+  .reveal p,
+  .reveal .favourites,
+  .reveal .memory{
+    opacity:1;
+    transform:none;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="topbar">
-    <span>J / Y</span>
-    <span>Personal Archive</span>
-  </div>
+<div class="big-star"></div>
 
-  <main>
+<main>
 
-    <!-- HERO -->
+  <!-- HERO -->
 
-    <section class="hero">
+  <header class="hero">
+    <div class="kicker">Personal archive / Yarc</div>
 
-      <div class="little-star" aria-hidden="true">
-        <span class="star-dot"></span>
-      </div>
+    <h1>
+      Jayé
+      <span class="soft">/ Yarc</span>
+    </h1>
 
-      <div class="hero-kicker">
-        Jayé / Yarc · 2026
-      </div>
-
-      <h1 class="hero-title">
-        JAYÉ
-        <span class="second">/ YARC</span>
-      </h1>
-
-      <div class="hero-rule"></div>
-
-      <p class="hero-description">
-        A place for the things I like, the things I create, the people and
-        memories that matter, and pieces of myself I want to keep somewhere.
-      </p>
-
-      <div class="hero-bottom">
-        Scroll to explore
-        <span class="scroll-dot"></span>
-      </div>
-
-    </section>
+    <div class="hero-intro">
+      I’m Jayé. Most people know me as Yarc.<br><br>
+      A place for the things I like, the things I create,
+      the people and memories that matter, and pieces of
+      myself I want to keep somewhere.
+    </div>
+  </header>
 
 
-    <!-- 01 -->
+  <!-- 01 -->
 
-    <section>
+  <section class="reveal">
+    <div class="section-number">01</div>
+    <h2>Intro.</h2>
 
-      <div class="section-label">
-        <span class="section-number">01</span>
-        <span class="section-name">About</span>
-      </div>
+    <p>
+      This is just a small space that belongs to me.
+      Nothing here is meant to be perfect or overly serious.
+    </p>
 
-      <h2>
-        A little<br>
-        context.
-      </h2>
+    <p>
+      It’s a place to keep things I like, things I make,
+      memories I want to remember, and parts of my life
+      that I don't want to disappear into the internet.
+    </p>
+  </section>
 
-      <div class="intro-block">
 
-        <p class="lead">
-          I’m Jayé. Most people know me as Yarc.
-        </p>
+  <!-- 02 -->
 
+  <section class="reveal">
+    <div class="section-number">02</div>
+    <h2>The Things I Do.</h2>
+
+    <p>
+      I’ve tried a lot of different things, some I stayed with,
+      some I didn’t.
+    </p>
+
+    <p>
+      I like learning something new, messing around with it,
+      and seeing where it goes.
+    </p>
+
+    <p>
+      I’m not trying to have everything figured out or be the
+      best at everything.
+      I just like having things to explore.
+    </p>
+  </section>
+
+
+  <!-- 03 -->
+
+  <section class="reveal">
+    <div class="section-number">03</div>
+    <h2>Favourites.</h2>
+
+    <div class="favourites">
+
+      <div class="fav">
+        <div class="fav-label">BLUE</div>
         <p>
-          I’m currently a student, figuring things out as I go.
-          I’m not an editor or designer, and I’m not trying to act like I’m
-          the best at everything.
+          Probably my favourite colour.
+          I’ve liked it for as long as I can remember.
         </p>
+      </div>
 
+      <div class="fav">
+        <div class="fav-label">MILK &amp; WATER</div>
         <p>
-          I just like trying things, learning something new, and seeing
-          what happens.
+          My usual drinks.
+          Nothing fancy. I just like them.
         </p>
-
       </div>
 
-    </section>
-
-
-    <!-- 02 -->
-
-    <section>
-
-      <div class="section-label">
-        <span class="section-number">02</span>
-        <span class="section-name">The Things I Do</span>
+      <div class="fav">
+        <div class="fav-label">MUSIC</div>
+        <p>
+          Kendrick is one of my favourites, but that's definitely
+          not the whole picture. My taste changes a lot. I listen
+          to different genres, different artists, different sounds,
+          basically whatever feels right at the time. There isn't
+          really one box my music belongs in.
+        </p>
       </div>
 
-      <h2>
-        Try it.<br>
-        See where it goes.
-      </h2>
+      <div class="fav">
+        <div class="fav-label">GAMES</div>
+        <p>
+          Free Fire, Roblox, Chess.com.
+          I don't really stick to one type of game.
+          I just play whatever I feel like playing.
+        </p>
+      </div>
+
+      <div class="fav">
+        <div class="fav-label">ANIMALS</div>
+        <p>
+          I like pretty much every animal.
+          I’ve got dogs and bunnies, so those are probably
+          the ones I’m around the most.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 04 -->
+
+  <section class="reveal">
+    <div class="section-number">04</div>
+    <h2>Currently.</h2>
+
+    <p>
+      Currently a student.
+    </p>
+
+    <p>
+      Somewhere between figuring out what I want, learning
+      what I can, and slowly understanding what actually
+      matters to me.
+    </p>
+
+    <p>
+      For now, I’m just taking it as it comes, learning,
+      making mistakes, finding things I enjoy, and keeping
+      a few things close along the way.
+    </p>
+
+    <p>
+      I don't have everything figured out yet.
+      And honestly, I think that's okay.
+    </p>
+  </section>
+
+
+  <!-- 05 -->
+
+  <section class="reveal">
+    <div class="section-number">05</div>
+    <h2>The People I Got Lucky With.</h2>
+
+    <p>
+      I’ve met some genuinely great people, both in-game
+      and in real life.
+    </p>
+
+    <p>
+      Different places, different stories, different kinds
+      of friendships, but somehow they all became part of my life.
+    </p>
+
+    <p>
+      I don’t take that for granted.
+    </p>
+
+    <p>
+      I feel pretty blessed to have the people I have.
+    </p>
+  </section>
+
+
+  <!-- 06 -->
+
+  <section class="reveal">
+    <div class="section-number">06</div>
+    <h2>Little Things.</h2>
+
+    <p>
+      Not everything about me needs a whole explanation.
+    </p>
+
+    <p>
+      I like small things that make everyday life better,
+      good conversations, random laughs, late-night gaming,
+      discovering something new, listening to music, spending
+      time with people I care about, and having things that
+      feel like mine.
+    </p>
+
+    <p>
+      I also appreciate simple things more than complicated ones.
+      Sometimes the little things are enough.
+    </p>
+  </section>
+
+
+  <!-- 07 -->
+
+  <section class="reveal">
+    <div class="section-number">07</div>
+    <h2>Beliefs.</h2>
+
+    <p>
+      I like thinking deeply about things, questioning what I'm
+      told, and forming my own opinions.
+    </p>
+
+    <p>
+      I'm interested in how people think, why things work the way
+      they do, and ideas that actually make me stop and think.
+    </p>
+
+    <p>
+      I don't believe being smart means knowing everything.
+    </p>
+
+    <p>
+      For me, it's being curious enough to keep asking better questions.
+    </p>
+  </section>
+
+
+  <!-- 08 -->
+
+  <section class="reveal">
+    <div class="section-number">08</div>
+    <h2>Things I Like.</h2>
+
+    <p>
+      I like things that genuinely interest me, not just things
+      that look impressive.
+    </p>
+
+    <p>
+      Games, music, animals, technology, interesting conversations,
+      discovering random things online, and anything that gives
+      me something new to explore.
+    </p>
+
+    <p>
+      My interests change over time, and that's part of it.
+    </p>
+
+    <p>
+      I like having more than one side to myself.
+    </p>
+  </section>
+
+
+  <!-- 09 -->
+
+  <section class="reveal">
+    <div class="section-number">09</div>
+    <h2>Memories.</h2>
+
+    <p>
+      Some moments don't need to be posted everywhere to matter.
+    </p>
+
+    <p>
+      There are people I've met, conversations I've had,
+      games I've played, stupid moments I've laughed at,
+      and memories that stayed with me longer than I expected.
+    </p>
+
+    <p>
+      This section is for those things.
+    </p>
+
+    <p>
+      The moments I don't want to forget.
+    </p>
+  </section>
+
+
+  <!-- 10 -->
+
+  <section class="reveal">
+    <div class="section-number">10</div>
+    <h2>The Last Page</h2>
+
+    <div class="final-name">
+      Demi / Shree
+    </div>
+
+    <div class="final-note">
 
       <p>
-        I’ve tried a lot of different things, some I stayed with,
-        some I didn’t.
+        The kindest girl I’ve ever met through a game,
+        and genuinely one of the purest souls I’ve come across.
       </p>
 
       <p>
-        I like learning something new, messing around with it,
-        and seeing where it goes.
+        What makes her different is the way her kindness feels natural.
+        She doesn't need a reason to be good to someone, and she doesn't
+        seem to do it for attention either. That kind of person is rare.
       </p>
 
       <p>
-        I’m not trying to have everything figured out or be the best
-        at everything. I just like having things to explore.
-      </p>
-
-    </section>
-
-
-    <!-- 03 -->
-
-    <section>
-
-      <div class="section-label">
-        <span class="section-number">03</span>
-        <span class="section-name">Favourites</span>
-      </div>
-
-      <h2>
-        Things I keep<br>
-        coming back to.
-      </h2>
-
-      <div class="favourites">
-
-        <div class="favourite">
-          <div class="favourite-name">Blue</div>
-          <p>
-            Probably my favourite colour. I’ve liked it for as long as I can remember.
-          </p>
-        </div>
-
-        <div class="favourite">
-          <div class="favourite-name">Milk & Water</div>
-          <p>
-            My usual drinks. Nothing fancy. I just like them.
-          </p>
-        </div>
-
-        <div class="favourite">
-          <div class="favourite-name">Music</div>
-          <p>
-            Kendrick is one of my favourites, but that's definitely not the whole picture.
-            My taste changes a lot. I listen to different genres, different artists,
-            different sounds, basically whatever feels right at the time. There isn't
-            really one box my music belongs in.
-          </p>
-        </div>
-
-        <div class="favourite">
-          <div class="favourite-name">Games</div>
-          <p>
-            Free Fire, Roblox, Chess.com. I don't really stick to one type of game.
-            I just play whatever I feel like playing.
-          </p>
-        </div>
-
-        <div class="favourite">
-          <div class="favourite-name">Animals</div>
-          <p>
-            I like pretty much every animal. I’ve got dogs and bunnies,
-            so those are probably the ones I’m around the most.
-          </p>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- 04 -->
-
-    <section>
-
-      <div class="section-label">
-        <span class="section-number">04</span>
-        <span class="section-name">Currently</span>
-      </div>
-
-      <h2>
-        Still figuring<br>
-        it out.
-      </h2>
-
-      <p>
-        Currently a student.
-        Somewhere between figuring out what I want, learning what I can,
-        and slowly understanding what actually matters to me.
+        I admire the softness in her character, the way she can make
+        someone feel comfortable just by being herself. There’s something
+        really genuine about that.
       </p>
 
       <p>
-        For now, I’m just taking it as it comes, learning, making mistakes,
-        finding things I enjoy, and keeping a few things close along the way.
+        I don't have one perfect moment that explains why she matters.
+        Sometimes it's not one big memory. It’s the collection of small
+        things that slowly make someone important.
       </p>
 
-      <div class="statement">
-        I don't have everything figured out yet.
-        And honestly, I think that's okay.
- 
+      <p>
+        Meeting her through a game was random.<br>
+        Keeping the memory of her isn't.
+      </p>
+
+      <p>
+        If I had to describe her in three words:<br><br>
+        Kind. Genuine. Pure.
+      </p>
+
+      <p>
+        And if she ever reads this, I’d want her to know one simple thing:
+      </p>
+
+      <p>
+        I'm genuinely glad I met you.
+      </p>
+
+      <p>
+        I hope you never lose the part of yourself that makes you this kind.
+        The world has enough people trying to be impressive.
+        Staying genuinely good is something else.
+      </p>
+
+      <p>
+        For Demi / Shree.
+      </p>
+
+    </div>
+
+    <div class="memory">
+      <img
+        class="memory-image"
+        src="demi.png"
+        alt="A memory from a game with Demi / Shree"
+      >
+    </div>
+
+  </section>
+
+
+  <footer>
+    Made by @cvechz
+  </footer>
+
+</main>
+
+
+<script>
+/*
+  Scroll reveal only.
+  It NEVER controls whether sections exist.
+*/
+
+const sections = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+
+      entries.forEach((entry) => {
+
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+
+      });
+
+    },
+    {
+      threshold:0.12,
+      rootMargin:"0px 0px -45px 0px"
+    }
+  );
+
+  sections.forEach((section) => {
+    observer.observe(section);
+  });
+
+} else {
+
+  sections.forEach((section) => {
+    section.classList.add("show");
+  });
+
+}
+</script>
+
+</body>
+</html>
